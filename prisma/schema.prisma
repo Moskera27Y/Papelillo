@@ -1,0 +1,335 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ============================================================
+// ADMIN USER
+// ============================================================
+model AdminUser {
+  id           String   @id @default(cuid())
+  username     String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// ============================================================
+// CATEGORIES
+// ============================================================
+model Category {
+  id              String    @id @default(cuid())
+  name            String
+  slug            String    @unique
+  description     String?
+  image           String?
+  color           String    @default("ink") // red | yellow | green | blue | ink
+  order           Int       @default(0)
+  isActive        Boolean   @default(true)
+  metaTitle       String?
+  metaDescription String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  products Product[]
+}
+
+// ============================================================
+// PRODUCTS
+// ============================================================
+model Product {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  name             String
+  shortDescription String?
+  description      String?
+  price            Float?
+  compareAtPrice   Float?
+  priceType        String   @default("fixed") // fixed | from | perUnit | quote
+  currency         String   @default("COP")
+  images           String[]
+  tags             String[]
+  stock            Int?
+  featured         Boolean  @default(false)
+  isNew            Boolean  @default(false)
+  isPopular        Boolean  @default(false)
+  isCustomizable   Boolean  @default(false)
+  requiresQuote    Boolean  @default(false)
+  isActive         Boolean  @default(true)
+  ctaLabel         String?
+  canBuy           Boolean  @default(true)
+  shippingCost     Float?
+  weight           Float?
+
+  // Dimensions
+  height      Float?
+  width       Float?
+  depth       Float?
+  unit        String? // cm | mm | m
+  approximate Boolean @default(false)
+
+  // Category relation
+  categoryId String?
+  category   Category? @relation(fields: [categoryId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  features      ProductFeature[]
+  options       ProductOption[]
+  customFields  CustomField[]
+  orderItems    OrderItem[]
+}
+
+model ProductFeature {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  text      String
+  order     Int     @default(0)
+
+  @@index([productId])
+}
+
+model ProductOption {
+  id            String  @id @default(cuid())
+  productId     String
+  product       Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  name          String
+  label         String
+  type          String  // text | textarea | number | select | radio | checkbox | file | image | date
+  required      Boolean @default(false)
+  order         Int     @default(0)
+  isActive      Boolean @default(true)
+  options       String[] // For select/radio/checkbox
+  allowOther    Boolean @default(false)
+  placeholder   String?
+  defaultValue  String?
+  min           Int?
+  max           Int?
+  accept        String? // File formats
+
+  values ProductOptionValue[]
+
+  @@index([productId])
+}
+
+model ProductOptionValue {
+  id              String        @id @default(cuid())
+  optionId        String
+  option          ProductOption @relation(fields: [optionId], references: [id], onDelete: Cascade)
+  label           String
+  value           String
+  priceAdjustment Float?
+  isAvailable     Boolean       @default(true)
+  order           Int           @default(0)
+
+  @@index([optionId])
+}
+
+model CustomField {
+  id          String  @id @default(cuid())
+  productId   String
+  product     Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  label       String
+  name        String
+  type        String  // text | textarea | number | select | radio | checkbox | file | image | date
+  required    Boolean @default(false)
+  placeholder String?
+  hint        String?
+  options     String[]
+  order       Int     @default(0)
+
+  @@index([productId])
+}
+
+// ============================================================
+// CUSTOM REQUESTS (Personalizaciones)
+// ============================================================
+model CustomRequest {
+  id                   String   @id @default(cuid())
+  status               String   @default("new") // new | review | contacted | quoted | approved | completed | cancelled
+  origin               String   @default("configurator") // configurator | contact-form | product-page | whatsapp
+  customerName         String
+  customerEmail        String
+  customerWhatsapp     String
+  productId            String?
+  productName          String
+  config               Json     // CustomRequestConfig
+  estimatedPrice       Float?
+  estimatedPriceType   String   @default("quote") // fixed | from | quote
+  isOutOfCatalog       Boolean  @default(false)
+  quantity             Int      @default(1)
+  dueDate              DateTime?
+  attachments          Json?    // Array of attachments
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  notes AdminNote[]
+}
+
+model AdminNote {
+  id              String        @id @default(cuid())
+  requestId       String
+  request         CustomRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  text            String
+  createdAt       DateTime      @default(now())
+
+  @@index([requestId])
+}
+
+// ============================================================
+// CONTACT MESSAGES
+// ============================================================
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  status    String   @default("new") // new | read | replied | archived
+  createdAt DateTime @default(now())
+}
+
+// ============================================================
+// ORDERS
+// ============================================================
+model Order {
+  id                   String   @id @default(cuid())
+  number               String   @unique
+  status               String   @default("pending") // pending | paid | processing | ready | shipped | delivered | cancelled | refunded
+  
+  // Customer
+  customerName         String
+  customerLastName     String
+  customerEmail        String
+  customerPhone        String
+  customerDocumentType String?
+  customerDocumentNumber String?
+  
+  // Shipping
+  shippingAddress      String
+  shippingAddress2     String?
+  shippingCity         String
+  shippingDepartment   String
+  shippingPostalCode   String?
+  shippingNotes        String?
+  shippingCost         Float    @default(0)
+  shippingCarrier      String?
+  shippingTrackingNumber String?
+  shippedAt            DateTime?
+  deliveredAt          DateTime?
+  
+  // Payment
+  paymentMethod        String   @default("whatsapp") // wompi | whatsapp | cash | other
+  paymentStatus        String   @default("pending") // pending | approved | declined | expired | refunded | error
+  paymentReference     String   @unique
+  wompiTransactionId   String?
+  paymentAmount        Float
+  paymentCurrency      String   @default("COP")
+  paidAt               DateTime?
+  failureReason        String?
+  
+  // Totals
+  subtotal             Float
+  total                Float
+  
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  
+  items                OrderItem[]
+  notes                OrderNote[]
+}
+
+model OrderItem {
+  id            String  @id @default(cuid())
+  orderId       String
+  order         Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId     String
+  product       Product @relation(fields: [productId], references: [id])
+  slug          String
+  name          String
+  image         String?
+  unitPrice     Float
+  quantity      Int
+  customization Json?   // Snapshot of customization options
+
+  @@index([orderId])
+}
+
+model OrderNote {
+  id        String   @id @default(cuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  text      String
+  createdAt DateTime @default(now())
+
+  @@index([orderId])
+}
+
+// ============================================================
+// SITE SETTINGS
+// ============================================================
+model SiteSettings {
+  id                    String   @id @default(cuid())
+  brandName             String   @default("Papelillo")
+  tagline               String   @default("Papelería creativa")
+  footerDescription     String?
+  
+  // Contact
+  contactEmail          String?
+  contactWhatsapp       String?
+  contactWhatsappMsg    String?
+  contactPhone          String?
+  contactAddress        String?
+  contactCity           String?
+  contactHours          String?
+  contactText           String?
+  
+  // SEO
+  seoSiteName           String   @default("Papelillo")
+  seoSiteDescription    String?
+  seoSiteUrl            String?
+  seoOgImage            String?
+  seoKeywords           String[]
+  
+  // Branding
+  logoSrc               String   @default("/images/logo.svg")
+  logoDataUrl           String?
+  faviconSrc            String   @default("/favicon.ico")
+  
+  // Wompi (public config only)
+  wompiEnabled          Boolean  @default(false)
+  wompiEnvironment      String   @default("sandbox") // sandbox | production
+  wompiPublicKey        String?
+  wompiMerchantName     String?
+  wompiWebhookUrl       String?
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  
+  socialLinks           SocialLink[]
+}
+
+model SocialLink {
+  id          String       @id @default(cuid())
+  settingsId  String
+  settings    SiteSettings @relation(fields: [settingsId], references: [id], onDelete: Cascade)
+  name        String
+  url         String
+  icon        String
+  isActive    Boolean      @default(true)
+  order       Int          @default(0)
+
+  @@index([settingsId])
+}

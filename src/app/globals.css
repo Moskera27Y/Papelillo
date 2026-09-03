@@ -1,0 +1,267 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground: #0a0a0a;
+  --background: #fff8f0;
+  --paper-bg: #fffdf9;
+  --ink: #0a0a0a;
+  --ink-muted: #555555;
+  --brand-red: #ff2b32;
+  --brand-yellow: #ffd000;
+  --brand-green: #78d64b;
+  --brand-blue: #5274e8;
+  --brand-accent: #ff2b32;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply text-ink font-sans antialiased;
+    /* Fondo: mesa de trabajo creativo con gradiente cálido y acentos radiales */
+    background:
+      radial-gradient(circle at 10% 20%, #ffd00030 0%, transparent 25%),
+      radial-gradient(circle at 90% 70%, #5274e830 0%, transparent 25%),
+      linear-gradient(160deg, #fff8f0 0%, #fffdf9 50%, #fff8f8 100%);
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Focus visible for accessibility */
+*:focus-visible {
+  @apply outline-none ring-2 ring-brand-blue ring-offset-2 ring-offset-paper;
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--brand-yellow);
+  color: var(--ink);
+}
+
+/* Smooth image loading */
+img {
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ink);
+  border-radius: 6px;
+  border: 3px solid var(--background);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-red);
+}
+
+/* ============================================ */
+/*  FONDO DE PAPELERA — elementos decorativos    */
+/* ============================================ */
+
+/* Pattern de puntos sutiles como cuaderno cuadriculado */
+.bg-dotted-paper {
+  background-image:
+    radial-gradient(var(--ink) 1px, transparent 1px),
+    radial-gradient(var(--ink) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+  opacity: 0.03;
+}
+
+/* Notas adhesivas flotantes (doodle corner) */
+.adhesive-note {
+  position: relative;
+  background: var(--brand-yellow);
+  border: 2px dashed var(--ink);
+  border-radius: 0 4px 4px 0;
+  box-shadow: 4px 4px 0 rgba(10, 10, 10, 0.15);
+  transform: rotate(2deg);
+}
+.adhesive-note::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: var(--brand-yellow);
+  border: 2px dashed var(--ink);
+  border-radius: 50%;
+  box-shadow: -2px -2px 0 rgba(10, 10, 10, 0.15);
+}
+
+/* ============================================ */
+/*  SKELETON LOADING — shimmer effect           */
+/* ============================================ */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f5f5f0 0%,
+    #eee9dc 25%,
+    #f5f5f0 50%,
+    #eee9dc 75%,
+    #f5f5f0 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s linear infinite;
+  border-radius: 0.75rem;
+}
+
+.skeleton-text {
+  height: 1em;
+  border-radius: 0.25rem;
+}
+
+.skeleton-circle {
+  border-radius: 9999px;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ============================================ */
+/*  REDUCE MOTION — respect user preference     */
+/* ============================================ */
+@keyframes gradient-x {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient-x {
+  background-size: 600% 600%;
+  animation: gradient-x 8s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-gradient-x {
+    animation: none !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-float,
+  .animate-float-slow,
+  .animate-float-gentle,
+  .animate-float-paper,
+  .animate-float-slower,
+  .animate-float-bob,
+  .animate-wiggle,
+  .animate-wiggle-soft,
+  .animate-marquee,
+  .animate-bounce,
+  .animate-spin-slow,
+  .animate-pulse-soft,
+  .animate-pulse-slow,
+  .animate-sticker-peel,
+  .animate-shimmer {
+    animation: none !important;
+  }
+}
+
+/* ============================================ */
+/*  PAPER / STICKER utilities                   */
+/* ============================================ */
+.paper-card {
+  transition: transform 0.3s cubic-bezier(.2,.7,.2,1), box-shadow 0.3s ease;
+  background: rgba(255, 253, 249, 0.7);
+  border: 1px solid rgba(10, 10, 10, 0.08);
+}
+.paper-card:hover {
+  transform: translateY(-4px) rotate(0deg);
+  box-shadow: 8px 8px 0 0 rgba(10,10,10,0.12);
+}
+
+.sticker-hover {
+  transition: transform 0.35s cubic-bezier(.2,.7,.2,1), box-shadow 0.35s ease;
+}
+.sticker-hover:hover {
+  transform: translateY(-3px) scale(1.015);
+  box-shadow: 7px 7px 0 0 rgba(10,10,10,0.12);
+}
+
+/* Subtle noise texture overlay */
+.paper-texture {
+  position: relative;
+}
+.paper-texture::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.02;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Hand-drawn underline effect */
+.hand-underline {
+  position: relative;
+  display: inline-block;
+}
+.hand-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 6px;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 3 Q 12 0, 25 3 T 50 3 T 75 3 T 100 3' stroke='%23FF2B32' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat;
+  background-size: 100% 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(.2,.7,.2,1);
+}
+.hand-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* Hide scrollbar for filter carousel */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Stagger children animation */
+.stagger-children > * {
+  opacity: 0;
+  animation: fade-up 0.5s cubic-bezier(.2,.7,.2,1) forwards;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.25s; }
+.stagger-children > *:nth-child(7) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(8) { animation-delay: 0.35s; }
+.stagger-children > *:nth-child(9) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(10) { animation-delay: 0.45s; }
+.stagger-children > *:nth-child(11) { animation-delay: 0.5s; }
+.stagger-children > *:nth-child(12) { animation-delay: 0.55s; }

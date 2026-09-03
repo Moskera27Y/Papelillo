@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 320" width="1280" height="320">
+  <!-- Fondo transparente -->
+  <rect width="1280" height="320" fill="white"/>
+  
+  <!-- Logo Papelillo - estilo marcador burbuja -->
+  <!-- Las letras "papelillo" con colores: pape=l negro, i=rojo con corazón, ll=amarillo/verde, o=azul -->
+  
+  <g font-family="'Comic Sans MS', 'Comic Sans', 'KG Red Hands', 'Marker Felt', 'Chalkboard SE', cursive, sans-serif" font-weight="bold">
+    <!-- p -->
+    <text x="80" y="210" font-size="160" fill="#0A0A0A">p</text>
+    <!-- a -->
+    <text x="200" y="210" font-size="160" fill="#0A0A0A">a</text>
+    <!-- p -->
+    <text x="310" y="210" font-size="160" fill="#0A0A0A">p</text>
+    <!-- e -->
+    <text x="420" y="210" font-size="160" fill="#0A0A0A">e</text>
+    <!-- l -->
+    <text x="520" y="210" font-size="160" fill="#0A0A0A">l</text>
+    <!-- i -->
+    <text x="620" y="210" font-size="160" fill="#FF2B32">i</text>
+    <!-- corazón en la i -->
+    <path d="M690 140 C685 135, 683 130, 685 122 C687 115, 693 110, 700 108 C707 106, 714 108, 718 114 C712 116, 708 120, 706 126 C704 132, 707 138, 712 140 C710 138, 708 136, 706 134 Z" fill="#FF2B32"/>
+    <!-- l -->
+    <text x="740" y="210" font-size="160" fill="#FFD000">l</text>
+    <!-- l -->
+    <text x="830" y="210" font-size="160" fill="#78D64B">l</text>
+    <!-- o -->
+    <text x="920" y="210" font-size="160" fill="#5274E8">o</text>
+  </g>
+  
+  <!-- Subtítulo "studio creativo" -->
+  <text x="450" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="300" fill="#0A0A0A" opacity="0.7">studio creativo</text>
+</svg>

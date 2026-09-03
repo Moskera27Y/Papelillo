@@ -1,0 +1,2306 @@
+
+> papelillo-web@0.1.0 dev
+> next dev
+
+ ⚠ Port 3000 is in use, trying 3001 instead.
+ ⚠ Port 3001 is in use, trying 3002 instead.
+ ⚠ Port 3002 is in use, trying 3003 instead.
+  ▲ Next.js 14.2.5
+  - Local:        http://localhost:3003
+
+ ✓ Starting...
+ ✓ Ready in 3.1s
+ ○ Compiling / ...
+ ✓ Compiled / in 6.4s (661 modules)
+ GET / 200 in 6751ms
+ GET / 200 in 75ms
+ ○ Compiling /shop ...
+ ✓ Compiled /shop in 847ms (653 modules)
+ GET /shop 200 in 1025ms
+ ✓ Compiled /contacto in 289ms (646 modules)
+ GET /contacto 200 in 435ms
+ ✓ Compiled /nosotros in 352ms (650 modules)
+ GET /nosotros 200 in 450ms
+ ✓ Compiled /personalizados in 309ms (653 modules)
+ GET /personalizados 200 in 425ms
+ ✓ Compiled /preguntas-frecuentes in 263ms (655 modules)
+ GET /preguntas-frecuentes 200 in 365ms
+ ✓ Compiled /cart in 344ms (661 modules)
+ GET /cart 200 in 446ms
+ ✓ Compiled /checkout in 349ms (667 modules)
+ GET /checkout 200 in 450ms
+ ✓ Compiled /crear-mi-producto in 409ms (679 modules)
+ GET /crear-mi-producto 200 in 511ms
+ ✓ Compiled /admin/login in 390ms (686 modules)
+ GET /admin/login 200 in 526ms
+ ✓ Compiled /admin in 479ms (700 modules)
+ GET /admin 200 in 599ms
+ ✓ Compiled /admin/orders in 449ms (706 modules)
+ GET /admin/orders 200 in 572ms
+ ✓ Compiled /admin/products in 428ms (712 modules)
+ GET /admin/products 200 in 539ms
+ ✓ Compiled /admin/categories in 448ms (718 modules)
+ GET /admin/categories 200 in 542ms
+ ✓ Compiled /admin/requests in 456ms (724 modules)
+ GET /admin/requests 200 in 571ms
+ ✓ Compiled /admin/messages in 454ms (730 modules)
+ GET /admin/messages 200 in 576ms
+ ○ Compiling /admin/settings ...
+ ✓ Compiled /admin/settings in 550ms (736 modules)
+ GET /admin/settings 200 in 662ms
+ ○ Compiling /admin/home ...
+ ✓ Compiled /admin/home in 669ms (742 modules)
+ GET /admin/home 200 in 807ms
+ ○ Compiling /admin/orders/[id] ...
+ ✓ Compiled /admin/orders/[id] in 574ms (748 modules)
+ GET /admin/orders/ord_noexiste 200 in 1256ms
+ GET /admin/login 200 in 64ms
+ GET / 200 in 89ms
+ GET / 200 in 103ms
+ ○ Compiling /icon ...
+ ✓ Compiled /icon in 1251ms (366 modules)
+ ⨯ Error: No response is returned from route handler 'next-metadata-route-loader?page=%2Ficon%2F%5B%5B...__metadata_id__%5D%5D%2Froute&filePath=C%3A%5CUsers%5Cuser%5CDesktop%5CIA%5CPRUEBAS%20CON%20OTROS%20MODELOS%5CHermes%5CPagina%5Csrc%5Capp%5Cicon.tsx&isDynamic=1!?__next_metadata_route__'. Ensure you return a `Response` or a `NextResponse` in all branches of your handler.
+    at C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:55203
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async ek.execute (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:45808)
+    at async ek.handle (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:56292)
+    at async doRender (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\server\base-server.js:1377:42)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\server\base-server.js:1587:40)
+ GET /icon?432c3d038441ffcc 500 in 2185ms
+ ✓ Compiled /admin in 391ms (376 modules)
+ GET /admin 200 in 665ms
+ ⨯ Error: No response is returned from route handler 'next-metadata-route-loader?page=%2Ficon%2F%5B%5B...__metadata_id__%5D%5D%2Froute&filePath=C%3A%5CUsers%5Cuser%5CDesktop%5CIA%5CPRUEBAS%20CON%20OTROS%20MODELOS%5CHermes%5CPagina%5Csrc%5Capp%5Cicon.tsx&isDynamic=1!?__next_metadata_route__'. Ensure you return a `Response` or a `NextResponse` in all branches of your handler.
+    at C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:55203
+    at async ek.execute (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:45808)
+    at async ek.handle (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:56292)
+    at async doRender (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\server\base-server.js:1377:42)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\server\base-server.js:1587:40)
+ GET /icon?432c3d038441ffcc 500 in 49ms
+ ✓ Compiled /admin/login in 170ms (380 modules)
+ ⨯ Error: No response is returned from route handler 'next-metadata-route-loader?page=%2Ficon%2F%5B%5B...__metadata_id__%5D%5D%2Froute&filePath=C%3A%5CUsers%5Cuser%5CDesktop%5CIA%5CPRUEBAS%20CON%20OTROS%20MODELOS%5CHermes%5CPagina%5Csrc%5Capp%5Cicon.tsx&isDynamic=1!?__next_metadata_route__'. Ensure you return a `Response` or a `NextResponse` in all branches of your handler.
+    at C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:55203
+    at async ek.execute (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:45808)
+    at async ek.handle (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:56292)
+    at async doRender (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\server\base-server.js:1377:42)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\server\base-server.js:1587:40)
+ GET /icon?432c3d038441ffcc 500 in 41ms
+ ⨯ Error: No response is returned from route handler 'next-metadata-route-loader?page=%2Ficon%2F%5B%5B...__metadata_id__%5D%5D%2Froute&filePath=C%3A%5CUsers%5Cuser%5CDesktop%5CIA%5CPRUEBAS%20CON%20OTROS%20MODELOS%5CHermes%5CPagina%5Csrc%5Capp%5Cicon.tsx&isDynamic=1!?__next_metadata_route__'. Ensure you return a `Response` or a `NextResponse` in all branches of your handler.
+    at C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:55203
+    at async ek.execute (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:45808)
+    at async ek.handle (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:56292)
+    at async doRender (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\server\base-server.js:1377:42)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\server\base-server.js:1587:40)
+ GET /icon?432c3d038441ffcc 500 in 43ms
+ GET / 200 in 296ms
+ ⨯ ./src/components/home/CTASection.tsx
+Error: 
+  [31mx[0m Unexpected token `section`. Expected jsx identifier
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\home\CTASection.tsx[0m:22:1]
+ [2m22[0m |   }, []);
+ [2m23[0m | 
+ [2m24[0m |   return (
+ [2m25[0m |     <section
+    : [31;1m     ^^^^^^^[0m
+ [2m26[0m |       ref={ref}
+ [2m27[0m |       className="relative py-24 lg:py-40 bg-ink text-paper overflow-hidden"
+ [2m28[0m |     >
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/home/CTASection.tsx
+./src/app/page.tsx
+ ○ Compiling /_error ...
+ ⨯ ./src/components/home/CTASection.tsx
+Error: 
+  [31mx[0m Unexpected token `section`. Expected jsx identifier
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\home\CTASection.tsx[0m:22:1]
+ [2m22[0m |   }, []);
+ [2m23[0m | 
+ [2m24[0m |   return (
+ [2m25[0m |     <section
+    : [31;1m     ^^^^^^^[0m
+ [2m26[0m |       ref={ref}
+ [2m27[0m |       className="relative py-24 lg:py-40 bg-ink text-paper overflow-hidden"
+ [2m28[0m |     >
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/home/CTASection.tsx
+./src/app/page.tsx
+ GET / 500 in 114ms
+ GET /admin 500 in 165ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\.next\cache\webpack\client-development-fallback\0.pack.gz'
+ ⨯ ./src/components/home/CTASection.tsx
+Error: 
+  [31mx[0m Unexpected token `section`. Expected jsx identifier
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\home\CTASection.tsx[0m:22:1]
+ [2m22[0m |   }, []);
+ [2m23[0m | 
+ [2m24[0m |   return (
+ [2m25[0m |     <section
+    : [31;1m     ^^^^^^^[0m
+ [2m26[0m |       ref={ref}
+ [2m27[0m |       className="relative py-24 lg:py-40 bg-ink text-paper overflow-hidden"
+ [2m28[0m |     >
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/home/CTASection.tsx
+./src/app/page.tsx
+ ⨯ ./src/components/home/CTASection.tsx
+Error: 
+  [31mx[0m Unexpected token `section`. Expected jsx identifier
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\home\CTASection.tsx[0m:22:1]
+ [2m22[0m |   }, []);
+ [2m23[0m | 
+ [2m24[0m |   return (
+ [2m25[0m |     <section
+    : [31;1m     ^^^^^^^[0m
+ [2m26[0m |       ref={ref}
+ [2m27[0m |       className="relative py-24 lg:py-40 bg-ink text-paper overflow-hidden"
+ [2m28[0m |     >
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/home/CTASection.tsx
+./src/app/page.tsx
+ GET / 200 in 786ms
+ GET /admin 200 in 811ms
+ GET /_next/static/webpack/73ccdafc0feeded3.webpack.hot-update.json 500 in 1025ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /_next/static/webpack/73ccdafc0feeded3.webpack.hot-update.json 500 in 84ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET / 500 in 123ms
+ GET /admin 500 in 151ms
+ GET / 500 in 66ms
+ ✓ Compiled /_not-found in 1909ms (904 modules)
+ GET /_next/static/webpack/73ccdafc0feeded3.webpack.hot-update.json 500 in 1344ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /admin 200 in 397ms
+ GET /_next/static/webpack/73ccdafc0feeded3.webpack.hot-update.json 404 in 478ms
+ GET / 200 in 468ms
+ GET /admin 200 in 171ms
+ ✓ Compiled /icon in 319ms (421 modules)
+ ⨯ Error: No response is returned from route handler 'next-metadata-route-loader?page=%2Ficon%2F%5B%5B...__metadata_id__%5D%5D%2Froute&filePath=C%3A%5CUsers%5Cuser%5CDesktop%5CIA%5CPRUEBAS%20CON%20OTROS%20MODELOS%5CHermes%5CPagina%5Csrc%5Capp%5Cicon.tsx&isDynamic=1!?__next_metadata_route__'. Ensure you return a `Response` or a `NextResponse` in all branches of your handler.
+    at C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:55203
+    at async ek.execute (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:45808)
+    at async ek.handle (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:56292)
+    at async doRender (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\server\base-server.js:1377:42)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\server\base-server.js:1587:40)
+ GET /icon?432c3d038441ffcc 500 in 448ms
+ ⨯ Error: No response is returned from route handler 'next-metadata-route-loader?page=%2Ficon%2F%5B%5B...__metadata_id__%5D%5D%2Froute&filePath=C%3A%5CUsers%5Cuser%5CDesktop%5CIA%5CPRUEBAS%20CON%20OTROS%20MODELOS%5CHermes%5CPagina%5Csrc%5Capp%5Cicon.tsx&isDynamic=1!?__next_metadata_route__'. Ensure you return a `Response` or a `NextResponse` in all branches of your handler.
+    at C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:55203
+    at async ek.execute (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:45808)
+    at async ek.handle (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:56292)
+    at async doRender (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\server\base-server.js:1377:42)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\server\base-server.js:1587:40)
+ GET /icon?432c3d038441ffcc 500 in 162ms
+ ✓ Compiled in 1246ms (949 modules)
+ ✓ Compiled in 1388ms (949 modules)
+ ✓ Compiled in 1359ms (949 modules)
+ ✓ Compiled in 1302ms (949 modules)
+ ✓ Compiled in 1245ms (949 modules)
+ ✓ Compiled in 1253ms (949 modules)
+ ✓ Compiled in 1240ms (915 modules)
+ ✓ Compiled in 1323ms (915 modules)
+ ✓ Compiled in 1171ms (915 modules)
+ ✓ Compiled in 1337ms (915 modules)
+ ✓ Compiled in 1298ms (915 modules)
+ ✓ Compiled in 1875ms (915 modules)
+ ✓ Compiled in 1303ms (915 modules)
+ ✓ Compiled in 1416ms (915 modules)
+ ✓ Compiled in 1289ms (915 modules)
+ ✓ Compiled in 1285ms (915 modules)
+ ✓ Compiled in 1859ms (915 modules)
+ ✓ Compiled in 1281ms (915 modules)
+ ✓ Compiled in 1375ms (915 modules)
+ ✓ Compiled in 1514ms (915 modules)
+ ✓ Compiled in 1801ms (915 modules)
+ ✓ Compiled in 920ms (915 modules)
+ ✓ Compiled in 746ms (527 modules)
+ ✓ Compiled in 1258ms (527 modules)
+ ✓ Compiled in 1612ms (915 modules)
+ ✓ Compiled in 703ms (527 modules)
+ ✓ Compiled in 1061ms (527 modules)
+ GET / 200 in 181ms
+ GET / 200 in 63ms
+ ○ Compiling /shop ...
+ ✓ Compiled /shop in 684ms (394 modules)
+ GET /shop 200 in 945ms
+ ✓ Compiled /contacto in 232ms (399 modules)
+ GET /contacto 200 in 463ms
+ GET /admin/login 200 in 138ms
+ ✓ Compiled /admin/orders/[id] in 190ms (403 modules)
+ GET /admin/orders/ord_noexiste 200 in 397ms
+ GET / 200 in 89ms
+ GET /shop 200 in 78ms
+ GET /contacto 200 in 52ms
+ ✓ Compiled /nosotros in 210ms (407 modules)
+ GET /nosotros 200 in 366ms
+ GET /admin/login 200 in 181ms
+ GET /admin/orders/ord_noexiste 200 in 134ms
+   Reload env: .env.local
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ✓ Compiled in 8.8s (933 modules)
+ GET / 200 in 4377ms
+ GET /admin 200 in 4148ms
+ ✓ Compiled /icon in 496ms (419 modules)
+ ⨯ Error: No response is returned from route handler 'next-metadata-route-loader?page=%2Ficon%2F%5B%5B...__metadata_id__%5D%5D%2Froute&filePath=C%3A%5CUsers%5Cuser%5CDesktop%5CIA%5CPRUEBAS%20CON%20OTROS%20MODELOS%5CHermes%5CPagina%5Csrc%5Capp%5Cicon.tsx&isDynamic=1!?__next_metadata_route__'. Ensure you return a `Response` or a `NextResponse` in all branches of your handler.
+    at C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:55203
+    at async ek.execute (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:45808)
+    at async ek.handle (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:56292)
+    at async doRender (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\server\base-server.js:1377:42)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\server\base-server.js:1587:40)
+ GET /icon?432c3d038441ffcc 500 in 802ms
+ ⨯ Error: No response is returned from route handler 'next-metadata-route-loader?page=%2Ficon%2F%5B%5B...__metadata_id__%5D%5D%2Froute&filePath=C%3A%5CUsers%5Cuser%5CDesktop%5CIA%5CPRUEBAS%20CON%20OTROS%20MODELOS%5CHermes%5CPagina%5Csrc%5Capp%5Cicon.tsx&isDynamic=1!?__next_metadata_route__'. Ensure you return a `Response` or a `NextResponse` in all branches of your handler.
+    at C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:55203
+    at async ek.execute (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:45808)
+    at async ek.handle (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:56292)
+    at async doRender (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\server\base-server.js:1377:42)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\server\base-server.js:1587:40)
+ GET /icon?432c3d038441ffcc 500 in 98ms
+   Reload env: .env.local
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 1679ms (916 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /_next/static/webpack/ca92b803b0e3a4de.webpack.hot-update.json 404 in 1357ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /_next/static/webpack/ca92b803b0e3a4de.webpack.hot-update.json 404 in 388ms
+ GET /admin 200 in 431ms
+ GET / 200 in 286ms
+ ✓ Compiled /icon in 313ms (420 modules)
+ ⨯ Error: No response is returned from route handler 'next-metadata-route-loader?page=%2Ficon%2F%5B%5B...__metadata_id__%5D%5D%2Froute&filePath=C%3A%5CUsers%5Cuser%5CDesktop%5CIA%5CPRUEBAS%20CON%20OTROS%20MODELOS%5CHermes%5CPagina%5Csrc%5Capp%5Cicon.tsx&isDynamic=1!?__next_metadata_route__'. Ensure you return a `Response` or a `NextResponse` in all branches of your handler.
+    at C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:55203
+    at async ek.execute (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:45808)
+    at async ek.handle (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:56292)
+    at async doRender (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\server\base-server.js:1377:42)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\server\base-server.js:1587:40)
+ GET /icon?432c3d038441ffcc 500 in 467ms
+ ⨯ Error: No response is returned from route handler 'next-metadata-route-loader?page=%2Ficon%2F%5B%5B...__metadata_id__%5D%5D%2Froute&filePath=C%3A%5CUsers%5Cuser%5CDesktop%5CIA%5CPRUEBAS%20CON%20OTROS%20MODELOS%5CHermes%5CPagina%5Csrc%5Capp%5Cicon.tsx&isDynamic=1!?__next_metadata_route__'. Ensure you return a `Response` or a `NextResponse` in all branches of your handler.
+    at C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:55203
+    at async ek.execute (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:45808)
+    at async ek.handle (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:56292)
+    at async doRender (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\server\base-server.js:1377:42)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\node_modules\next\dist\server\base-server.js:1587:40)
+ GET /icon?432c3d038441ffcc 500 in 204ms
+   Reload env: .env
+ ✓ Compiled in 363ms (933 modules)
+ ⚠ ./src/app/admin/page.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/app/admin/page.tsx
+
+./src/app/admin/page.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/app/admin/page.tsx
+
+./src/components/admin/AdminSidebar.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+
+./src/components/admin/AdminSidebar.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+
+./src/hooks/useDataService.ts
+Attempted import error: 'getSiteContentAction' is not exported from '@/app/actions' (imported as 'getSiteContentAction').
+
+Import trace for requested module:
+./src/hooks/useDataService.ts
+./src/components/home/CategoryGrid.tsx
+
+./src/app/admin/page.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/app/admin/page.tsx
+
+./src/components/admin/AdminSidebar.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+
+./src/hooks/useDataService.ts
+Attempted import error: 'getSiteContentAction' is not exported from '@/app/actions' (imported as 'getSiteContentAction').
+
+Import trace for requested module:
+./src/hooks/useDataService.ts
+./src/components/home/CategoryGrid.tsx
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⨯ src\components\layout\Header.tsx (17:37) @ logoDataUrl
+ ⨯ TypeError: Cannot read properties of undefined (reading 'logoDataUrl')
+    at Header (./src/components/layout/Header.tsx:29:39)
+digest: "2432953580"
+[0m [90m 15 |[39m   [36mconst[39m { count[33m,[39m toggle } [33m=[39m useCart()[33m;[39m[0m
+[0m [90m 16 |[39m   [36mconst[39m settings [33m=[39m useSiteSettings()[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 17 |[39m   [36mconst[39m logoSrc [33m=[39m settings[33m.[39mbranding[33m.[39mlogoDataUrl [33m||[39m settings[33m.[39mbranding[33m.[39mlogoSrc [33m||[39m siteConfig[33m.[39mlogoSrc[33m;[39m[0m
+[0m [90m    |[39m                                     [31m[1m^[22m[39m[0m
+[0m [90m 18 |[39m[0m
+[0m [90m 19 |[39m   [36mconst[39m navItems [33m=[39m [[0m
+[0m [90m 20 |[39m     { label[33m:[39m [32m"Inicio"[39m[33m,[39m href[33m:[39m [32m"/"[39m }[33m,[39m[0m
+ ⨯ src\components\layout\Header.tsx (17:37) @ logoDataUrl
+ ⨯ TypeError: Cannot read properties of undefined (reading 'logoDataUrl')
+    at Header (./src/components/layout/Header.tsx:29:39)
+digest: "2432953580"
+[0m [90m 15 |[39m   [36mconst[39m { count[33m,[39m toggle } [33m=[39m useCart()[33m;[39m[0m
+[0m [90m 16 |[39m   [36mconst[39m settings [33m=[39m useSiteSettings()[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 17 |[39m   [36mconst[39m logoSrc [33m=[39m settings[33m.[39mbranding[33m.[39mlogoDataUrl [33m||[39m settings[33m.[39mbranding[33m.[39mlogoSrc [33m||[39m siteConfig[33m.[39mlogoSrc[33m;[39m[0m
+[0m [90m    |[39m                                     [31m[1m^[22m[39m[0m
+[0m [90m 18 |[39m[0m
+[0m [90m 19 |[39m   [36mconst[39m navItems [33m=[39m [[0m
+[0m [90m 20 |[39m     { label[33m:[39m [32m"Inicio"[39m[33m,[39m href[33m:[39m [32m"/"[39m }[33m,[39m[0m
+ GET / 500 in 831ms
+ GET /admin 500 in 835ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\.next\cache\webpack\client-development\0.pack.gz'
+ ⚠ ./src/app/admin/page.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/app/admin/page.tsx
+
+./src/app/admin/page.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/app/admin/page.tsx
+
+./src/components/admin/AdminSidebar.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+
+./src/components/admin/AdminSidebar.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+
+./src/hooks/useDataService.ts
+Attempted import error: 'getSiteContentAction' is not exported from '@/app/actions' (imported as 'getSiteContentAction').
+
+Import trace for requested module:
+./src/hooks/useDataService.ts
+./src/components/home/CategoryGrid.tsx
+
+./src/app/admin/page.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/app/admin/page.tsx
+
+./src/components/admin/AdminSidebar.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+
+./src/hooks/useDataService.ts
+Attempted import error: 'getSiteContentAction' is not exported from '@/app/actions' (imported as 'getSiteContentAction').
+
+Import trace for requested module:
+./src/hooks/useDataService.ts
+./src/components/home/CategoryGrid.tsx
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ ./src/app/admin/orders/page.tsx
+Attempted import error: 'getOrderStatsAction' is not exported from '@/app/actions' (imported as 'getOrderStatsAction').
+
+Import trace for requested module:
+./src/app/admin/orders/page.tsx
+
+./src/app/admin/page.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/app/admin/page.tsx
+
+./src/app/admin/page.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/app/admin/page.tsx
+
+./src/components/admin/AdminSidebar.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+
+./src/components/admin/AdminSidebar.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+
+./src/hooks/useDataService.ts
+Attempted import error: 'getSiteContentAction' is not exported from '@/app/actions' (imported as 'getSiteContentAction').
+
+Import trace for requested module:
+./src/hooks/useDataService.ts
+./src/components/home/CategoryGrid.tsx
+
+./src/app/admin/page.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/app/admin/page.tsx
+
+./src/components/admin/AdminSidebar.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+
+./src/hooks/useDataService.ts
+Attempted import error: 'getSiteContentAction' is not exported from '@/app/actions' (imported as 'getSiteContentAction').
+
+Import trace for requested module:
+./src/hooks/useDataService.ts
+./src/components/home/CategoryGrid.tsx
+ GET / 200 in 165ms
+ ⨯ src\components\layout\Header.tsx (17:37) @ logoDataUrl
+ ⨯ TypeError: Cannot read properties of undefined (reading 'logoDataUrl')
+    at Header (./src/components/layout/Header.tsx:29:39)
+digest: "2432953580"
+[0m [90m 15 |[39m   [36mconst[39m { count[33m,[39m toggle } [33m=[39m useCart()[33m;[39m[0m
+[0m [90m 16 |[39m   [36mconst[39m settings [33m=[39m useSiteSettings()[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 17 |[39m   [36mconst[39m logoSrc [33m=[39m settings[33m.[39mbranding[33m.[39mlogoDataUrl [33m||[39m settings[33m.[39mbranding[33m.[39mlogoSrc [33m||[39m siteConfig[33m.[39mlogoSrc[33m;[39m[0m
+[0m [90m    |[39m                                     [31m[1m^[22m[39m[0m
+[0m [90m 18 |[39m[0m
+[0m [90m 19 |[39m   [36mconst[39m navItems [33m=[39m [[0m
+[0m [90m 20 |[39m     { label[33m:[39m [32m"Inicio"[39m[33m,[39m href[33m:[39m [32m"/"[39m }[33m,[39m[0m
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⨯ src\components\layout\Header.tsx (17:37) @ logoDataUrl
+ ⨯ TypeError: Cannot read properties of undefined (reading 'logoDataUrl')
+    at Header (./src/components/layout/Header.tsx:29:39)
+digest: "2432953580"
+[0m [90m 15 |[39m   [36mconst[39m { count[33m,[39m toggle } [33m=[39m useCart()[33m;[39m[0m
+[0m [90m 16 |[39m   [36mconst[39m settings [33m=[39m useSiteSettings()[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 17 |[39m   [36mconst[39m logoSrc [33m=[39m settings[33m.[39mbranding[33m.[39mlogoDataUrl [33m||[39m settings[33m.[39mbranding[33m.[39mlogoSrc [33m||[39m siteConfig[33m.[39mlogoSrc[33m;[39m[0m
+[0m [90m    |[39m                                     [31m[1m^[22m[39m[0m
+[0m [90m 18 |[39m[0m
+[0m [90m 19 |[39m   [36mconst[39m navItems [33m=[39m [[0m
+[0m [90m 20 |[39m     { label[33m:[39m [32m"Inicio"[39m[33m,[39m href[33m:[39m [32m"/"[39m }[33m,[39m[0m
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⨯ src\components\layout\Header.tsx (17:37) @ logoDataUrl
+ ⨯ TypeError: Cannot read properties of undefined (reading 'logoDataUrl')
+    at Header (./src/components/layout/Header.tsx:29:39)
+digest: "2432953580"
+[0m [90m 15 |[39m   [36mconst[39m { count[33m,[39m toggle } [33m=[39m useCart()[33m;[39m[0m
+[0m [90m 16 |[39m   [36mconst[39m settings [33m=[39m useSiteSettings()[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 17 |[39m   [36mconst[39m logoSrc [33m=[39m settings[33m.[39mbranding[33m.[39mlogoDataUrl [33m||[39m settings[33m.[39mbranding[33m.[39mlogoSrc [33m||[39m siteConfig[33m.[39mlogoSrc[33m;[39m[0m
+[0m [90m    |[39m                                     [31m[1m^[22m[39m[0m
+[0m [90m 18 |[39m[0m
+[0m [90m 19 |[39m   [36mconst[39m navItems [33m=[39m [[0m
+[0m [90m 20 |[39m     { label[33m:[39m [32m"Inicio"[39m[33m,[39m href[33m:[39m [32m"/"[39m }[33m,[39m[0m
+ ⨯ src\components\layout\Header.tsx (17:37) @ logoDataUrl
+ ⨯ TypeError: Cannot read properties of undefined (reading 'logoDataUrl')
+    at Header (./src/components/layout/Header.tsx:29:39)
+digest: "2432953580"
+[0m [90m 15 |[39m   [36mconst[39m { count[33m,[39m toggle } [33m=[39m useCart()[33m;[39m[0m
+[0m [90m 16 |[39m   [36mconst[39m settings [33m=[39m useSiteSettings()[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 17 |[39m   [36mconst[39m logoSrc [33m=[39m settings[33m.[39mbranding[33m.[39mlogoDataUrl [33m||[39m settings[33m.[39mbranding[33m.[39mlogoSrc [33m||[39m siteConfig[33m.[39mlogoSrc[33m;[39m[0m
+[0m [90m    |[39m                                     [31m[1m^[22m[39m[0m
+[0m [90m 18 |[39m[0m
+[0m [90m 19 |[39m   [36mconst[39m navItems [33m=[39m [[0m
+[0m [90m 20 |[39m     { label[33m:[39m [32m"Inicio"[39m[33m,[39m href[33m:[39m [32m"/"[39m }[33m,[39m[0m
+ GET / 500 in 215ms
+ GET /admin 500 in 223ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ ./src/app/admin/page.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/app/admin/page.tsx
+
+./src/app/admin/page.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/app/admin/page.tsx
+
+./src/components/admin/AdminSidebar.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+
+./src/components/admin/AdminSidebar.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+
+./src/hooks/useDataService.ts
+Attempted import error: 'getSiteContentAction' is not exported from '@/app/actions' (imported as 'getSiteContentAction').
+
+Import trace for requested module:
+./src/hooks/useDataService.ts
+./src/components/home/CategoryGrid.tsx
+
+./src/app/admin/page.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/app/admin/page.tsx
+
+./src/components/admin/AdminSidebar.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+
+./src/hooks/useDataService.ts
+Attempted import error: 'getSiteContentAction' is not exported from '@/app/actions' (imported as 'getSiteContentAction').
+
+Import trace for requested module:
+./src/hooks/useDataService.ts
+./src/components/home/CategoryGrid.tsx
+ GET /admin 200 in 1681ms
+ GET / 200 in 1730ms
+ ⨯ src\components\layout\Header.tsx (17:37) @ logoDataUrl
+ ⨯ TypeError: Cannot read properties of undefined (reading 'logoDataUrl')
+    at Header (./src/components/layout/Header.tsx:29:39)
+digest: "2432953580"
+[0m [90m 15 |[39m   [36mconst[39m { count[33m,[39m toggle } [33m=[39m useCart()[33m;[39m[0m
+[0m [90m 16 |[39m   [36mconst[39m settings [33m=[39m useSiteSettings()[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 17 |[39m   [36mconst[39m logoSrc [33m=[39m settings[33m.[39mbranding[33m.[39mlogoDataUrl [33m||[39m settings[33m.[39mbranding[33m.[39mlogoSrc [33m||[39m siteConfig[33m.[39mlogoSrc[33m;[39m[0m
+[0m [90m    |[39m                                     [31m[1m^[22m[39m[0m
+[0m [90m 18 |[39m[0m
+[0m [90m 19 |[39m   [36mconst[39m navItems [33m=[39m [[0m
+[0m [90m 20 |[39m     { label[33m:[39m [32m"Inicio"[39m[33m,[39m href[33m:[39m [32m"/"[39m }[33m,[39m[0m
+ ⨯ src\components\layout\Header.tsx (17:37) @ logoDataUrl
+ ⨯ TypeError: Cannot read properties of undefined (reading 'logoDataUrl')
+    at Header (./src/components/layout/Header.tsx:29:39)
+digest: "2432953580"
+[0m [90m 15 |[39m   [36mconst[39m { count[33m,[39m toggle } [33m=[39m useCart()[33m;[39m[0m
+[0m [90m 16 |[39m   [36mconst[39m settings [33m=[39m useSiteSettings()[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 17 |[39m   [36mconst[39m logoSrc [33m=[39m settings[33m.[39mbranding[33m.[39mlogoDataUrl [33m||[39m settings[33m.[39mbranding[33m.[39mlogoSrc [33m||[39m siteConfig[33m.[39mlogoSrc[33m;[39m[0m
+[0m [90m    |[39m                                     [31m[1m^[22m[39m[0m
+[0m [90m 18 |[39m[0m
+[0m [90m 19 |[39m   [36mconst[39m navItems [33m=[39m [[0m
+[0m [90m 20 |[39m     { label[33m:[39m [32m"Inicio"[39m[33m,[39m href[33m:[39m [32m"/"[39m }[33m,[39m[0m
+ ⨯ src\components\layout\Header.tsx (17:37) @ logoDataUrl
+ ⨯ TypeError: Cannot read properties of undefined (reading 'logoDataUrl')
+    at Header (./src/components/layout/Header.tsx:29:39)
+digest: "2432953580"
+[0m [90m 15 |[39m   [36mconst[39m { count[33m,[39m toggle } [33m=[39m useCart()[33m;[39m[0m
+[0m [90m 16 |[39m   [36mconst[39m settings [33m=[39m useSiteSettings()[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 17 |[39m   [36mconst[39m logoSrc [33m=[39m settings[33m.[39mbranding[33m.[39mlogoDataUrl [33m||[39m settings[33m.[39mbranding[33m.[39mlogoSrc [33m||[39m siteConfig[33m.[39mlogoSrc[33m;[39m[0m
+[0m [90m    |[39m                                     [31m[1m^[22m[39m[0m
+[0m [90m 18 |[39m[0m
+[0m [90m 19 |[39m   [36mconst[39m navItems [33m= ⚠ ./src/app/admin/page.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/app/admin/page.tsx
+
+./src/app/admin/page.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/app/admin/page.tsx
+
+./src/components/admin/AdminSidebar.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+
+./src/components/admin/AdminSidebar.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+
+./src/hooks/useDataService.ts
+Attempted import error: 'getSiteContentAction' is not exported from '@/app/actions' (imported as 'getSiteContentAction').
+
+Import trace for requested  ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ F ⚠ ./src/app/admin/page.tsx
+Attempted import error: 'useRequest ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ ./src/app/admin/page.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/app/admin/page.tsx
+
+./src/app/admin/page.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/app/admin/page.tsx
+
+./src/components/admin/AdminSidebar.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+
+./src/components/admin/AdminSidebar.tsx
+Attempted impor ⚠ ./src/app/admin/page.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/app/admin/page.tsx
+
+./src/app/admin/page.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/app/admin/page.tsx
+
+./src/components/admin/AdminSidebar.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+
+./src/components/admin/AdminSidebar.tsx
+Attempted import error: 'useRequestStats' is not exported from '@/hooks/useDataService' (imported as 'useRequestStats').
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRo ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m  ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRo ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/components/admin/AdminSidebar.tsx
+Error: 
+  [31mx[0m the name `useState` is defined multiple times
+    ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\components\admin\AdminSidebar.tsx[0m:1:1]
+ [2m 1[0m | "use client";
+ [2m 2[0m | 
+ [2m 3[0m | import React, { useState } from "react";
+    : [31;1m                ^^^^|^^^[0m
+    :                     [31;1m`-- [31;1mprevious definition of `useState` here[0m[0m
+ [2m 4[0m | import Link from "next/link";
+ [2m 5[0m | import { usePathname, useRouter } from "next/navigation";
+ [2m 6[0m | import { cn } from "@/lib/utils";
+ [2m 7[0m | import { useAuth } from "@/hooks/useDataService";
+ [2m 8[0m | import { getRequestStatsAction } from "@/app/actions";
+ [2m 9[0m | import { useEffect, useState } from "react";
+    : [33;1m                    ^^^^|^^^[0m
+    :                         [33;1m`-- [33;1m`useState` redefined here[0m[0m
+ [2m10[0m | 
+ [2m11[0m | const NAV = [
+ [2m12[0m |   { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    `----
+
+Import trace for requested module:
+./src/components/admin/AdminSidebar.tsx
+./src/app/admin/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\.next\cache\webpack\client-development\0.pack.gz'
+16[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
