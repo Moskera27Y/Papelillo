@@ -9,9 +9,9 @@ const nextConfig = {
     // Add remote image hosts here when real product photos are ready.
     remotePatterns: [],
   },
-  // Wompi public key → cliente (segura: solo public key, NUNCA expose secret en frontend)
+  // Wompi public key → cliente (Vercel lo recibe como NEXT_WOMPI_PUBLIC_KEY y lo re-mapeamos)
   env: {
-    NEXT_PUBLIC_WOMPI_PUBLIC_KEY: process.env.NEXT_PUBLIC_WOMPI_PUBLIC_KEY || "",
+    NEXT_PUBLIC_WOMPI_PUBLIC_KEY: process.env.NEXT_WOMPI_PUBLIC_KEY || "",
   },
 };
 
