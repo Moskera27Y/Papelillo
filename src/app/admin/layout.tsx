@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,11 +7,6 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-// Layout minimalista: cada página admin incluye su propio AuthGuard + AdminSidebar.
-export default function AdminRootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AdminLayout({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }
