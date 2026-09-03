@@ -266,7 +266,7 @@ export function useSiteSettings(): { settings: SiteSettings | null; isLoading: b
   useEffect(() => {
     getSiteSettingsAction()
       .then((r) => {
-        setSettings(r as SiteSettings);
+        setSettings(r as unknown as SiteSettings);
         setError(null);
       })
       .catch((e) => setError(e as Error))
