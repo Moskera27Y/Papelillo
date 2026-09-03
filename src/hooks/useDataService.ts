@@ -405,5 +405,28 @@ export function useAuth() {
       setSession(null);
       return data;
     },
+    changePassword: async (currentPassword: string, newPassword: string) => {
+      const fd = new FormData();
+      fd.set("currentPassword", currentPassword);
+      fd.set("newPassword", newPassword);
+      const res = await fetch("/api/auth/change-password", {
+        method: "POST",
+        body: fd,
+      });
+      const data = await res.json();
+      return data.success;
+    },
+    changeUsername: async (newUsername: string) => {
+      const res = await fetch("/api/auth/change-username", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: newUsername }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSession({ ...session, username: newUsername });
+      }
+      return data.success;
+    },
   };
 }

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { ordersService, wompiService } from "@/services";
+import { wompiService } from "@/services";
 const { formatCOP } = wompiService;
 import type { Order } from "@/types/admin";
 
@@ -15,8 +15,10 @@ export default function CheckoutSuccessPage() {
 
   useEffect(() => {
     if (orderId) {
-      const o = ordersService.getOrderById(orderId);
-      setOrder(o ?? null);
+      fetch(`/api/orders/${encodeURIComponent(orderId)}`)
+        .then((res) => res.json())
+        .then((o) => setOrder(o ?? null))
+        .catch(() => setOrder(null));
     }
     setLoading(false);
   }, [orderId]);

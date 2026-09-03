@@ -82,6 +82,17 @@ export async function changePasswordAction(formData: FormData) {
   return { success: true }
 }
 
+export async function changeUsernameAction(formData: FormData) {
+  const username = formData.get('username') as string
+  if (!username || username.trim().length < 3) {
+    return { success: false, error: 'El nombre debe tener al menos 3 caracteres' }
+  }
+  const session = await getSessionAction()
+  if (!session) return { success: false, error: 'No autorizado' }
+  await authService.changeUsername(session.userId, username)
+  return { success: true }
+}
+
 // ============================================================
 // PRODUCTS
 // ============================================================
@@ -310,7 +321,26 @@ export async function getSiteSettingsAction() {
 }
 
 export async function getSiteContentAction() {
-  return siteService.getSiteSettings()
+  const settings = await siteService.getSiteSettings()
+  const content = await siteService.getSiteContent()
+  // Combina settings de DB + content editable (JSON o null → seed fallback)
+  const base = {
+    brandName: content?.brandName ?? settings.brandName ?? "Papelillo",
+    tagline: content?.tagline ?? settings.tagline ?? "Papelería creativa",
+    footerDescription: content?.footerDescription ?? null,
+    hero: content?.hero ?? {},
+    customHighlight: content?.customHighlight ?? {},
+    about: content?.about ?? { values: [] },
+    personalized: content?.personalized ?? { steps: [] },
+    ctaFinal: content?.ctaFinal ?? { badge: "", title: "", description: "", primaryCta: { label: "", href: "" }, secondaryCta: { label: "", href: "" } },
+  } as any
+  return base
+}
+
+export async function updateSiteContentAction(data: Record<string, any>) {
+  const result = await siteService.updateSiteContent(data)
+  revalidatePath('/admin/home')
+  return result
 }
 
 export async function updateSiteSettingsAction(data: any) {

@@ -8,7 +8,7 @@ import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { ProductEditor } from "@/components/admin/ProductEditor";
 import { Toast } from "@/components/admin/AdminUI";
 import { useProducts } from "@/hooks/useDataService";
-import { productsService } from "@/services";
+import { updateProductAction } from "@/app/actions";
 import type { AdminProduct } from "@/types/admin";
 import { slugify } from "@/lib/utils";
 
@@ -16,7 +16,7 @@ function EditProductContent() {
   const params = useParams();
   const router = useRouter();
   const id = params.id as string;
-  const products = useProducts();
+  const { products, isLoading } = useProducts();
   const current = products.find((p) => p.id === id);
 
   const [draft, setDraft] = useState<AdminProduct | null>(current ?? null);
@@ -27,6 +27,17 @@ function EditProductContent() {
   useEffect(() => {
     setDraft(current ?? null);
   }, [current]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-paper-soft flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 border-3 border-ink border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-ink-muted">Cargando producto...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!draft) {
     return (
@@ -47,7 +58,7 @@ function EditProductContent() {
     setDraft((prev) => (prev ? { ...prev, ...patch } : prev));
   }
 
-  function handleSave() {
+  async function handleSave() {
     if (!draft) return;
     setError(null);
     if (!draft.name.trim()) {
@@ -61,7 +72,7 @@ function EditProductContent() {
     const finalSlug = draft.slug.trim() || slugify(draft.name);
     setSaving(true);
     try {
-      productsService.updateProduct(draft.id, { ...draft, slug: finalSlug });
+      await updateProductAction({ ...draft, slug: finalSlug });
       setToast("Cambios guardados ✓");
       setTimeout(() => setToast(null), 2500);
     } catch {

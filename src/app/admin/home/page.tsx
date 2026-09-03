@@ -5,221 +5,193 @@ import { AuthGuard } from "@/components/admin/AuthGuard";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { AdminCard, Input, Textarea, Toast, Toggle } from "@/components/admin/AdminUI";
 import { useSiteContent } from "@/hooks/useDataService";
-import { siteService } from "@/services";
+import { updateSiteContentAction } from "@/app/actions";
 import type { SiteContentEditable } from "@/types/admin";
 
 function HomeContent() {
-  const content = useSiteContent();
-  const [draft, setDraft] = useState<SiteContentEditable>(content);
+  const { content, isLoading } = useSiteContent();
+  const [draft, setDraft] = useState<SiteContentEditable | null>(content);
   const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
     setDraft(content);
   }, [content]);
 
-  const save = () => {
-    siteService.updateSiteContent(draft);
-    setToast("Home actualizada ✓");
+  if (isLoading || !content) {
+    return (
+      <div className="min-h-screen bg-paper-soft">
+        <div className="flex flex-col lg:flex-row">
+          <AdminSidebar />
+          <div className="flex-1 p-6 lg:p-10">
+            <div className="animate-pulse mb-8">
+              <div className="h-10 bg-paper rounded w-48 mb-4"></div>
+              <div className="h-4 bg-paper rounded w-3/4 mb-8"></div>
+            </div>
+            <AdminCard className="mb-8">
+              <div className="h-96 bg-paper-soft rounded"></div>
+            </AdminCard>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const save = async () => {
+    if (!draft) return;
+    try {
+      await updateSiteContentAction(draft);
+      setToast("Home actualizada ✓");
+    } catch {
+      setToast("Error al guardar ✗");
+    }
     setTimeout(() => setToast(null), 2500);
   };
 
   const update = <K extends keyof SiteContentEditable>(key: K, value: SiteContentEditable[K]) => {
-    setDraft((prev) => ({ ...prev, [key]: value }));
+    setDraft((prev) => (prev ? { ...prev, [key]: value } : prev));
   };
 
   return (
-    <div className="min-h-screen bg-paper-soft">
-      <div className="flex flex-col lg:flex-row">
-        <AdminSidebar />
-        <div className="flex-1 p-6 lg:p-10">
-          <header className="mb-8">
-            <h1 className="font-display text-4xl md:text-5xl font-bold text-ink mb-2">
-              Home
-            </h1>
-            <p className="text-ink-muted">
-              Edita el contenido de la página principal de Papelillo.
-            </p>
-          </header>
+    <AuthGuard>
+      <div className="min-h-screen bg-paper-soft">
+        <div className="flex flex-col lg:flex-row">
+          <AdminSidebar />
+          <div className="flex-1 p-6 lg:p-10">
+            <header className="mb-8">
+              <h1 className="font-display text-4xl md:text-5xl font-bold text-ink mb-2">
+                Home
+              </h1>
+              <p className="text-ink-muted">
+                Edita el contenido de la página principal de Papelillo.
+              </p>
+            </header>
 
-          <div className="space-y-6">
-            <AdminCard title="Marca">
-              <div className="grid md:grid-cols-2 gap-4">
-                <Input
-                  label="Nombre de la marca"
-                  value={draft.brandName}
-                  onChange={(e) => update("brandName", e.target.value)}
-                />
-                <Input
-                  label="Tagline"
-                  value={draft.tagline}
-                  onChange={(e) => update("tagline", e.target.value)}
-                />
-              </div>
-            </AdminCard>
+            {draft && (
+              <>
+                {/* Hero */}
+                <AdminCard className="mb-8">
+                  <h2 className="text-xl font-bold text-ink mb-4">Hero principal</h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <Input
+                      label="Título"
+                      value={draft.hero?.title || ""}
+                      onChange={(v) => update("hero", { ...draft.hero, title: v })}
+                    />
+                    <Input
+                      label="Subtítulo"
+                      value={draft.hero?.subtitle || ""}
+                      onChange={(v) => update("hero", { ...draft.hero, subtitle: v })}
+                    />
+                  </div>
+                  <Textarea
+                    label="Descripción"
+                    value={draft.hero?.description || ""}
+                    onChange={(v) => update("hero", { ...draft.hero, description: v })}
+                  />
+                </AdminCard>
 
-            <AdminCard title="Hero (encabezado principal)">
-              <Input
-                label="Título"
-                value={draft.hero.title}
-                onChange={(e) => update("hero", { ...draft.hero, title: e.target.value })}
-              />
-              <div className="mt-4">
-                <Textarea
-                  label="Descripción"
-                  value={draft.hero.description}
-                  onChange={(e) => update("hero", { ...draft.hero, description: e.target.value })}
-                  rows={3}
-                />
-              </div>
-              <div className="grid md:grid-cols-2 gap-4 mt-4">
-                <Input
-                  label="CTA principal - texto"
-                  value={draft.hero.ctaPrimary.label}
-                  onChange={(e) =>
-                    update("hero", {
-                      ...draft.hero,
-                      ctaPrimary: { ...draft.hero.ctaPrimary, label: e.target.value },
-                    })
-                  }
-                />
-                <Input
-                  label="CTA principal - link"
-                  value={draft.hero.ctaPrimary.href}
-                  onChange={(e) =>
-                    update("hero", {
-                      ...draft.hero,
-                      ctaPrimary: { ...draft.hero.ctaPrimary, href: e.target.value },
-                    })
-                  }
-                />
-                <Input
-                  label="CTA secundario - texto"
-                  value={draft.hero.ctaSecondary.label}
-                  onChange={(e) =>
-                    update("hero", {
-                      ...draft.hero,
-                      ctaSecondary: { ...draft.hero.ctaSecondary, label: e.target.value },
-                    })
-                  }
-                />
-                <Input
-                  label="CTA secundario - link"
-                  value={draft.hero.ctaSecondary.href}
-                  onChange={(e) =>
-                    update("hero", {
-                      ...draft.hero,
-                      ctaSecondary: { ...draft.hero.ctaSecondary, href: e.target.value },
-                    })
-                  }
-                />
-              </div>
-            </AdminCard>
+                {/* CustomHighlight */}
+                <AdminCard className="mb-8">
+                  <h2 className="text-xl font-bold text-ink mb-4">Resaltado</h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <Input
+                      label="Título"
+                      value={draft.customHighlight?.title || ""}
+                      onChange={(v) => update("customHighlight", { ...draft.customHighlight, title: v })}
+                    />
+                    <Input
+                      label="Badge"
+                      value={draft.customHighlight?.badge || ""}
+                      onChange={(v) => update("customHighlight", { ...draft.customHighlight, badge: v })}
+                    />
+                  </div>
+                  <Textarea
+                    label="Descripción"
+                    value={draft.customHighlight?.description || ""}
+                    onChange={(v) => update("customHighlight", { ...draft.customHighlight, description: v })}
+                  />
+                </AdminCard>
 
-            <AdminCard title="Sección personalizada (Hecho a tu manera)">
-              <Input
-                label="Eyebrow"
-                value={draft.customHighlight.eyebrow}
-                onChange={(e) =>
-                  update("customHighlight", { ...draft.customHighlight, eyebrow: e.target.value })
+                {/* About */}
+                <AdminCard className="mb-8">
+                  <h2 className="text-xl font-bold text-ink mb-4">Acerca de</h2>
+                  <Textarea
+                    label="Misión"
+                    value={draft.about?.mission || ""}
+                    onChange={(v) => update("about", { ...draft.about, mission: v })}
+                  />
+                  <Textarea
+                    label="Historia"
+                    value={draft.about?.history || ""}
+                    onChange={(v) => update("about", { ...draft.about, history: v })}
+                  />
+                </AdminCard>
+
+                {/* Footer */}
+                <AdminCard className="mb-8">
+                  <h2 className="text-xl font-bold text-ink mb-4">Footer</h2>
+                  <Textarea
+                    label="Descripción"
+                    value={draft.footerDescription || ""}
+                    onChange={(v) => update("footerDescription", v)}
+                  />
+                </AdminCard>
+
+                {/* Branding */}
+                <AdminCard className="mb-8">
+                  <h2 className="text-xl font-bold text-ink mb-4">Branding</h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <Input
+                      label="Nombre de marca"
+                      value={draft.brandName || ""}
+                      onChange={(v) => update("brandName", v)}
+                    />
+                    <Input
+                      label="Tagline"
+                      value={draft.tagline || ""}
+                      onChange={(v) => update("tagline", v)}
+                    />
+                  </div>
+                </AdminCard>
+              </>
+            )}
+
+            <div className="flex justify-between items-center mt-8 pt-6 border-t border-ink/10">
+              <Toggle
+                checked={draft?.ctaFinal?.secondaryCta?.enabled ?? false}
+                onChange={(v) =>
+                  update("ctaFinal", {
+                    ...draft?.ctaFinal,
+                    secondaryCta: { ...draft?.ctaFinal?.secondaryCta, enabled: v },
+                  } as any)
                 }
+                label="Mostrar CTA secundaria"
               />
-              <Input
-                label="Título"
-                value={draft.customHighlight.title}
-                className="mt-4"
-                onChange={(e) =>
-                  update("customHighlight", { ...draft.customHighlight, title: e.target.value })
-                }
-              />
-              <Textarea
-                label="Descripción"
-                value={draft.customHighlight.description}
-                className="mt-4"
-                onChange={(e) =>
-                  update("customHighlight", {
-                    ...draft.customHighlight,
-                    description: e.target.value,
-                  })
-                }
-                rows={2}
-              />
-              <div className="grid md:grid-cols-2 gap-4 mt-4">
-                <Input
-                  label="CTA - texto"
-                  value={draft.customHighlight.cta.label}
-                  onChange={(e) =>
-                    update("customHighlight", {
-                      ...draft.customHighlight,
-                      cta: { ...draft.customHighlight.cta, label: e.target.value },
-                    })
-                  }
-                />
-                <Input
-                  label="CTA - link"
-                  value={draft.customHighlight.cta.href}
-                  onChange={(e) =>
-                    update("customHighlight", {
-                      ...draft.customHighlight,
-                      cta: { ...draft.customHighlight.cta, href: e.target.value },
-                    })
-                  }
-                  help="Cambia a /crear-mi-producto para usar el nuevo configurador."
-                />
+              <div className="flex gap-4">
+                <button
+                  type="button"
+                  onClick={() => setDraft(content)}
+                  className="px-6 py-3 rounded-xl border-2 border-ink/20 text-ink hover:bg-paper transition"
+                >
+                  Revertir
+                </button>
+                <button
+                  type="button"
+                  onClick={save}
+                  className="px-6 py-3 rounded-xl bg-brand-red text-white font-bold hover:bg-red-700 transition transform hover:scale-105"
+                >
+                  Guardar cambios
+                </button>
               </div>
-            </AdminCard>
-
-            <AdminCard title="CTA final">
-              <Input
-                label="Título"
-                value={draft.ctaFinal.title}
-                onChange={(e) => update("ctaFinal", { ...draft.ctaFinal, title: e.target.value })}
-              />
-              <Textarea
-                label="Descripción"
-                value={draft.ctaFinal.description}
-                className="mt-4"
-                onChange={(e) =>
-                  update("ctaFinal", { ...draft.ctaFinal, description: e.target.value })
-                }
-                rows={2}
-              />
-            </AdminCard>
-
-            <AdminCard title="Footer">
-              <Textarea
-                label="Descripción del footer"
-                value={draft.footerDescription}
-                onChange={(e) => update("footerDescription", e.target.value)}
-                rows={3}
-              />
-            </AdminCard>
-
-            <div className="flex gap-3">
-              <button
-                onClick={save}
-                className="bg-ink text-paper font-bold rounded-full px-6 py-3 shadow-sticker hover:-translate-y-0.5 transition-transform"
-              >
-                Guardar cambios
-              </button>
-              <button
-                onClick={() => setDraft(content)}
-                className="bg-paper-soft border-2 border-ink/10 font-bold rounded-full px-6 py-3"
-              >
-                Descartar
-              </button>
             </div>
           </div>
         </div>
       </div>
-      {toast && <Toast type="success" message={toast} />}
-    </div>
+      {toast && <Toast message={toast} />}
+    </AuthGuard>
   );
 }
 
-export default function AdminHomePage() {
-  return (
-    <AuthGuard>
-      <HomeContent />
-    </AuthGuard>
-  );
+export default function HomeAdminPage() {
+  return <HomeContent />;
 }

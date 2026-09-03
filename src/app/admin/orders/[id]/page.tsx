@@ -3,11 +3,16 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { ordersService, siteService, wompiService } from "@/services";
-import { useOrder } from "@/hooks/useDataService";
+import { useOrder, useSiteSettings } from "@/hooks/useDataService";
+import {
+  updateOrderStatusAction,
+  updateOrderPaymentStatusAction,
+  updateOrderShippingAction,
+  addOrderNoteAction,
+  deleteOrderAction,
+} from "@/app/actions";
+import { formatCOP } from "@/lib/utils";
 import type { OrderStatus, PaymentStatus } from "@/types/admin";
-
-const formatCOP = wompiService.formatCOP;
 
 const STATUS_OPTIONS: OrderStatus[] = [
   "pending",
@@ -35,55 +40,53 @@ export default function AdminOrderDetailPage() {
   const params = useParams();
   const router = useRouter();
   const orderId = params.id as string;
-  const order = useOrder(orderId);
+  const { order, isLoading } = useOrder(orderId);
+  const { settings } = useSiteSettings();
 
   const [note, setNote] = useState("");
   const [shippingCarrier, setShippingCarrier] = useState(order?.shipping.carrier ?? "");
   const [trackingNumber, setTrackingNumber] = useState(order?.shipping.trackingNumber ?? "");
 
-  if (!order) {
+  if (isLoading || !order) {
     return (
-      <div className="text-center py-16">
-        <p className="font-display text-xl text-ink-muted">Pedido no encontrado</p>
-        <Link
-          href="/admin/orders"
-          className="inline-block mt-4 text-brand-red font-bold"
-        >
-          ← Volver a pedidos
-        </Link>
+      <div className="min-h-screen bg-paper-soft flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 border-3 border-ink border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-ink-muted">Cargando pedido...</p>
+        </div>
       </div>
     );
   }
 
-  const handleStatusChange = (newStatus: OrderStatus) => {
-    ordersService.updateOrderStatus(orderId, newStatus);
+  const handleStatusChange = async (newStatus: OrderStatus) => {
+    await updateOrderStatusAction(orderId, newStatus);
   };
 
-  const handlePaymentStatusChange = (newStatus: PaymentStatus) => {
-    ordersService.updatePaymentStatus(orderId, newStatus);
+  const handlePaymentStatusChange = async (newStatus: PaymentStatus) => {
+    await updateOrderPaymentStatusAction(orderId, newStatus);
   };
 
-  const handleAddNote = () => {
+  const handleAddNote = async () => {
     if (!note.trim()) return;
-    ordersService.addOrderNote(orderId, note.trim());
+    await addOrderNoteAction(orderId, note.trim());
     setNote("");
   };
 
-  const handleUpdateShipping = () => {
-    ordersService.updateShipping(orderId, {
+  const handleUpdateShipping = async () => {
+    await updateOrderShippingAction(orderId, {
       carrier: shippingCarrier || undefined,
       trackingNumber: trackingNumber || undefined,
     });
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (confirm("¿Seguro que deseas eliminar este pedido? Esta acción no se puede deshacer.")) {
-      ordersService.deleteOrder(orderId);
+      await deleteOrderAction(orderId);
       router.push("/admin/orders");
     }
   };
 
-  const whatsappNumber = siteService.getSiteSettings().contact.whatsapp;
+  const whatsappNumber = settings?.contact?.whatsapp;
   const waMsg = encodeURIComponent(
     `Hola ${order.customer.name}, te escribimos de Papelillo sobre tu pedido ${order.number}...`
   );

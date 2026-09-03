@@ -5,12 +5,12 @@ import { AuthGuard } from "@/components/admin/AuthGuard";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { AdminCard, Input, Select, Toggle, EmptyState, Toast } from "@/components/admin/AdminUI";
 import { useCategories } from "@/hooks/useDataService";
-import { categoriesService } from "@/services";
+import { updateCategoryAction, createCategoryAction, deleteCategoryAction, toggleCategoryActiveAction } from "@/app/actions";
 import { slugify } from "@/lib/utils";
 import type { AdminCategory } from "@/types/admin";
 
 function CategoriesContent() {
-  const { categories, isLoading } = useCategories();;
+  const { categories, isLoading } = useCategories();
   const [editingId, setEditingId] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   const [isCreating, setIsCreating] = useState(false);
@@ -20,14 +20,14 @@ function CategoriesContent() {
     setTimeout(() => setToast(null), 2500);
   };
 
-  const handleToggle = (c: AdminCategory) => {
-    categoriesService.updateCategory(c.id, { isActive: !c.isActive });
+  const handleToggle = async (c: AdminCategory) => {
+    await toggleCategoryActiveAction(c.id);
     showToast(c.isActive ? "Categoría desactivada." : "Categoría activada.");
   };
 
-  const handleDelete = (c: AdminCategory) => {
+  const handleDelete = async (c: AdminCategory) => {
     if (!confirm(`¿Eliminar la categoría "${c.name}"?`)) return;
-    categoriesService.deleteCategory(c.id);
+    await deleteCategoryAction(c.id);
     showToast("Categoría eliminada.");
   };
 
@@ -36,6 +36,23 @@ function CategoriesContent() {
     setIsCreating(false);
     showToast("Cambios guardados.");
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-paper-soft">
+        <div className="flex flex-col lg:flex-row">
+          <AdminSidebar />
+          <div className="flex-1 p-6 lg:p-10">
+            <div className="space-y-6">
+              <div className="h-10 bg-paper rounded w-48 animate-pulse mb-4" />
+              <div className="h-4 bg-paper rounded w-64 animate-pulse mb-4" />
+              <div className="h-12 bg-paper rounded animate-pulse" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-paper-soft">
@@ -177,7 +194,7 @@ function CategoryForm({
   const [isActive, setIsActive] = useState(category?.isActive ?? true);
   const [image, setImage] = useState(category?.image ?? "");
 
-  function save() {
+  async function save() {
     if (!name.trim()) {
       alert("El nombre es obligatorio.");
       return;
@@ -193,9 +210,9 @@ function CategoryForm({
       image,
     };
     if (category) {
-      categoriesService.updateCategory(category.id, data);
+      await updateCategoryAction(category.id, data);
     } else {
-      categoriesService.createCategory(data);
+      await createCategoryAction(data);
     }
     onSaved();
   }

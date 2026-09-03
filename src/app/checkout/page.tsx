@@ -4,7 +4,9 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
-import { ordersService, siteService, wompiService } from "@/services";
+import { wompiService } from "@/services";
+import { useSiteSettings } from "@/hooks/useDataService";
+import { createOrderAction, updateOrderPaymentStatusAction } from "@/app/actions";
 const { formatCOP, openWompiWidget, toCents, isWompiReady } = wompiService;
 import { ProductImage } from "@/components/ui/ProductImage";
 import type { OrderCustomer, OrderShipping } from "@/types/admin";
@@ -56,7 +58,8 @@ export default function CheckoutPage() {
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const settings = siteService.getSiteSettings();
+  const { settings: siteSettings } = useSiteSettings();
+  const settings = siteSettings ?? {};
   const wompiCheck = isWompiReady();
 
   const total = useMemo(() => subtotal + shippingCost, [subtotal, shippingCost]);
@@ -110,7 +113,8 @@ export default function CheckoutPage() {
     setProcessing(true);
 
     try {
-      // 1. Crear el pedido en estado "pending"
+      // 1. Crear el pedido (Prisma/Neón via server action)
+      const paymentMethod = form.paymentMethod || "whatsapp";
       const customer: OrderCustomer = {
         name: form.name,
         lastName: form.lastName,
@@ -140,11 +144,18 @@ export default function CheckoutPage() {
         customization: l.customizations,
       }));
 
-      const order = ordersService.createOrder({
+      const subtotal = lines.reduce((sum, l) => sum + (l.product?.price ?? 0) * l.quantity, 0);
+      const order = await createOrderAction({
         customer,
         shipping,
         items,
-        paymentMethod,
+        payment: {
+          method: paymentMethod as "whompi" | "whatsapp" | "cash" | "other",
+          reference: `order_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+          amount: total,
+          currency: "COP",
+        },
+        subtotal,
         total,
       });
 
@@ -207,7 +218,7 @@ export default function CheckoutPage() {
           // 4. Actualizar el pedido según el resultado
           const tx = event.data.transaction;
           if (tx.status === "APPROVED") {
-            ordersService.updatePaymentStatus(order.id, "approved", {
+            await updateOrderPaymentStatusAction(order.id, "approved", {
               wompiTransactionId: tx.id,
               paidAt: new Date().toISOString(),
             });

@@ -14,13 +14,22 @@ type Step = "select-product" | "configure" | "summary";
 export function Configurator() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const products = useActiveProducts();
-  const settings = useSiteSettings();
+  const { products: activeProducts, isLoading: productsLoading } = useActiveProducts();
+  const { settings, isLoading: settingsLoading } = useSiteSettings();
+  const products = activeProducts ?? [];
 
   const customizableProducts = useMemo(
     () => products.filter((p) => p.isCustomizable),
     [products]
   );
+
+  if (productsLoading || settingsLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-ink-muted">Cargando...</div>
+      </div>
+    );
+  }
 
   const [step, setStep] = useState<Step>("select-product");
   const [selectedProduct, setSelectedProduct] = useState<AdminProduct | null>(null);

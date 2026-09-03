@@ -97,3 +97,22 @@ export async function updateWompiConfig(data: {
     wompiWebhookUrl: data.webhookUrl,
   })
 }
+
+// ============================================================
+// EDITABLE CONTENT (Hero, About, etc.)
+// ============================================================
+export async function getSiteContent() {
+  const content = await db.siteContent.findFirst()
+  return content
+}
+
+export async function updateSiteContent(data: Record<string, any>) {
+  const existing = await db.siteContent.findFirst()
+  if (!existing) {
+    return db.siteContent.create({ data: data as any })
+  }
+  return db.siteContent.update({
+    where: { id: existing.id },
+    data: data as any,
+  })
+}

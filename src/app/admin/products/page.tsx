@@ -6,7 +6,11 @@ import { AuthGuard } from "@/components/admin/AuthGuard";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { AdminCard, AdminBadge, Input, Select, EmptyState, Toast } from "@/components/admin/AdminUI";
 import { useProducts, useCategories } from "@/hooks/useDataService";
-import { productsService } from "@/services";
+import {
+  toggleProductActiveAction,
+  duplicateProductAction,
+  deleteProductAction,
+} from "@/app/actions";
 import { formatPrice } from "@/lib/utils";
 import type { AdminProduct } from "@/types/admin";
 
@@ -19,23 +23,32 @@ function ProductRow({
   categoryMap: Record<string, string>;
   onAction: (msg: string, type: "success" | "error") => void;
 }) {
-  const handleToggle = () => {
-    productsService.updateProduct(product.id, { isActive: !product.isActive });
-    onAction(
-      product.isActive ? "Producto desactivado." : "Producto activado.",
-      "success"
-    );
+  const handleToggle = async () => {
+    try {
+      await toggleProductActiveAction(product.id);
+      onAction(
+        product.isActive ? "Producto desactivado." : "Producto activado.",
+        "success"
+      );
+    } catch {
+      onAction("Error al actualizar el estado.", "error");
+    }
   };
 
-  const handleDuplicate = () => {
-    productsService.duplicateProduct(product.id);
-    onAction("Producto duplicado.", "success");
+  const handleDuplicate = async () => {
+    try {
+      await duplicateProductAction(product.id);
+      onAction("Producto duplicado.", "success");
+    } catch {
+      onAction("Error al duplicar.", "error");
+    }
   };
 
   const handleDelete = () => {
     if (!confirm(`¿Eliminar "${product.name}"? Esta acción no se puede deshacer.`)) return;
-    productsService.deleteProduct(product.id);
-    onAction("Producto eliminado.", "success");
+    deleteProductAction(product.id)
+      .then(() => onAction("Producto eliminado.", "success"))
+      .catch(() => onAction("Error al eliminar.", "error"));
   };
 
   return (

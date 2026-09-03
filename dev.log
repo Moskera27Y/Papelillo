@@ -1991,6 +1991,618 @@ Error:
 Import trace for requested module:
 ./src/app/shop/page.tsx
 <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\.next\cache\webpack\client-development\0.pack.gz'
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
+ ⨯ ./src/app/shop/page.tsx
+Error: 
+  [31mx[0m the name `error` is defined multiple times
+     ,-[[36;1;4mC:\Users\user\Desktop\IA\PRUEBAS CON OTROS MODELOS\Hermes\Pagina\src\app\shop\page.tsx[0m:197:1]
+ [2m197[0m |   const { filters, setFilter, resetFilters, hasActiveFilters } = useShopFilters();
+ [2m198[0m |   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+ [2m199[0m |   const isLoading = productsLoading || catsLoading;
+ [2m200[0m |   const error = productsError || catsError;
+     : [31;1m        ^^|^^[0m
+     :           [31;1m`-- [31;1mprevious definition of `error` here[0m[0m
+ [2m201[0m | 
+ [2m202[0m |   // Simular una pequeña carga inicial
+ [2m203[0m |   useEffect(() => {}, []);
+ [2m204[0m | 
+ [2m205[0m |   const filtered = useMemo(
+ [2m206[0m |     () => applyFilters(products, filters),
+ [2m207[0m |     [products, filters]
+ [2m208[0m |   );
+ [2m209[0m | 
+ [2m210[0m |   const activeCategoryName = useMemo(() => {
+ [2m211[0m |     if (!filters.category) return "";
+ [2m212[0m |     return categories.find((c) => c.slug === filters.category)?.name || "";
+ [2m213[0m |   }, [filters.category, categories]);
+ [2m214[0m | 
+ [2m215[0m |   const [error] = useState(false);
+     : [33;1m         ^^|^^[0m
+     :            [33;1m`-- [33;1m`error` redefined here[0m[0m
+ [2m216[0m | 
+ [2m217[0m |   return (
+ [2m218[0m |     <div className="min-h-screen bg-paper">
+     `----
+
+Import trace for requested module:
+./src/app/shop/page.tsx
 16[0m | 
  [2m217[0m |   return (
  [2m218[0m |     <div className="min-h-screen bg-paper">

@@ -321,6 +321,23 @@ model SiteSettings {
   socialLinks           SocialLink[]
 }
 
+// ============================================================
+// EDITABLE SITE CONTENT (Hero, About, CustomHighlight, etc.)
+// ============================================================
+model SiteContent {
+  id          String   @id @default(cuid())
+  brandName   String?
+  tagline     String?
+  hero        Json?
+  customHighlight Json?
+  about       Json?
+  personalized Json?
+  ctaFinal    Json?
+  footerDescription String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
 model SocialLink {
   id          String       @id @default(cuid())
   settingsId  String

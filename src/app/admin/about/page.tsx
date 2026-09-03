@@ -5,11 +5,11 @@ import { AuthGuard } from "@/components/admin/AuthGuard";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { AdminCard, Input, Textarea, Select, Toast } from "@/components/admin/AdminUI";
 import { useSiteContent } from "@/hooks/useDataService";
-import { siteService } from "@/services";
+import { updateSiteContentAction } from "@/app/actions";
 import type { SiteContentEditable } from "@/types/admin";
 
 function AboutContent() {
-  const content = useSiteContent();
+  const { content, isLoading } = useSiteContent();
   const [draft, setDraft] = useState<SiteContentEditable>(content);
   const [toast, setToast] = useState<string | null>(null);
 
@@ -17,9 +17,35 @@ function AboutContent() {
     setDraft(content);
   }, [content]);
 
-  const save = () => {
-    siteService.updateSiteContent(draft);
-    setToast("Nosotros actualizado ✓");
+  if (isLoading || !content) {
+    return (
+      <div className="min-h-screen bg-paper-soft">
+        <div className="flex flex-col lg:flex-row">
+          <AdminSidebar />
+          <div className="flex-1 p-6 lg:p-10">
+            <div className="space-y-6">
+              <div className="h-10 bg-paper rounded w-48 animate-pulse mb-4" />
+              <div className="h-4 bg-paper rounded w-64 animate-pulse" />
+              <div className="grid md:grid-cols-2 gap-4 mt-6">
+                <div className="h-12 bg-paper rounded animate-pulse" />
+                <div className="h-12 bg-paper rounded animate-pulse" />
+              </div>
+              <div className="h-64 bg-paper rounded-3xl border-2 border-ink/10 animate-pulse" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const save = async () => {
+    if (!draft) return;
+    try {
+      await updateSiteContentAction(draft);
+      setToast("Nosotros actualizado ✓");
+    } catch {
+      setToast("Error al guardar ✗");
+    }
     setTimeout(() => setToast(null), 2500);
   };
 

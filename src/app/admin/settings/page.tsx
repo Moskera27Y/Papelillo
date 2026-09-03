@@ -5,13 +5,14 @@ import { AuthGuard } from "@/components/admin/AuthGuard";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { AdminCard, Input, Textarea, Toast } from "@/components/admin/AdminUI";
 import { useSiteSettings, useAuth } from "@/hooks/useDataService";
-import { siteService, authService } from "@/services";
+import { updateSiteSettingsAction } from "@/app/actions";
+import { loginAction, logoutAction } from "@/app/actions";
 import type { SiteSettings, WompiConfig } from "@/types/admin";
 
 function SettingsContent() {
-  const settings = useSiteSettings();
-  const { changePassword, changeUsername, session } = useAuth();
-  const [draft, setDraft] = useState<SiteSettings>(settings);
+  const { settings, isLoading: ssLoading } = useSiteSettings();
+  const { changePassword, changeUsername, session, isLoading: authLoading } = useAuth();
+  const [draft, setDraft] = useState<SiteSettings | null>(settings);
   const [toast, setToast] = useState<string | null>(null);
 
   const [currentPw, setCurrentPw] = useState("");
@@ -23,8 +24,21 @@ function SettingsContent() {
     setDraft(settings);
   }, [settings]);
 
-  const save = () => {
-    siteService.updateSiteSettings(draft);
+  useEffect(() => {
+    setNewUsername(session?.username ?? "");
+  }, [session]);
+
+  if (ssLoading || authLoading) {
+    return (
+      <div className="min-h-screen bg-paper-soft flex items-center justify-center">
+        <div className="text-ink-muted">Cargando configuración...</div>
+      </div>
+    );
+  }
+
+  const save = async () => {
+    if (!draft) return;
+    await updateSiteSettingsAction(draft);
     setToast("Configuración guardada ✓");
     setTimeout(() => setToast(null), 2500);
   };

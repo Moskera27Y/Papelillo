@@ -5,11 +5,11 @@ import { AuthGuard } from "@/components/admin/AuthGuard";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { AdminCard, Input, Textarea, Toast } from "@/components/admin/AdminUI";
 import { useSiteSettings } from "@/hooks/useDataService";
-import { siteService } from "@/services";
+import { updateSiteSettingsAction } from "@/app/actions";
 import type { SiteSettings } from "@/types/admin";
 
 function ContactContent() {
-  const settings = useSiteSettings();
+  const { settings, isLoading } = useSiteSettings();
   const [draft, setDraft] = useState<SiteSettings>(settings);
   const [toast, setToast] = useState<string | null>(null);
 
@@ -17,8 +17,25 @@ function ContactContent() {
     setDraft(settings);
   }, [settings]);
 
-  const save = () => {
-    siteService.updateSiteSettings(draft);
+  if (isLoading || !settings) {
+    return (
+      <div className="min-h-screen bg-paper-soft">
+        <div className="flex flex-col lg:flex-row">
+          <AdminSidebar />
+          <div className="flex-1 p-6 lg:p-10">
+            <div className="space-y-6">
+              <div className="h-10 bg-paper rounded w-48 animate-pulse mb-4" />
+              <div className="h-4 bg-paper rounded w-64 animate-pulse" />
+              <div className="h-64 bg-paper rounded-3xl border-2 border-ink/10 animate-pulse mt-6" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const save = async () => {
+    await updateSiteSettingsAction(draft);
     setToast("Contacto actualizado ✓");
     setTimeout(() => setToast(null), 2500);
   };

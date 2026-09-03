@@ -212,8 +212,6 @@ function ShopContent() {
     return categories.find((c) => c.slug === filters.category)?.name || "";
   }, [filters.category, categories]);
 
-  const [error] = useState(false);
-
   return (
     <div className="min-h-screen bg-paper">
       {/* ============================================ */}
