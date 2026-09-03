@@ -10,15 +10,14 @@ import type { SiteSettings } from "@/types/admin";
 
 function ContactContent() {
   const { settings, isLoading } = useSiteSettings();
-  const [draft, setDraft] = useState<any>(settings ?? {});
+  const [draft, setDraft] = useState<any>(settings ?? { contact: {} });
   const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
     if (settings) {
       setDraft({
         ...settings,
-        contact: settings?.contact ?? {},
-        ...(settings as any)?.contact,
+        contact: { ...settings?.contact, ...(settings as any)?.contact, ...(settings as any).contact } as any,
       });
     }
   }, [settings]);
