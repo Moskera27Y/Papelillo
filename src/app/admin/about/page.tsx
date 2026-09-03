@@ -10,14 +10,14 @@ import type { SiteContentEditable } from "@/types/admin";
 
 function AboutContent() {
   const { content, isLoading } = useSiteContent();
-  const [draft, setDraft] = useState<SiteContentEditable>(content);
+  const [draft, setDraft] = useState<any>(content);
   const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
     setDraft(content);
   }, [content]);
 
-  if (isLoading || !content) {
+  if (isLoading || !content || !draft) {
     return (
       <div className="min-h-screen bg-paper-soft">
         <div className="flex flex-col lg:flex-row">
@@ -50,7 +50,7 @@ function AboutContent() {
   };
 
   const addValue = () => {
-    setDraft((prev) => ({
+    setDraft((prev: any) => ({
       ...prev,
       about: {
         ...prev.about,
@@ -66,7 +66,7 @@ function AboutContent() {
     idx: number,
     patch: Partial<SiteContentEditable["about"]["values"][number]>
   ) => {
-    setDraft((prev) => {
+    setDraft((prev: any) => {
       const values = [...prev.about.values];
       values[idx] = { ...values[idx], ...patch };
       return { ...prev, about: { ...prev.about, values } };
@@ -74,11 +74,11 @@ function AboutContent() {
   };
 
   const removeValue = (idx: number) => {
-    setDraft((prev) => ({
+    setDraft((prev: any) => ({
       ...prev,
       about: {
         ...prev.about,
-        values: prev.about.values.filter((_, i) => i !== idx),
+        values: prev.about.values.filter((_: any, i: number) => i !== idx),
       },
     }));
   };
@@ -103,7 +103,7 @@ function AboutContent() {
                 label="Eyebrow"
                 value={draft.about.eyebrow}
                 onChange={(e) =>
-                  setDraft((prev) => ({
+                  setDraft((prev: any) => ({
                     ...prev,
                     about: { ...prev.about, eyebrow: e.target.value },
                   }))
@@ -114,7 +114,7 @@ function AboutContent() {
                 value={draft.about.title}
                 className="mt-4"
                 onChange={(e) =>
-                  setDraft((prev) => ({
+                  setDraft((prev: any) => ({
                     ...prev,
                     about: { ...prev.about, title: e.target.value },
                   }))
@@ -125,7 +125,7 @@ function AboutContent() {
                 value={draft.about.intro}
                 className="mt-4"
                 onChange={(e) =>
-                  setDraft((prev) => ({
+                  setDraft((prev: any) => ({
                     ...prev,
                     about: { ...prev.about, intro: e.target.value },
                   }))
@@ -137,7 +137,7 @@ function AboutContent() {
                 value={draft.about.story ?? ""}
                 className="mt-4"
                 onChange={(e) =>
-                  setDraft((prev) => ({
+                  setDraft((prev: any) => ({
                     ...prev,
                     about: { ...prev.about, story: e.target.value },
                   }))
@@ -149,7 +149,7 @@ function AboutContent() {
                 value={draft.about.mission ?? ""}
                 className="mt-4"
                 onChange={(e) =>
-                  setDraft((prev) => ({
+                  setDraft((prev: any) => ({
                     ...prev,
                     about: { ...prev.about, mission: e.target.value },
                   }))
@@ -161,7 +161,7 @@ function AboutContent() {
                 value={draft.about.vision ?? ""}
                 className="mt-4"
                 onChange={(e) =>
-                  setDraft((prev) => ({
+                  setDraft((prev: any) => ({
                     ...prev,
                     about: { ...prev.about, vision: e.target.value },
                   }))
@@ -172,7 +172,7 @@ function AboutContent() {
 
             <AdminCard title="Valores">
               <div className="space-y-4">
-                {draft.about.values.map((v, idx) => (
+                {draft.about.values.map((v: any, idx: number) => (
                   <div
                     key={v.id ?? idx}
                     className="bg-paper-soft rounded-2xl border-2 border-ink/10 p-4"

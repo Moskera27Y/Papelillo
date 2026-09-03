@@ -23,16 +23,16 @@ export function Configurator() {
     [products]
   );
 
-  if (productsLoading || settingsLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="text-ink-muted">Cargando...</div>
-      </div>
-    );
-  }
-
+  // Hooks declarados antes de cualquier early return (regla react-hooks)
   const [step, setStep] = useState<Step>("select-product");
   const [selectedProduct, setSelectedProduct] = useState<AdminProduct | null>(null);
+  const [values, setValues] = useState<Record<string, unknown>>({});
+  const [quantity, setQuantity] = useState(1);
+  const [dueDate, setDueDate] = useState("");
+  const [customerName, setCustomerName] = useState("");
+  const [customerEmail, setCustomerEmail] = useState("");
+  const [customerWhatsapp, setCustomerWhatsapp] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   // Auto-seleccionar producto desde query parameter (?producto=slug)
   useEffect(() => {
@@ -48,45 +48,28 @@ export function Configurator() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams, customizableProducts.length]);
-  const [values, setValues] = useState<Record<string, unknown>>({});
-  const [quantity, setQuantity] = useState(1);
-  const [dueDate, setDueDate] = useState("");
-  const [customerName, setCustomerName] = useState("");
-  const [customerEmail, setCustomerEmail] = useState("");
-  const [customerWhatsapp, setCustomerWhatsapp] = useState("");
-  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const whatsappNumber = settings.contact.whatsapp;
-
   const activeOptions = useMemo(() => {
     if (!selectedProduct) return [];
     return (selectedProduct.options ?? []).filter((o) => o.isActive);
   }, [selectedProduct]);
-
   const estimatedPrice = useMemo(() => {
     if (!selectedProduct) return null;
     if (selectedProduct.requiresQuote) return null;
     if (selectedProduct.price === null) return null;
-
     let base = selectedProduct.price;
     if (selectedProduct.priceType === "perUnit") {
       base = base * Math.max(1, quantity);
     }
-
     // Agregar ajustes de precio de las opciones
     activeOptions.forEach((opt) => {
       const val = values[opt.name];
-      if (typeof val === "string" && opt.options) {
-        // Buscar si hay un ajuste de precio para esta opción
-        // (por ahora no implementamos priceAdjustment en la UI, pero lo dejamos preparado)
-      }
+      void val;
     });
-
     return base;
   }, [selectedProduct, quantity, values, activeOptions]);
-
   const isOutOfCatalog = useMemo(() => {
-    // Detectar si alguna opción eligió "Otro"
     for (const opt of activeOptions) {
       const val = values[opt.name];
       if (typeof val === "object" && val !== null && !Array.isArray(val) && "value" in val) {
@@ -96,6 +79,14 @@ export function Configurator() {
     }
     return false;
   }, [values, activeOptions]);
+
+  if (productsLoading || settingsLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-ink-muted">Cargando...</div>
+      </div>
+    );
+  }
 
   const handleSelectProduct = (p: AdminProduct) => {
     setSelectedProduct(p);

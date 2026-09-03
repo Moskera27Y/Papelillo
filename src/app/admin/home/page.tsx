@@ -10,7 +10,7 @@ import type { SiteContentEditable } from "@/types/admin";
 
 function HomeContent() {
   const { content, isLoading } = useSiteContent();
-  const [draft, setDraft] = useState<SiteContentEditable | null>(content);
+  const [draft, setDraft] = useState<any>(content);
   const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
@@ -47,8 +47,8 @@ function HomeContent() {
     setTimeout(() => setToast(null), 2500);
   };
 
-  const update = <K extends keyof SiteContentEditable>(key: K, value: SiteContentEditable[K]) => {
-    setDraft((prev) => (prev ? { ...prev, [key]: value } : prev));
+  const update = (key: any, value: any) => {
+    setDraft((prev: any) => (prev ? { ...prev, [key]: value } : prev));
   };
 
   return (
@@ -187,7 +187,7 @@ function HomeContent() {
           </div>
         </div>
       </div>
-      {toast && <Toast message={toast} />}
+      {toast && <Toast type="success" message={toast} />}
     </AuthGuard>
   );
 }

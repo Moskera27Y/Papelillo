@@ -19,7 +19,7 @@ const ICON_OPTIONS = [
 
 function SocialContent() {
   const { settings, isLoading } = useSiteSettings();
-  const [draft, setDraft] = useState<SiteSettings>(settings);
+  const [draft, setDraft] = useState<any>(settings);
   const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ function SocialContent() {
   };
 
   const addLink = () => {
-    setDraft((prev) => ({
+    setDraft((prev: any) => ({
       ...prev,
       social: [
         ...prev.social,
@@ -67,16 +67,16 @@ function SocialContent() {
   };
 
   const updateLink = (id: string, patch: Partial<SocialLink>) => {
-    setDraft((prev) => ({
+    setDraft((prev: any) => ({
       ...prev,
-      social: prev.social.map((l) => (l.id === id ? { ...l, ...patch } : l)),
+      social: prev.social.map((l: any) => (l.id === id ? { ...l, ...patch } : l)),
     }));
   };
 
   const removeLink = (id: string) => {
-    setDraft((prev) => ({
+    setDraft((prev: any) => ({
       ...prev,
-      social: prev.social.filter((l) => l.id !== id),
+      social: prev.social.filter((l: any) => l.id !== id),
     }));
   };
 
@@ -96,7 +96,7 @@ function SocialContent() {
 
           <AdminCard>
             <div className="space-y-4">
-              {draft.social.map((link) => (
+              {draft.social.map((link: any) => (
                 <div
                   key={link.id}
                   className="bg-paper-soft rounded-2xl border-2 border-ink/10 p-4"

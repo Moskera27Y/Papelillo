@@ -33,7 +33,7 @@ async function main() {
     { name: 'Personalizados', slug: 'personalizados', color: 'blue', order: 8, description: 'Productos completamente personalizados', image: '/images/categories/personalizados.jpg' },
   ]
 
-  const createdCategories = {}
+  const createdCategories: Record<string, string> = {}
   for (const cat of categories) {
     const created = await prisma.category.upsert({
       where: { slug: cat.slug },

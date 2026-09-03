@@ -10,14 +10,14 @@ import type { SiteSettings } from "@/types/admin";
 
 function ContactContent() {
   const { settings, isLoading } = useSiteSettings();
-  const [draft, setDraft] = useState<SiteSettings>(settings);
+  const [draft, setDraft] = useState<SiteSettings>(settings as SiteSettings);
   const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
-    setDraft(settings);
+    setDraft(settings as SiteSettings);
   }, [settings]);
 
-  if (isLoading || !settings) {
+  if (isLoading || !settings || !draft) {
     return (
       <div className="min-h-screen bg-paper-soft">
         <div className="flex flex-col lg:flex-row">

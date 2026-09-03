@@ -72,7 +72,7 @@ function EditProductContent() {
     const finalSlug = draft.slug.trim() || slugify(draft.name);
     setSaving(true);
     try {
-      await updateProductAction({ ...draft, slug: finalSlug });
+      await updateProductAction({ ...draft, slug: finalSlug } as any);
       setToast("Cambios guardados ✓");
       setTimeout(() => setToast(null), 2500);
     } catch {

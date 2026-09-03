@@ -101,8 +101,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [cart]);
 
   const lines: CartItemExt[] = useMemo(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    productsVersion; // dependencia para re-calcular
+    // referenciamos productsVersion para recalcular cuando cambian productos
+    void productsVersion;
     const availableProducts = allProducts.length > 0 ? allProducts : [];
     return cart.items
       .map((item) => {

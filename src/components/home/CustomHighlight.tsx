@@ -349,7 +349,7 @@ export function CustomHighlight() {
                 <span className="text-2xl">💛</span>
               </div>
               <p className="text-lg text-ink italic font-medium leading-relaxed">
-                "Cada producto es una pequeña pieza de arte hecha a tu medida."
+                &quot;Cada producto es una pequeña pieza de arte hecha a tu medida.&quot;
               </p>
             </div>
           </div>

@@ -197,7 +197,7 @@ export function ProductEditor({ value, onChange, isEditing }: Props) {
         )}
         {v.requiresQuote && (
           <div className="mt-4 bg-paper-soft rounded-2xl border-2 border-ink/10 p-4 text-sm text-ink-muted">
-            Este producto no mostrará precio. El cliente verá "Precio bajo cotización" y un botón
+            Este producto no mostrará precio. El cliente verá &quot;Precio bajo cotización&quot; y un botón
             para solicitar cotización por WhatsApp.
           </div>
         )}
@@ -574,7 +574,7 @@ function OptionsEditor({
         <p className="font-semibold text-ink mb-1">Configurador del cliente</p>
         <p>
           Define aquí qué información debe proporcionar quien pide este producto. El cliente verá
-          estos campos en el configurador y podrá elegir "Otro" cuando aplique.
+          estos campos en el configurador y podrá elegir &quot;Otro&quot; cuando aplique.
         </p>
       </div>
 

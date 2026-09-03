@@ -137,8 +137,8 @@ function ProductRow({
 }
 
 function ProductsListContent() {
-  const products = useProducts();
-  const categories = useCategories();
+  const { products: activeProducts = [] } = useProducts();
+  const { categories = [] } = useCategories();
   const [query, setQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<string>("");
   const [statusFilter, setStatusFilter] = useState<"all" | "active" | "inactive">("all");
@@ -153,7 +153,7 @@ function ProductsListContent() {
   }, [categories]);
 
   const filtered = useMemo(() => {
-    let list = [...products];
+    let list = [...activeProducts];
     if (query.trim()) {
       const q = query.toLowerCase();
       list = list.filter(
@@ -167,7 +167,7 @@ function ProductsListContent() {
     if (statusFilter === "active") list = list.filter((p) => p.isActive);
     if (statusFilter === "inactive") list = list.filter((p) => !p.isActive);
     return list;
-  }, [products, query, categoryFilter, statusFilter]);
+  }, [activeProducts, query, categoryFilter, statusFilter]);
 
   return (
     <div className="min-h-screen bg-paper-soft">
@@ -180,9 +180,9 @@ function ProductsListContent() {
                 Productos
               </h1>
               <p className="text-ink-muted">
-                {products.length} producto{products.length === 1 ? "" : "s"} en total ·{" "}
-                {products.filter((p) => p.isActive).length} activo
-                {products.filter((p) => p.isActive).length === 1 ? "" : "s"}
+                {activeProducts.length} producto{activeProducts.length === 1 ? "" : "s"} en total ·{" "}
+                {activeProducts.filter((p) => p.isActive).length} activo
+                {activeProducts.filter((p) => p.isActive).length === 1 ? "" : "s"}
               </p>
             </div>
             <Link

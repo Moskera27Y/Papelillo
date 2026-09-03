@@ -134,6 +134,12 @@ export async function deleteProductAction(id: string) {
   return { success: true }
 }
 
+export async function deleteOrderAction(id: string) {
+  await orderService.deleteOrder(id)
+  revalidatePath('/admin/orders')
+  return { success: true }
+}
+
 export async function toggleProductActiveAction(id: string) {
   await productService.toggleProductActive(id)
   revalidatePath('/admin/products')

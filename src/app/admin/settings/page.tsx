@@ -12,7 +12,7 @@ import type { SiteSettings, WompiConfig } from "@/types/admin";
 function SettingsContent() {
   const { settings, isLoading: ssLoading } = useSiteSettings();
   const { changePassword, changeUsername, session, isLoading: authLoading } = useAuth();
-  const [draft, setDraft] = useState<SiteSettings | null>(settings);
+  const [draft, setDraft] = useState<any>(settings);
   const [toast, setToast] = useState<string | null>(null);
 
   const [currentPw, setCurrentPw] = useState("");
@@ -83,7 +83,7 @@ function SettingsContent() {
     }
     const reader = new FileReader();
     reader.onload = () => {
-      setDraft((prev) => ({
+      setDraft((prev: any) => ({
         ...prev,
         branding: {
           ...prev.branding,
@@ -97,7 +97,7 @@ function SettingsContent() {
   };
 
   const clearLogo = () => {
-    setDraft((prev) => ({
+    setDraft((prev: any) => ({
       ...prev,
       branding: {
         ...prev.branding,
@@ -167,7 +167,7 @@ function SettingsContent() {
                     label="URL del logo (si no subes archivo)"
                     value={draft.branding.logoSrc}
                     onChange={(e) =>
-                      setDraft((prev) => ({
+                      setDraft((prev: any) => ({
                         ...prev,
                         branding: { ...prev.branding, logoSrc: e.target.value },
                       }))
@@ -178,7 +178,7 @@ function SettingsContent() {
                     label="Favicon (URL)"
                     value={draft.branding.faviconSrc}
                     onChange={(e) =>
-                      setDraft((prev) => ({
+                      setDraft((prev: any) => ({
                         ...prev,
                         branding: {
                           ...prev.branding,
@@ -196,7 +196,7 @@ function SettingsContent() {
               <WompiSettings
                 config={draft.wompi}
                 onChange={(cfg) =>
-                  setDraft((prev) => ({ ...prev, wompi: cfg }))
+                  setDraft((prev: any) => ({ ...prev, wompi: cfg }))
                 }
               />
             </AdminCard>
@@ -207,7 +207,7 @@ function SettingsContent() {
                 label="Nombre del sitio"
                 value={draft.seo.siteName}
                 onChange={(e) =>
-                  setDraft((prev) => ({
+                  setDraft((prev: any) => ({
                     ...prev,
                     seo: { ...prev.seo, siteName: e.target.value },
                   }))
@@ -218,7 +218,7 @@ function SettingsContent() {
                 value={draft.seo.siteDescription}
                 className="mt-4"
                 onChange={(e) =>
-                  setDraft((prev) => ({
+                  setDraft((prev: any) => ({
                     ...prev,
                     seo: { ...prev.seo, siteDescription: e.target.value },
                   }))
@@ -230,7 +230,7 @@ function SettingsContent() {
                 value={draft.seo.siteUrl}
                 className="mt-4"
                 onChange={(e) =>
-                  setDraft((prev) => ({
+                  setDraft((prev: any) => ({
                     ...prev,
                     seo: { ...prev.seo, siteUrl: e.target.value },
                   }))
@@ -242,7 +242,7 @@ function SettingsContent() {
                 value={draft.seo.ogImage ?? ""}
                 className="mt-4"
                 onChange={(e) =>
-                  setDraft((prev) => ({
+                  setDraft((prev: any) => ({
                     ...prev,
                     seo: { ...prev.seo, ogImage: e.target.value },
                   }))
