@@ -23,7 +23,11 @@ function SocialContent() {
   const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
-    setDraft(settings);
+    setDraft((prev: any) => ({
+      ...(settings ?? {}),
+      social: Array.isArray(settings?.social) ? settings.social : [],
+      socialLinks: Array.isArray((settings as any)?.socialLinks) ? (settings as any).socialLinks : [],
+    }));
   }, [settings]);
 
   if (isLoading || !settings) {
