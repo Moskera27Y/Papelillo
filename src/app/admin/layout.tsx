@@ -6,12 +6,11 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+// Layout minimalista: cada página admin incluye su propio AuthGuard + AdminSidebar.
 export default function AdminRootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // El layout del admin es minimalista: las páginas hijas se encargan
-  // de su propio contenido (login no usa sidebar, el resto sí).
   return <>{children}</>;
 }

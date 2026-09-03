@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useOrders } from "@/hooks/useDataService";
 import { getOrderStatsAction } from "@/app/actions";
 import { formatCOP } from "@/services/wompi.service";
+import { AuthGuard } from "@/components/admin/AuthGuard";
+import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import type { Order, OrderStatus } from "@/types/admin";
 
 const STATUS_LABELS: Record<OrderStatus, { label: string; color: string }> = {
@@ -73,9 +75,13 @@ export default function AdminOrdersPage() {
   }
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="font-display text-4xl font-bold text-ink mb-2">Pedidos</h1>
+    <AuthGuard>
+      <div className="flex min-h-screen bg-paper-soft">
+        <AdminSidebar />
+        <main className="flex-1 overflow-y-auto">
+          <div className="space-y-8">
+            <div>
+              <h1 className="font-display text-4xl font-bold text-ink mb-2">Pedidos</h1>
         <p className="text-ink-muted">
           Gestiona todos los pedidos de Papelillo
         </p>
@@ -220,7 +226,10 @@ export default function AdminOrdersPage() {
           </div>
         </div>
       )}
-    </div>
+          </div>
+        </main>
+      </div>
+    </AuthGuard>
   );
 }
 
