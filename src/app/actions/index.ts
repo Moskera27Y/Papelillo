@@ -323,24 +323,57 @@ export async function deleteMessageAction(id: string) {
 // ============================================================
 
 export async function getSiteSettingsAction() {
-  return siteService.getSiteSettings()
+  try {
+    return await siteService.getSiteSettings()
+  } catch (e: any) {
+    console.error('[getSiteSettingsAction]', e?.message ?? e)
+    return {
+      id: 'main',
+      brandName: 'Papelillo',
+      tagline: 'Papelería creativa',
+      whatsappNumber: '573185171163',
+      email: 'hola@papelillo.co',
+      phone: '',
+      address: '',
+      socialLinks: [],
+      // fallbacks para los accesos directos en componentes admin
+      contact: { whatsapp: '573185171163', email: 'hola@papelillo.co', phone: '', address: '' },
+      seo: { title: 'Papelillo', description: '', keywords: '' },
+      branding: { logoUrl: '/images/logo.png', favicon: '/favicon.svg' },
+      wompi: { enabled: false, publicKey: '', privateKey: '' },
+    } as any
+  }
 }
 
 export async function getSiteContentAction() {
-  const settings = await siteService.getSiteSettings()
-  const content = await siteService.getSiteContent()
-  // Combina settings de DB + content editable (JSON o null → seed fallback)
-  const base = {
-    brandName: content?.brandName ?? settings.brandName ?? "Papelillo",
-    tagline: content?.tagline ?? settings.tagline ?? "Papelería creativa",
-    footerDescription: content?.footerDescription ?? null,
-    hero: content?.hero ?? {},
-    customHighlight: content?.customHighlight ?? {},
-    about: content?.about ?? { values: [] },
-    personalized: content?.personalized ?? { steps: [] },
-    ctaFinal: content?.ctaFinal ?? { badge: "", title: "", description: "", primaryCta: { label: "", href: "" }, secondaryCta: { label: "", href: "" } },
-  } as any
-  return base
+  try {
+    const settings = await siteService.getSiteSettings()
+    const content = await siteService.getSiteContent()
+    // Combina settings de DB + content editable (JSON o null → seed fallback)
+    const base = {
+      brandName: content?.brandName ?? settings.brandName ?? "Papelillo",
+      tagline: content?.tagline ?? settings.tagline ?? "Papelería creativa",
+      footerDescription: content?.footerDescription ?? null,
+      hero: content?.hero ?? {},
+      customHighlight: content?.customHighlight ?? {},
+      about: content?.about ?? { values: [] },
+      personalized: content?.personalized ?? { steps: [] },
+      ctaFinal: content?.ctaFinal ?? { badge: "", title: "", description: "", primaryCta: { label: "", href: "" }, secondaryCta: { label: "", href: "" } },
+    } as any
+    return base
+  } catch (e: any) {
+    console.error('[getSiteContentAction]', e?.message ?? e)
+    return {
+      brandName: 'Papelillo',
+      tagline: 'Papelería creativa',
+      footerDescription: null,
+      hero: {},
+      customHighlight: {},
+      about: { values: [] },
+      personalized: { steps: [] },
+      ctaFinal: { badge: '', title: '', description: '', primaryCta: { label: '', href: '' }, secondaryCta: { label: '', href: '' } },
+    } as any
+  }
 }
 
 export async function updateSiteContentAction(data: Record<string, any>) {
