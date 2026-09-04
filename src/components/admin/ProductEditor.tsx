@@ -29,7 +29,7 @@ interface Props {
   isEditing?: boolean;
 }
 
-function ProductEditor({ value, onChange, isEditing }: Props) {
+export function ProductEditor({ value, onChange, isEditing }: Props) {
   const { categories: categoryList = [] } = useCategories();
   const v = value;
 
