@@ -176,9 +176,10 @@ export function normalizeDBProduct(product: ProductWithRelations): ProductWithRe
 
 // 🔧 Mapea editor format ({text}) → Prisma format ({name}) antes del update/create
 export function normalizeProductForPrisma(data: Partial<UpdateProductInput>): Record<string, any> {
-  const { category, categoryName, features, options, customFields, ...rest } = data;
+  const { category, categoryName, features, options, customFields, images, ...rest } = data;
   return {
     ...rest,
+    images: images ?? [],
     features: Array.isArray(features)
       ? { create: features.map((f: any, i: number) => ({ name: f.name ?? f.text ?? "", order: f.order ?? i })) }
       : undefined,
@@ -212,29 +213,15 @@ export async function getProductsByCategory(categorySlug: string): Promise<Produ
 // ============================================================
 
 export async function createProduct(data: CreateProductInput): Promise<ProductWithRelations> {
-  const { features, options, customFields, ...productData } = data
+  const normalized = normalizeProductForPrisma(data);
 
   const product = await db.product.create({
     data: {
-      ...productData,
+      ...normalized,
       price: data.price ?? null,
       compareAtPrice: data.compareAtPrice ?? null,
       stock: data.stock ?? null,
       categoryId: data.categoryId ?? null,
-      features: {
-        create: features || [],
-      },
-      options: {
-        create: options?.map((opt) => ({
-          ...opt,
-          values: {
-            create: opt.values || [],
-          },
-        })) || [],
-      },
-      customFields: {
-        create: customFields || [],
-      },
     },
     include: {
       features: { orderBy: { order: 'asc' } },
@@ -274,6 +261,7 @@ export async function updateProduct(data: UpdateProductInput): Promise<ProductWi
     where: { id },
     data: {
       ...normalized,
+      images: data.images ?? normalized.images ?? [],
       price: data.price ?? null,
       compareAtPrice: data.compareAtPrice ?? null,
       stock: data.stock ?? null,
