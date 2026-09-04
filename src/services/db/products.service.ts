@@ -76,6 +76,8 @@ export interface CreateProductInput {
 
 export interface UpdateProductInput extends Partial<CreateProductInput> {
   id: string
+  category?: string
+  categoryId?: string | null
 }
 
 // ============================================================
@@ -225,7 +227,7 @@ export async function createProduct(data: CreateProductInput): Promise<ProductWi
 // ============================================================
 
 export async function updateProduct(data: UpdateProductInput): Promise<ProductWithRelations> {
-  const { id, features, options, customFields, ...productData } = data
+  const { id, features, options, customFields, category, categoryName, ...productData } = data
 
   // Delete existing relations
   await db.productFeature.deleteMany({ where: { productId: id } })

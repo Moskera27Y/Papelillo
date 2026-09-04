@@ -29,11 +29,12 @@ interface Props {
   isEditing?: boolean;
 }
 
-export function ProductEditor({ value, onChange, isEditing }: Props) {
-  const categories = useCategories(); /* {categories:[], isLoading, error} */
-  const catList: any[] = Array.isArray(categories?.categories) ? categories.categories : (Array.isArray(categories) ? categories : []);
-
+function ProductEditor({ value, onChange, isEditing }: Props) {
+  const { categories: categoryList = [] } = useCategories();
   const v = value;
+
+  // 🔧 Helper: mapear slug→categoryId para Prisma
+  const getCatIdBySlug = (slug: string) => categoryList.find((c) => c.slug === slug)?.id ?? null;
 
   // ---------- General ----------
   const Section = ({
@@ -97,10 +98,14 @@ export function ProductEditor({ value, onChange, isEditing }: Props) {
           <Select
             label="Categoría *"
             value={v.category}
-            onChange={(e) => onChange({ category: e.target.value })}
+            onChange={(e) => {
+              const slug = e.target.value;
+              const catId = slug ? getCatIdBySlug(slug) : null;
+              onChange({ category: slug, categoryId: catId });
+            }}
           >
             <option value="">Selecciona una categoría…</option>
-            {catList.map((c) => (
+            {categoryList.map((c) => (
               <option key={c.id} value={c.slug}>
                 {c.name}
               </option>
