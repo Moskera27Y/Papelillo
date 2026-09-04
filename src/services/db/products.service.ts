@@ -161,6 +161,34 @@ export async function getFeaturedProducts(): Promise<ProductWithRelations[]> {
   })
 }
 
+// 🔁 Normaliza features {name} → {text} para el editor + mantiene name para Prisma
+export function normalizeDBProduct(product: ProductWithRelations): ProductWithRelations {
+  if (!product) return product;
+  return {
+    ...product,
+    features: (product.features ?? []).map((f: any) => ({
+      ...f,
+      text: (f as any).name ?? (f as any).text ?? "",
+      name: (f as any).name ?? (f as any).text ?? "",
+    })),
+  };
+}
+
+// 🔧 Mapea editor format ({text}) → Prisma format ({name}) antes del update/create
+export function normalizeProductForPrisma(data: Partial<UpdateProductInput>): Record<string, any> {
+  const { category, categoryName, features, options, customFields, ...rest } = data;
+  return {
+    ...rest,
+    features: Array.isArray(features)
+      ? { create: features.map((f: any, i: number) => ({ name: f.name ?? f.text ?? "", order: f.order ?? i })) }
+      : undefined,
+    options: Array.isArray(options)
+      ? { create: options.map((o: any) => ({ ...o, values: o.values ? { create: o.values } : undefined })) }
+      : undefined,
+    customFields: Array.isArray(customFields) ? { create: customFields } : undefined,
+  };
+}
+
 export async function getProductsByCategory(categorySlug: string): Promise<ProductWithRelations[]> {
   return db.product.findMany({
     where: {
@@ -226,40 +254,33 @@ export async function createProduct(data: CreateProductInput): Promise<ProductWi
 // UPDATE PRODUCT
 // ============================================================
 
+// ============================================================
+// UPDATE PRODUCT
+// ============================================================
+
 export async function updateProduct(data: UpdateProductInput): Promise<ProductWithRelations> {
-  const { id, features, options, customFields, category, categoryName, ...productData } = data
+  const { id, features, options, customFields, category, categoryName, ...productData } = data;
 
   // Delete existing relations
-  await db.productFeature.deleteMany({ where: { productId: id } })
-  await db.productOptionValue.deleteMany({
-    where: { option: { productId: id } },
-  })
-  await db.productOption.deleteMany({ where: { productId: id } })
-  await db.customField.deleteMany({ where: { productId: id } })
+  await db.productFeature.deleteMany({ where: { productId: id } });
+  await db.productOptionValue.deleteMany({ where: { option: { productId: id } } });
+  await db.productOption.deleteMany({ where: { productId: id } });
+  await db.customField.deleteMany({ where: { productId: id } });
 
-  // Update product with new relations
+  // Normaliza features/options/customFields a formato Prisma ({name} no {text})
+  const normalized = normalizeProductForPrisma({ ...productData, features, options, customFields });
+
   const product = await db.product.update({
     where: { id },
     data: {
-      ...productData,
+      ...normalized,
       price: data.price ?? null,
       compareAtPrice: data.compareAtPrice ?? null,
       stock: data.stock ?? null,
       categoryId: data.categoryId ?? null,
-      features: {
-        create: features || [],
-      },
-      options: {
-        create: options?.map((opt) => ({
-          ...opt,
-          values: {
-            create: opt.values || [],
-          },
-        })) || [],
-      },
-      customFields: {
-        create: customFields || [],
-      },
+      features: normalized.features ?? { create: [] },
+      options: normalized.options ?? { create: [] },
+      customFields: normalized.customFields ?? { create: [] },
     },
     include: {
       features: { orderBy: { order: 'asc' } },
@@ -270,9 +291,9 @@ export async function updateProduct(data: UpdateProductInput): Promise<ProductWi
       customFields: { orderBy: { order: 'asc' } },
       category: { select: { id: true, name: true, slug: true, color: true } },
     },
-  })
+  });
 
-  return product
+  return product;
 }
 
 // ============================================================
@@ -280,7 +301,7 @@ export async function updateProduct(data: UpdateProductInput): Promise<ProductWi
 // ============================================================
 
 export async function deleteProduct(id: string): Promise<void> {
-  await db.product.delete({ where: { id } })
+  await db.product.delete({ where: { id } });
 }
 
 // ============================================================

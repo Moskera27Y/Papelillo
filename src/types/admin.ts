@@ -78,7 +78,7 @@ export interface ProductDimensions {
 export interface ExtendedProductFields {
   subcategory?: string;
   dimensions?: ProductDimensions;
-  features?: { id: string; text: string; order: number }[];
+  features?: { id?: string; text: string; name?: string; order: number }[];
   options?: ProductOption[];
   minQuantity?: number;
   maxQuantity?: number;
@@ -122,7 +122,7 @@ export interface AdminProduct {
   /** ----- Campos nuevos Fase 2 ----- */
   subcategory?: string;
   dimensions?: ProductDimensions;
-  features?: { id: string; text: string; order: number }[];
+  features?: { id?: string; text: string; name?: string; order: number }[];
   options?: ProductOption[];
   minQuantity?: number;
   maxQuantity?: number;
