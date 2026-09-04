@@ -30,7 +30,8 @@ interface Props {
 }
 
 export function ProductEditor({ value, onChange, isEditing }: Props) {
-  const categories = useCategories();
+  const categories = useCategories(); /* {categories:[], isLoading, error} */
+  const catList: any[] = Array.isArray(categories?.categories) ? categories.categories : (Array.isArray(categories) ? categories : []);
 
   const v = value;
 
@@ -99,7 +100,7 @@ export function ProductEditor({ value, onChange, isEditing }: Props) {
             onChange={(e) => onChange({ category: e.target.value })}
           >
             <option value="">Selecciona una categoría…</option>
-            {categories.map((c) => (
+            {catList.map((c) => (
               <option key={c.id} value={c.slug}>
                 {c.name}
               </option>
