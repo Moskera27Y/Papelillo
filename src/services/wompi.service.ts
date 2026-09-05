@@ -83,11 +83,19 @@ let _wompiConfig: WompiConfig | null = null;
 export function getWompiConfig(): WompiConfig {
   if (_wompiConfig) return _wompiConfig;
   const settings = getSiteSettingsSync();
+  // Cliente-safe env access (Vercel Edge: process.env puede no estar en runtime)
+  if (typeof window !== "undefined") {
+    const injected = (window as any).__PAPELILLO_WOMPI_CONFIG__;
+    if (injected && injected.publicKey) {
+      _wompiConfig = { enabled: true, publicKey: injected.publicKey, environment: injected.environment || "production", integrityKey: injected.integrityKey || "" };
+      return _wompiConfig;
+    }
+  }
   _wompiConfig = settings.wompi ?? {
     enabled: true,
-    publicKey: process.env.NEXT_PUBLIC_WOMPI_PUBLIC_KEY || "",
-    environment: (process.env.NEXT_PUBLIC_WOMPI_ENV || "production") as "sandbox" | "production",
-    integrityKey: process.env.NEXT_PUBLIC_WOMPI_INTEGRITY_KEY || "",
+    publicKey: "",
+    environment: "production",
+    integrityKey: "",
   };
   return _wompiConfig;
 }

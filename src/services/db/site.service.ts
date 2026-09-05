@@ -21,7 +21,7 @@ export interface SiteSettingsClient {
 import { db } from '@/lib/db'
 import type { SiteSettings, SocialLink } from '@prisma/client'
 
-export async function getSiteSettings(): Promise<SiteSettingsWithSocial> {
+export async function getSiteSettings(): Promise<SiteSettingsClient> {
   const settings = await db.siteSettings.findFirst({
     include: {
       socialLinks: { orderBy: { order: 'asc' } },
@@ -54,7 +54,7 @@ export function getSiteSettingsSync(): SiteSettingsClient {
   if (typeof window !== 'undefined') {
     const cached = window.sessionStorage.getItem('papelillo_wompi_config');
     if (cached) {
-      try { return JSON.parse(cached) as SiteSettingsWithSocial; } catch {}
+      try { return JSON.parse(cached) as SiteSettingsClient; } catch {}
     }
   }
   // 2. Fallback a env vars públicas (Vercel NEXT_PUBLIC_*)
@@ -75,7 +75,7 @@ export function getSiteSettingsSync(): SiteSettingsClient {
 
 export async function updateSiteSettings(
   data: Partial<Omit<SiteSettings, 'id' | 'createdAt' | 'updatedAt'>>
-): Promise<SiteSettingsWithSocial> {
+): Promise<SiteSettingsClient> {
   const settings = await getSiteSettings()
 
   return db.siteSettings.update({
@@ -96,7 +96,7 @@ export async function updateSocialLinks(
     isActive: boolean
     order: number
   }>
-): Promise<SiteSettingsWithSocial> {
+): Promise<SiteSettingsClient> {
   const settings = await getSiteSettings()
 
   // Delete all existing social links
@@ -121,7 +121,7 @@ export async function updateBranding(data: {
   logoSrc?: string
   logoDataUrl?: string
   faviconSrc?: string
-}): Promise<SiteSettingsWithSocial> {
+}): Promise<SiteSettingsClient> {
   return updateSiteSettings(data)
 }
 
@@ -131,7 +131,7 @@ export async function updateWompiConfig(data: {
   publicKey?: string
   merchantName?: string
   webhookUrl?: string
-}): Promise<SiteSettingsWithSocial> {
+}): Promise<SiteSettingsClient> {
   return updateSiteSettings({
     wompiEnabled: data.enabled,
     wompiEnvironment: data.environment,
