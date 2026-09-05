@@ -199,39 +199,46 @@ function ShopContent() {
   const isLoading = productsLoading || catsLoading;
   const error = productsError || catsError;
 
+  // FILTERED computed BEFORE handlers (fixes stale-closure NaN bug)
+  const filtered = useMemo(
+    () => applyFilters(products, filters),
+    [products, filters]
+  );
+
   const [visibleCount, setVisibleCount] = useState(12);
 
   const handleLoadMore = () => {
-    setVisibleCount((c) => Math.min(c + 9, filtered.length));
+    setVisibleCount((c) => Math.min(c + 12, filtered.length));
   };
 
-  const visibleProducts = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
+  const visibleProducts = useMemo(
+    () => filtered.slice(0, visibleCount),
+    [filtered, visibleCount]
+  );
 
-  // Infinite scroll + lazy images (nextjs-debug-patterns)
-  useEffect(() => {
-    const sentinel = document.getElementById("sentinel-grid");
-    if (!sentinel) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && visibleCount < filtered.length && !isLoading) {
-          handleLoadMore();
-        }
-      },
-      { root: null, rootMargin: "200px", threshold: 0 }
-    );
-    observer.observe(sentinel);
-    return () => observer.disconnect();
-  }, [visibleCount, filtered.length, isLoading, handleLoadMore]);
+  const hasMore = visibleCount < filtered.length;
 
   // Reset visible count cuando cambian los filtros
   useEffect(() => {
     setVisibleCount(12);
   }, [filters]);
 
-  const filtered = useMemo(
-    () => applyFilters(products, filters),
-    [products, filters]
-  );
+  // Infinite scroll via IntersectionObserver (mobile-safe)
+  useEffect(() => {
+    if (!hasMore) return;
+    const sentinel = document.getElementById("sentinel-grid");
+    if (!sentinel) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isLoading) {
+          handleLoadMore();
+        }
+      },
+      { root: null, rootMargin: "300px", threshold: 0 }
+    );
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [hasMore, isLoading]);
 
   const activeCategoryName = useMemo(() => {
     if (!filters.category) return "";
