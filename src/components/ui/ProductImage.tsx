@@ -15,6 +15,8 @@ interface ProductImageProps {
 }
 
 const PLACEHOLDER_IMG = "/images/placeholder.png";
+// Valid base64 1x1 gray blur seed (prevents next/image crash on invalid blurDataURL)
+const BLUR_FALLBACK = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHRwOi53d3cub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSIjY2NjY2NjIi8+PC9zdmc+";
 
 export function ProductImage({ images, alt = "Producto", className = "", priority = false }: ProductImageProps) {
   const safeImages = React.useMemo(() => {
@@ -25,10 +27,13 @@ export function ProductImage({ images, alt = "Producto", className = "", priorit
   }, [images]);
 
   const src = safeImages[0] || PLACEHOLDER_IMG;
-  const blurDataURL = safeImages.length > 1 ? safeImages[1] : undefined;
+  // blurDataURL must be a valid base64 data URI or null (not arbitrary image URL)
+  const candidate = safeImages[1];
+  const blurDataURL = candidate && candidate.startsWith("data:image") ? candidate : null;
 
+  // For fill to work, parent must be position:relative — wrap in div
   return (
-    <>
+    <div className="relative w-full h-full">
       <Image
         src={src}
         alt={alt}
@@ -37,15 +42,19 @@ export function ProductImage({ images, alt = "Producto", className = "", priorit
         priority={priority}
         quality={85}
         placeholder={blurDataURL ? "blur" : "empty"}
-        blurDataURL={blurDataURL}
+        blurDataURL={blurDataURL || BLUR_FALLBACK}
+        onError={(e) => {
+          const tgt = e.currentTarget as HTMLImageElement;
+          if (tgt.src !== PLACEHOLDER_IMG) tgt.src = PLACEHOLDER_IMG;
+        }}
       />
       {safeImages.length === 0 && (
         <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center">
           <svg className="w-16 h-16 text-gray-300 dark:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L10 12l2.586-2.586M4 16l4.586-4.586M4.5 6h15a2 2 0 012 2v10a2 2 0 01-2 2h-2l-4.586-4.586M6.5 6h11a2 2 0 012 2v10a2 2 0 01-2 2H6.5a2 2 0 01-2-2V8a2 2 0 012-2z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L10 12l2.586-2.586M4.5 6h15a2 2 0 012 2v10a2 2 0 01-2 2h-2l-4.586-4.586M6.5 6h11a2 2 0 012 2v10a2 2 0 01-2 2H6.5a2 2 0 01-2-2V8a2 2 0 012-2z" />
           </svg>
         </div>
       )}
-    </>
+    </div>
   );
 }
