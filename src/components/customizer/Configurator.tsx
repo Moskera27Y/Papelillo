@@ -19,7 +19,7 @@ export function Configurator() {
   const products = activeProducts ?? [];
 
   const customizableProducts = useMemo(
-    () => products.filter((p) => p.isCustomizable),
+    () => (products ?? []).filter((p) => p && p.isCustomizable),
     [products]
   );
 
@@ -49,7 +49,7 @@ export function Configurator() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams, customizableProducts.length]);
 
-  const whatsappNumber = settings.contact.whatsapp;
+  const whatsappNumber = settings?.contact?.whatsapp;
   const activeOptions = useMemo(() => {
     if (!selectedProduct) return [];
     return (selectedProduct.options ?? []).filter((o) => o.isActive);
@@ -59,7 +59,7 @@ export function Configurator() {
     if (selectedProduct.requiresQuote) return null;
     if (selectedProduct.price === null) return null;
     let base = selectedProduct.price;
-    if (selectedProduct.priceType === "perUnit") {
+    if (selectedProduct.priceType === "perUnit" || !selectedProduct.priceType) {
       base = base * Math.max(1, quantity);
     }
     // Agregar ajustes de precio de las opciones

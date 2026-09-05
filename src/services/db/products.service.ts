@@ -118,7 +118,14 @@ export async function getActiveProducts(): Promise<ProductWithRelations[]> {
 export async function getProductBySlug(slug: string): Promise<ProductWithRelations | null> {
   return db.product.findUnique({
     where: { slug },
-    include: {
+    select: {
+      id: true, slug: true, name: true, shortDescription: true, description: true,
+      price: true, compareAtPrice: true, priceType: true, currency: true,
+      images: true, tags: true, stock: true, featured: true, isNew: true,
+      isPopular: true, isCustomizable: true, requiresQuote: true, isActive: true,
+      ctaLabel: true, canBuy: true, shippingCost: true, weight: true,
+      height: true, width: true, depth: true, unit: true, approximate: true,
+      categoryId: true, createdAt: true, updatedAt: true,
       features: { orderBy: { order: 'asc' } },
       options: {
         include: { values: { orderBy: { order: 'asc' } } },
