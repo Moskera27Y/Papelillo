@@ -22,16 +22,16 @@ export function useTheme() {
 
   const resolved = useMemo(() => {
     if (theme === "system") {
-      return typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
+      if (typeof window === "undefined") return "light";
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     }
     return theme;
   }, [theme]);
 
+  // SSR-safe theme application
   useEffect(() => {
+    if (typeof window === "undefined") return;
     document.documentElement.setAttribute("data-theme", resolved);
-    // También aplica la clase .dark para compatibilidad Tailwind
     if (resolved === "dark") {
       document.documentElement.classList.add("dark");
     } else {

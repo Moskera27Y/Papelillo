@@ -9,6 +9,12 @@ import { useCart } from "@/context/CartContext";
 import { buildWhatsAppLink, buildProductMessage } from "@/lib/config";
 import { Button } from "@/components/ui/Button";
 import { QuickViewModal } from "@/components/products/QuickViewModal";
+import dynamic from "next/dynamic";
+
+const QuickViewModalLazy = dynamic(() => import("@/components/products/QuickViewModal"), {
+  ssr: false,
+  loading: () => null,
+});
 import { useWishlist } from "@/hooks/useWishlist";
 import type { Product } from "@/types";
 
@@ -125,7 +131,7 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
       </div>
 
-      <QuickViewModal product={quickViewOpen ? product : null} onClose={() => setQuickViewOpen(false)} />
+      <QuickViewModalLazy product={quickViewOpen ? product : null} onClose={() => setQuickViewOpen(false)} />
     </div>
   );
 }

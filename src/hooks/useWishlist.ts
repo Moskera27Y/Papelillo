@@ -1,5 +1,5 @@
 // ============================================================
-// WISHLIST HOOK — client-side + localStorage fallback + sync API
+// WISHLIST HOOK — SSR-safe (usesMounted guard + localStorage)
 // ============================================================
 "use client";
 
@@ -13,14 +13,25 @@ export interface WishlistItem {
   createdAt: string;
 }
 
+function safeUUID(): string {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+  // Fallback para SSR/Edge sin crypto
+  return "______" + Math.random().toString(36).slice(2, 12) + "_" + Date.now().toString(36);
+}
+
 export function useWishlist() {
   const [items, setItems] = useState<WishlistItem[]>([]);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem(KEY);
-    if (stored) {
-      setItems(JSON.parse(stored));
+    if (typeof window === "undefined") return;
+    try {
+      const stored = localStorage.getItem(KEY);
+      if (stored) setItems(JSON.parse(stored) as WishlistItem[]);
+    } catch {
+      // ignore parse errors
     }
     setLoaded(true);
   }, []);
@@ -28,7 +39,13 @@ export function useWishlist() {
   const sync = useCallback(
     (newItems: WishlistItem[]) => {
       setItems(newItems);
-      localStorage.setItem(KEY, JSON.stringify(newItems));
+      if (typeof window !== "undefined") {
+        try {
+          localStorage.setItem(KEY, JSON.stringify(newItems));
+        } catch {
+          // ignore quota errors
+        }
+      }
     },
     []
   );
@@ -36,7 +53,7 @@ export function useWishlist() {
   const add = useCallback(
     async (productId: string) => {
       const newItem: WishlistItem = {
-        id: crypto.randomUUID(),
+        id: safeUUID(),
         productId,
         createdAt: new Date().toISOString(),
       };

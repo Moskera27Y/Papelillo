@@ -3,13 +3,14 @@
 // ============================================================
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 
 export function useSafeLocalStorage() {
   const [mounted, setMounted] = useState(false);
-  useState(() => {
+
+  useEffect(() => {
     setMounted(true);
-  });
+  }, []);
 
   const getItem = useCallback((key: string): string | null => {
     if (!mounted || typeof window === "undefined") return null;
@@ -29,5 +30,14 @@ export function useSafeLocalStorage() {
     }
   }, [mounted]);
 
-  return { getItem, setItem, mounted };
+  const removeItem = useCallback((key: string): void => {
+    if (!mounted || typeof window === "undefined") return;
+    try {
+      localStorage.removeItem(key);
+    } catch {
+      // ignore
+    }
+  }, [mounted]);
+
+  return { getItem, setItem, removeItem, mounted };
 }
