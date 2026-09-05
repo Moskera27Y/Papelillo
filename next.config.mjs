@@ -17,3 +17,4 @@ const nextConfig = {
 
 export default nextConfig;
 // force fresh build cache - 1788648185
+// cache invalidation token VERCEL_FRESH_BUILD_1788648608
