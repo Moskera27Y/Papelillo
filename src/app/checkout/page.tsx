@@ -7,6 +7,7 @@ import { useCart } from "@/context/CartContext";
 import { wompiService } from "@/services";
 import { useSiteSettings } from "@/hooks/useDataService";
 import { createOrderAction, updateOrderPaymentStatusAction } from "@/app/actions";
+import { updateOrderPaymentStatus as updatePayment } from "@/services/db/orders.service";
 const { formatCOP, openWompiWidget, toCents, isWompiReady } = wompiService;
 import { ProductImage } from "@/components/ui/ProductImage";
 import type { OrderCustomer, OrderShipping } from "@/types/admin";
@@ -164,7 +165,7 @@ export default function CheckoutPage() {
         productId: l.productId,
         slug: l.product?.slug ?? "",
         name: l.product?.name ?? "",
-        image: l.product?.images[0],
+        image: l.product?.images?.[0],
         unitPrice: l.product?.price ?? 0,
         quantity: l.quantity,
         customization: l.customizations,
@@ -173,7 +174,6 @@ export default function CheckoutPage() {
       const subtotal = lines.reduce((sum, l) => sum + (l.product?.price ?? 0) * l.quantity, 0);
       const shippingTotal = shippingCost;
       const computedTotal = subtotal + shippingTotal;
-      // 🔐 Security: server-side recompute total, ignore cliente "total"
       if (Math.abs(computedTotal - total) > 0.01) {
         console.warn("[security] cliente total mismatch", total, computedTotal);
       }
@@ -182,10 +182,8 @@ export default function CheckoutPage() {
         shipping,
         items,
         payment: {
-          method: paymentMethod as "whompi" | "whatsapp" | "cash" | "other",
-          // 🔐 Security: reference única criptográfica (no Math.random)
+          method: paymentMethod as "wompi" | "whatsapp" | "cash" | "other",
           reference: `ord_${Date.now().toString(36)}_${cryptoRandomHex(6)}`,
-          // 🔐 Security: usa computed total del SERVER, no del cliente
           amount: computedTotal,
           currency: "COP",
         },
@@ -200,7 +198,7 @@ export default function CheckoutPage() {
             items.map((i) => `• ${i.name} x${i.quantity}`).join("\n") +
             `\n\nTotal: ${formatCOP(total)}\n\n¿Cómo procedo con el pago y envío?`
         );
-        const wa = settings.contact.whatsapp
+        const wa = settings?.contact?.whatsapp
           ? `https://wa.me/${settings.contact.whatsapp}?text=${msg}`
           : "/checkout/success?order=" + order.id;
         clear();
@@ -259,7 +257,7 @@ export default function CheckoutPage() {
             clear();
             router.push(`/checkout/success?order=${order.id}`);
           } else {
-            ordersService.updatePaymentStatus(order.id, "declined", {
+            updatePayment(order.id, "declined", {
               failureReason: tx.status_message || tx.status,
             });
             setError(
