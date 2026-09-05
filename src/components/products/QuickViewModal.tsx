@@ -4,7 +4,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { Product } from "@/types";
+import type { Product } from "@/types";
 import { ProductImage } from "@/components/ui/ProductImage";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "@/context/CartContext";

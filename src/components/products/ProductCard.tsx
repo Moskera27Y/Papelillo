@@ -8,7 +8,6 @@ import { ProductImage } from "@/components/ui/ProductImage";
 import { useCart } from "@/context/CartContext";
 import { buildWhatsAppLink, buildProductMessage } from "@/lib/config";
 import { Button } from "@/components/ui/Button";
-import { QuickViewModal } from "@/components/products/QuickViewModal";
 import dynamic from "next/dynamic";
 
 const QuickViewModalLazy = dynamic(() => import("@/components/products/QuickViewModal"), {
