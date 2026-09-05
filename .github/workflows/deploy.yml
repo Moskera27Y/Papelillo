@@ -1,0 +1,19 @@
+name: Deploy a Vercel
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    name: "Force Vercel redeploy"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: "Trigger Vercel deploy"
+        run: |
+          curl -X POST "https://api.github.com/repos/Moskera27Y/Papelillo/git/refs" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            -d '{"ref":"refs/heads/main"}'
+      - name: "Purge Vercel cache"
+        run: |
+          curl -X POST "https://api.vercel.com/v2/projects/papelillo-web/force-rebuild" 2>/dev/null || true
