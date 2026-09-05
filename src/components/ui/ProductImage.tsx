@@ -45,6 +45,7 @@ export function ProductImage({ images, alt = "Producto", className = "", priorit
         blurDataURL={blurDataURL || BLUR_FALLBACK}
         onError={(e) => {
           const tgt = e.currentTarget as HTMLImageElement;
+          tgt.onerror = null; // Prevent infinite re-render loop
           if (tgt.src !== PLACEHOLDER_IMG) tgt.src = PLACEHOLDER_IMG;
         }}
       />
