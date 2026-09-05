@@ -4,8 +4,8 @@
 // NO expone secretos en el frontend.
 // ============================================================
 
-import { getSiteSettingsSync } from "./site.service";
-import type { WompiConfig } from "./site.service";
+import { getSiteSettingsSync } from "../db/site.service";
+import type { WompiConfig } from "../db/site.service";
 
 // ============================================================
 // TYPES
