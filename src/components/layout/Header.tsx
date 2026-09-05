@@ -103,6 +103,7 @@ export function Header() {
                   <path fillRule="evenodd" clipRule="evenodd" d="M12 3C6.7 3 2.4 6.8 1.2 11.6c0 .3.1.6.1 1H3.5c.1 0 .1-.1 0-.1-.2-.1-.3-.3-.4-.5C1 11.9 1 11.3 1 11 1 6.6 4.6 3 9 3h2.5c.3 0 .6.1.8.3.2.2.2.5.2.8v1.3c0 .3-.1.6-.3.7-.2.1-.4.2-.7.2h-2c-.3 0-.5-.2-.5-.5v-2c0-.3.2-.6.5-.7.2-.1.5-.1.7-.1h4c.8 0 1.5.7 1.5 1.5v6.9c0 .3-.1.6-.3.8-.2.1-.5.2-.7.2h-1c-.4 0-.7.3-.7.7 0 .8.7 1.5 1.5 1.5h2c.6 0 1 .5 1 1.1 0 .3-.1.6-.3.8-.2.2-.4.3-.7.4C21.7 18.4 24 15 24 11 24 6.6 21.3 3 18.5 3H17c-.3 0-.6-.1-.8-.3-.2-.2-.2-.5-.2-.8z" />
                 </svg>
               </a>
+              <button
                 onClick={toggle}
                 className="relative text-ink hover:text-brand-red transition-all duration-200 hover:scale-110"
                 aria-label="Carrito"
