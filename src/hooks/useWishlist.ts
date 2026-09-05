@@ -23,7 +23,7 @@ function safeUUID(): string {
 
 export function useWishlist() {
   const [items, setItems] = useState<WishlistItem[]>([]);
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(true); // Fix: default true — avoid blocking product render
 
   useEffect(() => {
     if (typeof window === "undefined") return;
