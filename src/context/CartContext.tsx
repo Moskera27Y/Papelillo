@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import type { Cart, CartItem } from "@/types";
 import type { AdminProduct } from "@/types/admin";
-import { productsService } from "@/services";
+import { getWompiConfig } from "@/services/wompi.service";
 
 const STORAGE_KEY = "papelillo-cart-v1";
 
@@ -82,6 +82,16 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         /* fallback: products vacíos sin romper UX */
         setProductsLoaded(true);
       });
+    // Inyectar config de Wompi a window para checkout sync access
+    const cfg = getWompiConfig();
+    if (typeof window !== "undefined") {
+      (window as any).__PAPELILLO_WOMPI_CONFIG__ = {
+        publicKey: cfg.publicKey || process.env.NEXT_PUBLIC_WOMPI_PUBLIC_KEY || "",
+        integrityKey: cfg.integrityKey || process.env.NEXT_PUBLIC_WOMPI_INTEGRITY_KEY || process.env.WOMPI_INTEGRITY_KEY || "",
+        environment: cfg.environment,
+        enabled: cfg.enabled,
+      };
+    }
     // Sincroniza cuando cambian los productos (desde admin, etc.)
     const handler = () => setProductsVersion((v) => v + 1);
     window.addEventListener("storage", handler);

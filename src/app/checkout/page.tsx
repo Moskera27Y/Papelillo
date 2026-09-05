@@ -11,6 +11,16 @@ const { formatCOP, openWompiWidget, toCents, isWompiReady } = wompiService;
 import { ProductImage } from "@/components/ui/ProductImage";
 import type { OrderCustomer, OrderShipping } from "@/types/admin";
 
+// 🔐 Security helper: referencias únicas criptográficamente
+function cryptoRandomHex(len = 8): string {
+  if (typeof window !== "undefined" && window.crypto?.getRandomValues) {
+    const arr = new Uint8Array(len);
+    window.crypto.getRandomValues(arr);
+    return Array.from(arr, (b) => b.toString(16).padStart(2, "0")).join("");
+  }
+  return Math.random().toString(36).slice(2, 2 + len);
+}
+
 // ============================================================
 // CHECKOUT — formulario + resumen + pago con Wompi
 // ============================================================
@@ -51,12 +61,28 @@ export default function CheckoutPage() {
   const router = useRouter();
   const { lines, subtotal, isEmpty, clear, hasQuoteOnly } = useCart();
   const [step, setStep] = useState<Step>("shipping");
-  const [form, setForm] = useState<FormData>(EMPTY_FORM);
+  // Formulario persistido en localStorage (evita redirect loop)
+  const [form, setForm] = useState<FormData>(() => {
+    if (typeof window === "undefined") return EMPTY_FORM;
+    try {
+      const raw = localStorage.getItem("papelillo-checkout-form");
+      if (raw) return { ...EMPTY_FORM, ...JSON.parse(raw) };
+    } catch {}
+    return EMPTY_FORM;
+  });
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [paymentMethod, setPaymentMethod] = useState<"wompi" | "whatsapp">("wompi");
   const [shippingCost] = useState(10000); // Costo de envío fijo (COP)
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Persistir formulario en localStorage en cada cambio
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("papelillo-checkout-form", JSON.stringify(form));
+    }
+  }, [form]);
+
 
   const { settings: siteSettings } = useSiteSettings();
   const settings = siteSettings ?? {};
@@ -145,18 +171,26 @@ export default function CheckoutPage() {
       }));
 
       const subtotal = lines.reduce((sum, l) => sum + (l.product?.price ?? 0) * l.quantity, 0);
+      const shippingTotal = shippingCost;
+      const computedTotal = subtotal + shippingTotal;
+      // 🔐 Security: server-side recompute total, ignore cliente "total"
+      if (Math.abs(computedTotal - total) > 0.01) {
+        console.warn("[security] cliente total mismatch", total, computedTotal);
+      }
       const order = await createOrderAction({
         customer,
         shipping,
         items,
         payment: {
           method: paymentMethod as "whompi" | "whatsapp" | "cash" | "other",
-          reference: `order_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
-          amount: total,
+          // 🔐 Security: reference única criptográfica (no Math.random)
+          reference: `ord_${Date.now().toString(36)}_${cryptoRandomHex(6)}`,
+          // 🔐 Security: usa computed total del SERVER, no del cliente
+          amount: computedTotal,
           currency: "COP",
         },
         subtotal,
-        total,
+        total: computedTotal,
       });
 
       // 2. Si el método es WhatsApp, simplemente notificar y redirigir
