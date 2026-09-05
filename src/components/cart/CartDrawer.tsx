@@ -118,6 +118,16 @@ export function CartDrawer() {
                 </Link>
               )}
 
+              {hasQuoteOnly && lines.length > 0 && (
+                <Link
+                  href="/checkout"
+                  onClick={() => setOpen(false)}
+                  className="block w-full bg-brand-yellow text-ink text-center font-bold rounded-full px-6 py-3.5 hover:brightness-90 transition-colors shadow-sticker-sm"
+                >
+                  Ir a pagar (cotizar productos)
+                </Link>
+              )}
+
               {hasQuoteOnly && (
                 <a
                   href={buildWhatsAppLink(
