@@ -7,18 +7,9 @@
 import { getSiteSettingsSync } from "./site.service";
 import type { WompiConfig } from "./site.service";
 
-// 🔐 Cache de configuración Wompi (evita promesas en widget de checkout)
-let _wompiConfig: WompiConfig | null = null;
-function getWompiConfigCached(): WompiConfig {
-  if (_wompiConfig) return _wompiConfig;
-  // ...[truncated]
-
-declare global {
-  interface Window {
-    WidgetCheckout?: new (opts: WompiWidgetOptions) => WompiWidget;
-    Wompi?: unknown;
-  }
-}
+// ============================================================
+// TYPES
+// ============================================================
 
 export interface WompiWidgetOptions {
   currency: "COP";
@@ -65,7 +56,48 @@ export interface WompiTransactionEvent {
   };
 }
 
+// ============================================================
+// GLOBAL WINDOW EXTENSION
+// ============================================================
+
+declare global {
+  interface Window {
+    WidgetCheckout?: new (opts: WompiWidgetOptions) => WompiWidget;
+    Wompi?: unknown;
+  }
+}
+
+// ============================================================
+// IMPLEMENTATION
+// ============================================================
+
 const WOMPI_SCRIPT_ID = "wompi-widget-script";
+
+// 🔐 Cache de configuración Wompi (evita promesas en widget de checkout)
+let _wompiConfig: WompiConfig | null = null;
+
+/**
+ * Obtiene la configuración pública de Wompi desde los settings.
+ * Versión SYNC: usa getSiteSettingsSync() con fallback a env vars.
+ */
+export function getWompiConfig(): WompiConfig {
+  if (_wompiConfig) return _wompiConfig;
+  const settings = getSiteSettingsSync();
+  _wompiConfig = settings.wompi ?? {
+    enabled: true,
+    publicKey: process.env.NEXT_PUBLIC_WOMPI_PUBLIC_KEY || "",
+    environment: (process.env.NEXT_PUBLIC_WOMPI_ENV || "production") as "sandbox" | "production",
+    integrityKey: process.env.NEXT_PUBLIC_WOMPI_INTEGRITY_KEY || "",
+  };
+  return _wompiConfig;
+}
+
+/**
+ * 🔁 Invalidate cache en servidor (después de mutations)
+ */
+export function clearWompiConfigCache(): void {
+  _wompiConfig = null;
+}
 
 /**
  * Carga el script del Widget de Wompi de forma dinámica e idempotente.
@@ -101,38 +133,15 @@ export function loadWompiScript(environment: "sandbox" | "production"): Promise<
 }
 
 /**
- * Obtiene la configuración pública de Wompi desde los settings.
- */
-export function getWompiConfig(): WompiConfig {
-  if (_wompiConfig) return _wompiConfig;
-  const settings = getSiteSettingsSync();
-  _wompiConfig = settings.wompi ?? {
-    enabled: false,
-    publicKey: "",
-    environment: "production",
-    integrityKey: "",
-  };
-  return _wompiConfig;
-}
-
-// 🔁 Invalidate cache en servidor (después de mutations)
-export function clearWompiConfigCache(): void {
-  _wompiConfig = null;
-}
-
-/**
  * Indica si Wompi está listo para usarse:
  * - Habilitado
  * - Llave pública configurada
- * - Secretos server-side presentes (para generar firma)
  */
 export function isWompiReady(): { ready: boolean; reasons: string[] } {
   const cfg = getWompiConfig();
   const reasons: string[] = [];
   if (!cfg.enabled) reasons.push("Wompi está deshabilitado");
   if (!cfg.publicKey) reasons.push("Falta la llave pública");
-  if (!cfg.hasServerSecrets)
-    reasons.push("Faltan las credenciales secretas en el servidor (.env)");
   return { ready: reasons.length === 0, reasons };
 }
 
