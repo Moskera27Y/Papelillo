@@ -73,6 +73,16 @@ export interface CartItem {
   variantId?: string;
   quantity: number;
   customizations?: Record<string, string>;
+  /** Snapshot del producto al agregarlo (nombre, imagen, precio) */
+  snapshot?: {
+    name: string;
+    image?: string;
+    slug: string;
+    unitPrice: number | null;
+    priceType: PriceType;
+    requiresQuote: boolean;
+    isCustomizable: boolean;
+  };
 }
 
 export interface Cart {

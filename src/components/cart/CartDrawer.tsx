@@ -13,7 +13,7 @@ import { ProductImage } from "@/components/ui/ProductImage";
 // ============================================================
 
 export function CartDrawer() {
-  const { isOpen, setOpen, lines, count, subtotal, isEmpty, hasQuoteOnly, clear } = useCart();
+  const { isOpen, setOpen, lines, count, subtotal, isEmpty, hasQuoteOnly, clear, productsLoaded } = useCart();
 
   useEffect(() => {
     if (isOpen) {
@@ -79,7 +79,9 @@ export function CartDrawer() {
         </div>
 
         <div className="flex-1 overflow-y-auto px-6 py-4">
-          {isEmpty ? (
+          {!productsLoaded ? (
+            <LoadingCartItems count={count} />
+          ) : isEmpty ? (
             <EmptyCart onClose={() => setOpen(false)} />
           ) : (
             <div className="space-y-4">
@@ -174,16 +176,20 @@ function CartItemRow({ line }: { line: ReturnType<typeof useCart>["lines"][numbe
       ? "Cotizar"
       : formatCOP(unitPrice);
 
+  // Snapshot image: usa localStorage snapshot cuando product aún no cargó
+  const productName = p.name || line.snapshot?.name || "Producto";
+  const imageSources: string[] = p.images?.length ? p.images : line.snapshot?.image ? [line.snapshot.image] : [];
+
   return (
     <article className="flex gap-4 bg-paper rounded-2xl border-2 border-ink/10 p-3 hover:border-ink/30 transition-colors">
       <Link
-        href={`/product/${p.slug}`}
+        href={p.slug ? `/product/${p.slug}` : "#"}
         className="w-20 h-20 flex-shrink-0 rounded-xl overflow-hidden border-2 border-ink/10"
       >
         <ProductImage
-          images={p.images}
-          productName={p.name}
-          color={p.isCustomizable ? "blue" : "yellow"}
+          images={imageSources}
+          productName={productName}
+          color={p.isCustomizable ? "blue" : line.snapshot?.requiresQuote ? "blue" : "yellow"}
           className="w-full h-full"
         />
       </Link>
@@ -248,6 +254,23 @@ function CartItemRow({ line }: { line: ReturnType<typeof useCart>["lines"][numbe
         </div>
       </div>
     </article>
+  );
+}
+
+// Shimmer loading rows mientras products API carga
+function LoadingCartItems({ count }: { count: number }) {
+  return (
+    <div className="space-y-4">
+      {Array.from({ length: count || 1 }).map((_, i) => (
+        <div key={i} className="flex gap-4 bg-paper rounded-2xl border-2 border-ink/10 p-3">
+          <div className="w-20 h-20 flex-shrink-0 rounded-xl skeleton skeleton-circle" />
+          <div className="flex-1 space-y-2 py-1">
+            <div className="h-4 skeleton skeleton-text w-3/4 rounded" />
+            <div className="h-3 skeleton skeleton-text w-1/2 rounded" />
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
 

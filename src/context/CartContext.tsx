@@ -7,19 +7,6 @@ import { productsService } from "@/services";
 
 const STORAGE_KEY = "papelillo-cart-v1";
 
-interface CartLine extends CartItem {
-  /** Snapshot del producto en el momento de agregarlo (nombre, imagen, precio) */
-  snapshot?: {
-    name: string;
-    image?: string;
-    slug: string;
-    unitPrice: number | null;
-    priceType: AdminProduct["priceType"];
-    requiresQuote: boolean;
-    isCustomizable: boolean;
-  };
-}
-
 export interface CartItemExt extends CartItem {
   product?: AdminProduct;
   lineTotal: number | null; // null si requiere cotización
@@ -31,6 +18,8 @@ interface CartContextValue {
   subtotal: number;
   /** Detalle extendido con producto cargado */
   lines: CartItemExt[];
+  /** True cuando la API de productos ha respondido (para loading states) */
+  productsLoaded: boolean;
   itemCount: (productId: string) => number;
   addItem: (item: CartItem) => void;
   removeItem: (productId: string, variantId?: string) => void;
@@ -78,6 +67,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setOpen] = useState(false);
   const [allProducts, setAllProducts] = useState<AdminProduct[]>([]);
   const [productsVersion, setProductsVersion] = useState(0);
+  const [productsLoaded, setProductsLoaded] = useState(false);
 
   useEffect(() => {
     setCart(readCart());
@@ -86,9 +76,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) setAllProducts(data as AdminProduct[]);
+        setProductsLoaded(true);
       })
       .catch(() => {
         /* fallback: products vacíos sin romper UX */
+        setProductsLoaded(true);
       });
     // Sincroniza cuando cambian los productos (desde admin, etc.)
     const handler = () => setProductsVersion((v) => v + 1);
@@ -214,6 +206,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       count,
       subtotal,
       lines,
+      productsLoaded,
       itemCount,
       addItem,
       removeItem,
@@ -228,7 +221,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       toggle,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [cart, count, subtotal, lines, isOpen, hasQuoteOnly]
+    [cart, count, subtotal, lines, productsLoaded, isOpen, hasQuoteOnly]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

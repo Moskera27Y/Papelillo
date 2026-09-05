@@ -19,7 +19,19 @@ export function ProductCard({ product }: ProductCardProps) {
 
   const handleAddToCart = () => {
     if (product.requiresQuote) return;
-    addItem({ productId: product.id, quantity: 1 });
+    addItem({
+      productId: product.id,
+      quantity: 1,
+      snapshot: {
+        name: product.name,
+        image: product.images?.[0] ?? undefined,
+        slug: product.slug,
+        unitPrice: product.price,
+        priceType: product.priceType,
+        requiresQuote: product.requiresQuote,
+        isCustomizable: product.isCustomizable,
+      },
+    });
   };
 
   const whatsappMsg = buildProductMessage(product.name);
