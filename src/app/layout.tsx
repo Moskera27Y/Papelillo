@@ -106,13 +106,6 @@ export default function RootLayout({
               }),
             }}
           />
-          {/* Skip-to-content for accessibility */}
-          <a
-            href="#main"
-            className="absolute top-4 left-1/2 -translate-x-1/2 z-[9999] bg-brand-red text-paper text-xs font-bold px-3 py-1 rounded-full focus-visible:static focus-visible:translate-x-0 transition-transform"
-          >
-            Saltar al contenido
-          </a>
           <div className="relative z-10">
             <Header />
             <main id="main">{children}</main>
