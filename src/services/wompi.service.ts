@@ -5,6 +5,7 @@
 // ============================================================
 
 import { getSiteSettingsSync } from "./site.service";
+import type { WompiConfig } from "./site.service";
 
 // 🔐 Cache de configuración Wompi (evita promesas en widget de checkout)
 let _wompiConfig: WompiConfig | null = null;
