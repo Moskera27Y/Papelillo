@@ -4,7 +4,13 @@
 // NO expone secretos en el frontend.
 // ============================================================
 
-import { getSiteSettings } from "./site.service";
+import { getSiteSettingsSync } from "./site.service";
+
+// 🔐 Cache de configuración Wompi (evita promesas en widget de checkout)
+let _wompiConfig: WompiConfig | null = null;
+function getWompiConfigCached(): WompiConfig {
+  if (_wompiConfig) return _wompiConfig;
+  // ...[truncated]
 
 declare global {
   interface Window {
@@ -96,9 +102,21 @@ export function loadWompiScript(environment: "sandbox" | "production"): Promise<
 /**
  * Obtiene la configuración pública de Wompi desde los settings.
  */
-export function getWompiConfig() {
-  const settings = getSiteSettings();
-  return settings.wompi;
+export function getWompiConfig(): WompiConfig {
+  if (_wompiConfig) return _wompiConfig;
+  const settings = getSiteSettingsSync();
+  _wompiConfig = settings.wompi ?? {
+    enabled: false,
+    publicKey: "",
+    environment: "production",
+    integrityKey: "",
+  };
+  return _wompiConfig;
+}
+
+// 🔁 Invalidate cache en servidor (después de mutations)
+export function clearWompiConfigCache(): void {
+  _wompiConfig = null;
 }
 
 /**

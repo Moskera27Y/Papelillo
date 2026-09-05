@@ -2,8 +2,19 @@
 import { db } from '@/lib/db'
 import type { SiteSettings, SocialLink } from '@prisma/client'
 
+// 🔐 Tipo Wompi config (cliente-safe)
+export interface WompiConfig {
+  enabled: boolean
+  publicKey: string
+  environment: 'sandbox' | 'production'
+  integrityKey?: string
+  merchantName?: string
+  webhookUrl?: string
+}
+
 export interface SiteSettingsWithSocial extends SiteSettings {
   socialLinks: SocialLink[]
+  wompi?: WompiConfig
 }
 
 export async function getSiteSettings(): Promise<SiteSettingsWithSocial> {
@@ -28,6 +39,34 @@ export async function getSiteSettings(): Promise<SiteSettingsWithSocial> {
   }
 
   return settings
+}
+
+/**
+ * Sync fallback para cliente — usa localStorage o env vars (Vercel).
+ * Evita promises en el render del widget Wompi.
+ */
+export function getSiteSettingsSync(): SiteSettingsWithSocial {
+  // 1. Cache de sessionStorage (SSR-safe)
+  if (typeof window !== 'undefined') {
+    const cached = window.sessionStorage.getItem('papelillo_wompi_config');
+    if (cached) {
+      try { return JSON.parse(cached) as SiteSettingsWithSocial; } catch {}
+    }
+  }
+  // 2. Fallback a env vars públicas (Vercel NEXT_PUBLIC_*)
+  //    ⚠️ Solo publicKey/integrityKey en cliente, REST en server
+  return {
+    id: 'main',
+    brandName: 'Papelillo',
+    tagline: 'Papelería creativa',
+    socialLinks: [],
+    wompi: {
+      enabled: true,
+      publicKey: process.env.NEXT_PUBLIC_WOMPI_PUBLIC_KEY || '',
+      environment: (process.env.NEXT_PUBLIC_WOMPI_ENV || 'production') as 'sandbox' | 'production',
+      integrityKey: process.env.NEXT_PUBLIC_WOMPI_INTEGRITY_KEY || '',
+    },
+  };
 }
 
 export async function updateSiteSettings(
