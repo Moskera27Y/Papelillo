@@ -42,17 +42,22 @@ export function useShopFilters() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const filters: ShopFilters = useMemo(() => ({
-    category: searchParams.get("category") || "",
-    query: searchParams.get("q") || "",
-    sort: (searchParams.get("sort") as SortOption) || "recent",
-    onlyCustomizable: searchParams.get("custom") === "1",
-    onlyAvailable: searchParams.get("available") === "1",
-    priceMax: Number(searchParams.get("priceMax")) || 0,
-  }), [searchParams]);
+  const filters: ShopFilters = useMemo(() => {
+    // ✅ null-safe: useSearchParams() retorna null en SSR/Edge → crash #306
+    if (!searchParams) return { ...DEFAULT_FILTERS };
+    return ({
+      category: searchParams.get("category") || "",
+      query: searchParams.get("q") || "",
+      sort: (searchParams.get("sort") as SortOption) || "recent",
+      onlyCustomizable: searchParams.get("custom") === "1",
+      onlyAvailable: searchParams.get("available") === "1",
+      priceMax: Number(searchParams.get("priceMax")) || 0,
+    });
+  }, [searchParams]);
 
   const setFilter = useCallback(
     <K extends keyof ShopFilters>(key: K, value: ShopFilters[K]) => {
+      if (!searchParams) return; // ✅ null-safe
       const params = new URLSearchParams(searchParams.toString());
       const strValue = String(value);
 
@@ -74,6 +79,7 @@ export function useShopFilters() {
   );
 
   const resetFilters = useCallback(() => {
+    if (!searchParams) return; // ✅ null-safe
     router.push(pathname, { scroll: false });
   }, [router, pathname]);
 
