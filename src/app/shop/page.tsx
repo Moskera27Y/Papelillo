@@ -199,8 +199,34 @@ function ShopContent() {
   const isLoading = productsLoading || catsLoading;
   const error = productsError || catsError;
 
-  // Simular una pequeña carga inicial
-  useEffect(() => {}, []);
+  const [visibleCount, setVisibleCount] = useState(12);
+
+  const handleLoadMore = () => {
+    setVisibleCount((c) => Math.min(c + 9, filtered.length));
+  };
+
+  const visibleProducts = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
+
+  // Infinite scroll + lazy images (nextjs-debug-patterns)
+  useEffect(() => {
+    const sentinel = document.getElementById("sentinel-grid");
+    if (!sentinel) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && visibleCount < filtered.length && !isLoading) {
+          handleLoadMore();
+        }
+      },
+      { root: null, rootMargin: "200px", threshold: 0 }
+    );
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [visibleCount, filtered.length, isLoading, handleLoadMore]);
+
+  // Reset visible count cuando cambian los filtros
+  useEffect(() => {
+    setVisibleCount(12);
+  }, [filters]);
 
   const filtered = useMemo(
     () => applyFilters(products, filters),
@@ -387,22 +413,23 @@ function ShopContent() {
             ) : error ? (
               <ErrorState onRetry={() => window.location.reload()} />
             ) : filtered.length === 0 ? (
-              <EmptyState
-                hasFilters={hasActiveFilters || !!filters.category}
-                onReset={resetFilters}
-              />
+              <EmptyState hasFilters={hasActiveFilters || !!filters.category} onReset={resetFilters} />
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-                {filtered.map((product, idx) => (
-                  <div
-                    key={product.id}
-                    className="animate-fade-up"
-                    style={{ animationDelay: `${Math.min(idx * 0.04, 0.4)}s` }}
-                  >
-                    <ProductCard product={product as unknown as Product} />
+              <React.Fragment>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+                  {visibleProducts.map((product, idx) => (
+                    <div key={product.id} className="animate-fade-up" style={{ animationDelay: `${Math.min(idx * 0.04, 0.4)}s` }}>
+                      <ProductCard product={product as unknown as Product} />
+                    </div>
+                  ))}
+                </div>
+                <div id="sentinel-grid" className="h-1" />
+                {visibleCount < filtered.length && (
+                  <div className="text-center mt-8">
+                    <button onClick={handleLoadMore} className="bg-ink text-paper font-bold rounded-full px-6 py-2.5 hover:bg-opacity-90 transition-colors">Cargar más</button>
                   </div>
-                ))}
-              </div>
+                )}
+              </React.Fragment>
             )}
           </div>
         </div>

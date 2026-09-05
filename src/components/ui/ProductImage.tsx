@@ -1,80 +1,51 @@
+// ============================================================
+// PRODUCT IMAGE — next/image + blur placeholder + fallthrough
+// nextjs-debug-patterns: image optimization
+// ============================================================
+"use client";
+
 import React from "react";
+import Image from "next/image";
 
 interface ProductImageProps {
-  images: string[] | null | undefined;
-  productName: string;
-  color?: "red" | "yellow" | "green" | "blue" | "ink";
+  images: string[] | string | null | undefined;
+  alt?: string;
   className?: string;
+  priority?: boolean;
 }
 
-// Placeholder ilustrado cuando no hay imágenes reales.
-// Reemplaza con <img src={images[0]} /> cuando tengas fotos reales en public/images/products/.
+const PLACEHOLDER_IMG = "/images/placeholder.png";
 
-export function ProductImage({ images, productName, color = "red", className = "" }: ProductImageProps) {
-  const safeImages: string[] = Array.isArray(images) ? images.filter(Boolean) : [];
-  const bgColors = {
-    red: "#FFE8E9",
-    yellow: "#FFF8D6",
-    green: "#E8F7D6",
-    blue: "#E6EEFB",
-    ink: "#F5F5F5",
-  };
+export function ProductImage({ images, alt = "Producto", className = "", priority = false }: ProductImageProps) {
+  const safeImages = React.useMemo(() => {
+    if (!images) return [];
+    if (Array.isArray(images)) return images.filter(Boolean);
+    if (typeof images === "string") return [images];
+    return [];
+  }, [images]);
 
-  const accentColors = {
-    red: "#FF2B32",
-    yellow: "#FFD000",
-    green: "#78D64B",
-    blue: "#5274E8",
-    ink: "#0A0A0A",
-  };
+  const src = safeImages[0] || PLACEHOLDER_IMG;
+  const blurDataURL = safeImages.length > 1 ? safeImages[1] : undefined;
 
-  const bg = bgColors[color] || bgColors.red;
-  const accent = accentColors[color] || accentColors.ink;
-
-  // Render real de imagen cuando existe
-  if (safeImages.length > 0) {
-    return (
-      <div className={`relative overflow-hidden rounded-3xl ${className}`}>
-        <img src={safeImages[0]} alt={productName || "Producto"} className="w-full h-full object-cover" />
-      </div>
-    );
-  }
-
-  // Placeholder SVG ilustrado
   return (
-    <div
-      className={`relative overflow-hidden rounded-3xl flex items-center justify-center ${className}`}
-      style={{ backgroundColor: bg }}
-    >
-      <svg width="100%" height="100%" viewBox="0 0 200 200" aria-hidden="true">
-        {/* Fondo decorativo */}
-        <circle cx="100" cy="100" r="80" fill={accent} opacity="0.1" />
-        {/* Elementos decorativos */}
-        <circle cx="60" cy="60" r="15" fill={accent} opacity="0.3" />
-        <circle cx="140" cy="140" r="20" fill={accent} opacity="0.2" />
-        <rect x="130" y="40" width="30" height="30" fill={accent} opacity="0.25" transform="rotate(15 145 55)" />
-        {/* Texto del producto */}
-        <text
-          x="100"
-          y="100"
-          textAnchor="middle"
-          dominantBaseline="middle"
-          fill={accent}
-          fontSize="18"
-          fontWeight="bold"
-          fontFamily="system-ui, sans-serif"
-        >
-          {(productName ?? "Producto").length > 20 ? (productName ?? "Producto").slice(0, 18) + "..." : productName ?? "Producto"}
-        </text>
-        {/* Estrella decorativa */}
-        <g transform="translate(160, 60) scale(0.8)">
-          <path
-            d="M0,-20 L5.88,-6.18 L19.51,-6.18 L8.78,2.36 L12.94,16.18 L0,8 L-12.94,16.18 L-8.78,2.36 L-19.51,-6.18 L-5.88,-6.18 Z"
-            fill={accent}
-            opacity="0.4"
-          />
-        </g>
-      </svg>
-    </div>
+    <>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className={className}
+        priority={priority}
+        quality={85}
+        placeholder={blurDataURL ? "blur" : "empty"}
+        blurDataURL={blurDataURL}
+      />
+      {safeImages.length === 0 && (
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center">
+          <svg className="w-16 h-16 text-gray-300 dark:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L10 12l2.586-2.586M4 16l4.586-4.586M4.5 6h15a2 2 0 012 2v10a2 2 0 01-2 2h-2l-4.586-4.586M6.5 6h11a2 2 0 012 2v10a2 2 0 01-2 2H6.5a2 2 0 01-2-2V8a2 2 0 012-2z" />
+          </svg>
+        </div>
+      )}
+    </>
   );
 }

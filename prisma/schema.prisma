@@ -88,6 +88,7 @@ model Product {
   options       ProductOption[]
   customFields  CustomField[]
   orderItems    OrderItem[]
+  wishlists     WishlistItem[]
 }
 
 model ProductFeature {
@@ -150,6 +151,20 @@ model CustomField {
   order       Int     @default(0)
 
   @@index([productId])
+}
+
+// ============================================================
+// WISHLIST (persistente en Postgres)
+// ============================================================
+model WishlistItem {
+  id          String   @id @default(cuid())
+  sessionId   String   @default("anonymous")
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+
+  @@index([sessionId, productId])
+  @@unique([sessionId, productId])
 }
 
 // ============================================================

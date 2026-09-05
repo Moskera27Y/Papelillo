@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { ProductPrice } from "./ProductPrice";
 import { ProductBadge } from "./ProductBadge";
@@ -8,6 +8,8 @@ import { ProductImage } from "@/components/ui/ProductImage";
 import { useCart } from "@/context/CartContext";
 import { buildWhatsAppLink, buildProductMessage } from "@/lib/config";
 import { Button } from "@/components/ui/Button";
+import { QuickViewModal } from "@/components/products/QuickViewModal";
+import { useWishlist } from "@/hooks/useWishlist";
 import type { Product } from "@/types";
 
 interface ProductCardProps {
@@ -16,6 +18,13 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   const { addItem } = useCart();
+  const { has, add: wishAdd, remove: wishRemove } = useWishlist();
+  const [quickViewOpen, setQuickViewOpen] = useState(false);
+  const inWishlist = has(product.id);
+
+  const toggleWishlist = () => {
+    inWishlist ? wishRemove(product.id) : wishAdd(product.id);
+  };
 
   const handleAddToCart = () => {
     if (product.requiresQuote) return;
@@ -39,17 +48,25 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <div className="group bg-paper rounded-3xl border-2 border-ink shadow-sticker hover:shadow-sticker-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden">
-      {/* Image */}
+      {/* Image + Badges + Wishlist */}
       <Link href={`/product/${product.slug}`} className="block relative">
-        <ProductImage
-          images={product.images}
-          productName={product.name}
-          color={product.isCustomizable ? "blue" : product.isPopular ? "red" : "yellow"}
-          className="aspect-square w-full"
-        />
+        <div className="aspect-square relative">
+          <ProductImage images={product.images} alt={product.name} className="object-cover" />
+        </div>
         <div className="absolute top-3 left-3">
           <ProductBadge product={product} />
         </div>
+        <button
+          onClick={toggleWishlist}
+          className={`absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+            inWishlist ? "bg-brand-red text-paper scale-110" : "bg-white/80 text-ink/40 hover:text-brand-red hover:bg-white"
+          }`}
+          aria-label={inWishlist ? "Quitar de favoritos" : "Añadir a favoritos"}
+        >
+          <svg className="w-4 h-4" fill={inWishlist ? "currentColor" : "none"} stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318A4.49 4.49 0 0112 3.324M12 20.773l-1.447-1.324A6.5 6.5 0 014 10.8V8a8 8 0 0115.666-1.553M9 13h.01M15 13h.01" />
+          </svg>
+        </button>
       </Link>
 
       {/* Content */}
@@ -73,22 +90,24 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Actions */}
         <div className="flex gap-2">
           {product.requiresQuote ? (
-            <Button
-              href={whatsappHref}
-              variant="primary"
-              size="sm"
-              className="flex-1"
-            >
+            <Button href={whatsappHref} variant="primary" size="sm" className="flex-1">
               {product.ctaLabel || "Solicitar cotización"}
             </Button>
           ) : (
             <>
               <button
-                  onClick={handleAddToCart}
-                  aria-label={`Agregar ${product.name} al carrito`}
-                  className="flex-1 bg-ink text-paper text-sm font-bold rounded-full px-4 py-2 hover:brightness-90 active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow"
-                >
+                onClick={handleAddToCart}
+                aria-label={`Agregar ${product.name} al carrito`}
+                className="flex-1 bg-ink text-paper text-sm font-bold rounded-full px-4 py-2 hover:brightness-90 active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow"
+              >
                 Agregar
+              </button>
+              <button
+                onClick={() => setQuickViewOpen(true)}
+                aria-label="Vista rápida"
+                className="flex-1 bg-transparent text-ink border border-ink/20 text-sm font-bold rounded-full px-4 py-2 hover:bg-ink/5 active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow"
+              >
+                Vista rápida
               </button>
               <a
                 href={whatsappHref}
@@ -105,6 +124,8 @@ export function ProductCard({ product }: ProductCardProps) {
           )}
         </div>
       </div>
+
+      <QuickViewModal product={quickViewOpen ? product : null} onClose={() => setQuickViewOpen(false)} />
     </div>
   );
 }

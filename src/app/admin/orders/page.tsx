@@ -29,6 +29,69 @@ const PAYMENT_LABELS: Record<string, { label: string; color: string }> = {
   error: { label: "Error", color: "bg-brand-red text-paper" },
 };
 
+function StatCard({ label, value, icon, color }: { label: string; value: string | number; icon: string; color: string }) {
+  return (
+    <div className={`${color} rounded-2xl border-2 border-ink/10 p-4 text-center flex flex-col items-center gap-1`}>
+      <span className="text-2xl">{icon}</span>
+      <div className="text-2xl font-bold text-ink">{value}</div>
+      <div className="text-xs text-ink-muted font-medium">{label}</div>
+    </div>
+  );
+}
+
+function OrdersTable({ orders, onExport }: { orders: any[]; onExport: () => void }) {
+  if (!orders.length) {
+    return (
+      <div className="text-center py-12 bg-paper rounded-3xl border-2 border-ink/10">
+        <p className="text-ink-muted">No hay pedidos todavía</p>
+      </div>
+    );
+  }
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full text-left text-sm">
+        <thead>
+          <tr className="border-b-2 border-ink/10">
+            <th className="py-3 text-xs font-bold uppercase text-ink-muted">Pedido</th>
+            <th className="py-3 text-xs font-bold uppercase text-ink-muted">Cliente</th>
+            <th className="py-3 text-xs font-bold uppercase text-ink-muted">Estado</th>
+            <th className="py-3 text-xs font-bold uppercase text-ink-muted">Pago</th>
+            <th className="py-3 text-xs font-bold uppercase text-ink-muted text-right">Total</th>
+            <th className="py-3 text-xs font-bold uppercase text-ink-muted">Fecha</th>
+            <th className="py-3 text-right"><span className="sr-only">Acciones</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          {orders.map((order) => {
+            const statusLabel = STATUS_LABELS[order.status as OrderStatus] || { label: order.status, color: "bg-ink/10" };
+            const payLabel = PAYMENT_LABELS[order.paymentStatus || "pending"] || { label: "Pendiente", color: "bg-brand-yellow/30" };
+            return (
+              <tr key={order.id} className="border-b border-ink/5 hover:bg-paper-soft/50">
+                <td className="py-3 font-bold text-brand-red">#{order.number}</td>
+                <td className="py-3">
+                  <div className="font-medium">{order.customer?.name || order.customerName}</div>
+                  <div className="text-xs text-ink-muted">{order.customer?.email || order.customerEmail}</div>
+                </td>
+                <td className="py-3">
+                  <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-bold ${statusLabel.color}`}>{statusLabel.label}</span>
+                </td>
+                <td className="py-3">
+                  <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-bold ${payLabel.color}`}>{payLabel.label}</span>
+                </td>
+                <td className="py-3 text-right font-bold">{formatCOP(order.totalAmount || order.total)}</td>
+                <td className="py-3 text-sm text-ink-muted">{new Date(order.createdAt).toLocaleDateString("es-CO")}</td>
+                <td className="py-3 text-right">
+                  <Link href={`/admin/orders/${order.id}`} className="text-xs font-bold text-brand-blue hover:underline">Ver</Link>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 export default function AdminOrdersPage() {
   const { orders, isLoading } = useOrders();
   const [statusFilter, setStatusFilter] = useState<OrderStatus | "all">("all");
@@ -49,9 +112,9 @@ export default function AdminOrdersPage() {
       list = list.filter(
         (o) =>
           o.number.toLowerCase().includes(q) ||
-          o.customer.name.toLowerCase().includes(q) ||
-          o.customer.email.toLowerCase().includes(q) ||
-          o.customer.phone.includes(q)
+          (o.customer?.name || (o as any).customerName || "").toLowerCase().includes(q) ||
+          (o.customer?.email || (o as any).customerEmail || "").toLowerCase().includes(q) ||
+          (o.customer?.phone || "").toLowerCase().includes(q)
       );
     }
     return list;
@@ -59,18 +122,20 @@ export default function AdminOrdersPage() {
 
   if (isLoading) {
     return (
-      <div className="space-y-8">
-        <div className="animate-pulse">
-          <div className="h-8 bg-paper-soft rounded w-48 mb-4"></div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-24 bg-paper-soft rounded-2xl border-2 border-ink/10"></div>
-            ))}
+      <AuthGuard>
+        <div className="space-y-8">
+          <div className="animate-pulse">
+            <div className="h-8 bg-paper-soft rounded w-48 mb-4"></div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="h-24 bg-paper-soft rounded-2xl border-2 border-ink/10"></div>
+              ))}
+            </div>
+            <div className="h-12 bg-paper-soft rounded mb-4"></div>
+            <div className="h-96 bg-paper-soft rounded-3xl border-2 border-ink/10"></div>
           </div>
-          <div className="h-12 bg-paper-soft rounded mb-4"></div>
-          <div className="h-96 bg-paper-soft rounded-3xl border-2 border-ink/10"></div>
         </div>
-      </div>
+      </AuthGuard>
     );
   }
 
@@ -78,179 +143,49 @@ export default function AdminOrdersPage() {
     <AuthGuard>
       <div className="flex min-h-screen bg-paper-soft">
         <AdminSidebar />
-        <main className="flex-1 overflow-y-auto">
-          <div className="space-y-8">
-            <div>
-              <h1 className="font-display text-4xl font-bold text-ink mb-2">Pedidos</h1>
-        <p className="text-ink-muted">
-          Gestiona todos los pedidos de Papelillo
-        </p>
-      </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <StatCard label="Total pedidos" value={stats.total} icon="📦" color="bg-paper-soft" />
-        <StatCard label="Pendientes" value={stats.pending} icon="⏳" color="bg-brand-yellow/30" />
-        <StatCard label="Pagados" value={stats.paymentApproved} icon="✅" color="bg-brand-green/30" />
-        <StatCard label="Ingresos (30 días)" value={formatCOP(stats.revenue30d)} icon="💰" color="bg-brand-blue/30" />
-      </div>
-
-      {/* Filtros */}
-      <div className="flex flex-col md:flex-row gap-3">
-        <input
-          type="search"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Buscar por número, cliente, email..."
-          className="flex-1 px-4 py-3 rounded-full border-2 border-ink/15 bg-paper focus:border-ink focus:outline-none transition-colors"
-        />
-        <select
-          value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value as OrderStatus | "all")}
-          className="px-4 py-3 rounded-full border-2 border-ink/15 bg-paper focus:border-ink focus:outline-none transition-colors"
-        >
-          <option value="all">Todos los estados</option>
-          {Object.entries(STATUS_LABELS).map(([k, v]) => (
-            <option key={k} value={k}>
-              {v.label}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* Tabla */}
-      {filtered.length === 0 ? (
-        <div className="text-center py-16 bg-paper-soft rounded-3xl border-2 border-ink/10">
-          <p className="text-2xl mb-2">📭</p>
-          <p className="font-display text-xl font-bold text-ink">
-            No hay pedidos aún
-          </p>
-          <p className="text-ink-muted">
-            Los pedidos aparecerán aquí cuando los clientes realicen compras.
-          </p>
-        </div>
-      ) : (
-        <div className="bg-paper rounded-3xl border-2 border-ink/10 overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-paper-soft border-b-2 border-ink/10">
-                <tr>
-                  <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wide text-ink-muted">
-                    Pedido
-                  </th>
-                  <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wide text-ink-muted">
-                    Cliente
-                  </th>
-                  <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wide text-ink-muted">
-                    Fecha
-                  </th>
-                  <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wide text-ink-muted">
-                    Total
-                  </th>
-                  <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wide text-ink-muted">
-                    Pago
-                  </th>
-                  <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wide text-ink-muted">
-                    Estado
-                  </th>
-                  <th className="text-right px-4 py-3 text-xs font-bold uppercase tracking-wide text-ink-muted">
-                    Acción
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-ink/5">
-                {filtered.map((order) => (
-                  <tr
-                    key={order.id}
-                    className="hover:bg-paper-soft transition-colors"
-                  >
-                    <td className="px-4 py-4">
-                      <p className="font-display font-bold text-ink">
-                        {order.number}
-                      </p>
-                      <p className="text-xs text-ink-muted">
-                        {order.items.length}{" "}
-                        {order.items.length === 1 ? "item" : "items"}
-                      </p>
-                    </td>
-                    <td className="px-4 py-4">
-                      <p className="text-sm font-bold text-ink">
-                        {order.customer.name} {order.customer.lastName}
-                      </p>
-                      <p className="text-xs text-ink-muted">
-                        {order.customer.email}
-                      </p>
-                    </td>
-                    <td className="px-4 py-4 text-sm text-ink-muted">
-                      {new Date(order.createdAt).toLocaleDateString("es-CO", {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric",
-                      })}
-                    </td>
-                    <td className="px-4 py-4 font-bold text-ink">
-                      {formatCOP(order.total)}
-                    </td>
-                    <td className="px-4 py-4">
-                      <span
-                        className={`inline-block px-2 py-0.5 rounded-full text-xs font-bold ${
-                          PAYMENT_LABELS[order.payment.status]?.color ??
-                          "bg-ink/10 text-ink"
-                        }`}
-                      >
-                        {PAYMENT_LABELS[order.payment.status]?.label ??
-                          order.payment.status}
-                      </span>
-                    </td>
-                    <td className="px-4 py-4">
-                      <span
-                        className={`inline-block px-2 py-0.5 rounded-full text-xs font-bold ${
-                          STATUS_LABELS[order.status].color
-                        }`}
-                      >
-                        {STATUS_LABELS[order.status].label}
-                      </span>
-                    </td>
-                    <td className="px-4 py-4 text-right">
-                      <Link
-                        href={`/admin/orders/${order.id}`}
-                        className="inline-block bg-ink text-paper text-xs font-bold rounded-full px-3 py-1.5 hover:bg-opacity-90 transition-colors"
-                      >
-                        Ver
-                      </Link>
-                    </td>
-                  </tr>
+        <main className="flex-1 lg:ml-0 p-4 sm:p-6 lg:p-8">
+          {/* Toolbar: filters + export */}
+          <div className="flex flex-col sm:flex-row gap-4 mb-6 justify-between">
+            <div className="flex items-center gap-3 flex-wrap">
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value as any)}
+                className="px-3 py-1.5 rounded-full border-2 border-ink/15 bg-paper text-sm font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow"
+              >
+                <option value="all">Todos los estados</option>
+                {Object.entries(STATUS_LABELS).map(([val, lbl]) => (
+                  <option key={val} value={val}>{lbl.label}</option>
                 ))}
-              </tbody>
-            </table>
+              </select>
+              <input
+                type="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Buscar por número, nombre, email, teléfono..."
+                className="px-4 py-1.5 rounded-full border-2 border-ink/15 bg-paper text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow"
+              />
+            </div>
+            <button
+              onClick={() => (window.location.href = "/api/admin/orders/csv")}
+              className="bg-brand-green hover:bg-brand-green/90 text-ink font-bold px-4 py-2 rounded-full transition-colors flex items-center gap-2"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" /></svg>
+              Exportar CSV
+            </button>
           </div>
-        </div>
-      )}
+
+          {/* Stat cards */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <StatCard label="Total" value={stats.total} icon="📦" color="bg-paper" />
+            <StatCard label="Pendientes" value={stats.pending} icon="⏳" color="bg-brand-yellow/30" />
+            <StatCard label="Pagados" value={stats.paymentApproved} icon="✅" color="bg-brand-green/30" />
+            <StatCard label="Ingresos (30 días)" value={formatCOP(stats.revenue30d)} icon="💰" color="bg-brand-blue/30" />
           </div>
+
+          <OrdersTable orders={filtered} onExport={() => {}} />
         </main>
       </div>
     </AuthGuard>
-  );
-}
-
-function StatCard({
-  label,
-  value,
-  icon,
-  color,
-}: {
-  label: string;
-  value: number | string;
-  icon: string;
-  color: string;
-}) {
-  return (
-    <div className={`${color} rounded-2xl p-4 border-2 border-ink/10`}>
-      <p className="text-2xl mb-1">{icon}</p>
-      <p className="text-xs text-ink-muted uppercase tracking-wide mb-1">
-        {label}
-      </p>
-      <p className="font-display text-2xl font-bold text-ink">{value}</p>
-    </div>
   );
 }

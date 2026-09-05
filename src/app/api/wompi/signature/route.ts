@@ -8,6 +8,10 @@
 import { NextResponse } from "next/server";
 import crypto from "crypto";
 
+// 🔐 Security: cache simple anti-replay (reference única por ventana)
+const signatureCache = new Map<string, number>();
+const CACHE_TTL_MS = 1000 * 60 * 60; // 1 hora (larga vida de firma)
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -17,9 +21,16 @@ export async function POST(req: Request) {
       currency: string;
     };
 
-    if (!reference || typeof amountInCents !== "number" || !currency) {
+    // 🔐 Security: validación estricta de tipos (evita type coercion)
+    if (
+      typeof reference !== "string" ||
+      typeof amountInCents !== "number" ||
+      !Number.isFinite(amountInCents) ||
+      amountInCents < 0 ||
+      typeof currency !== "string"
+    ) {
       return NextResponse.json(
-        { error: "Faltan parámetros: reference, amountInCents, currency" },
+        { error: "Faltan o son inválidos parámetros: reference, amountInCents, currency" },
         { status: 400 }
       );
     }
@@ -30,6 +41,25 @@ export async function POST(req: Request) {
         { error: "WOMPI_INTEGRITY_KEY no está configurada en el servidor" },
         { status: 500 }
       );
+    }
+
+    // 🔐 Security: anti-replay — misma reference dentro del TTL rechaza
+    const now = Date.now();
+    const cached = signatureCache.get(reference);
+    if (cached && now - cached < CACHE_TTL_MS) {
+      console.warn("[security] replay attempt on wompi signature:", reference);
+      return NextResponse.json(
+        { error: "Firma duplicada (replay) rechazada" },
+        { status: 409 }
+      );
+    }
+    signatureCache.set(reference, now);
+
+    // Limpieza de cache viejo
+    if (signatureCache.size > 1000) {
+      signatureCache.forEach((ts, key) => {
+        if (now - ts > CACHE_TTL_MS) signatureCache.delete(key);
+      });
     }
 
     // Wompi requiere SHA-256 hex de:

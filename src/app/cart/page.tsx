@@ -80,10 +80,9 @@ export default function CartPage() {
                       className="w-24 h-24 md:w-32 md:h-32 flex-shrink-0 rounded-2xl overflow-hidden border-2 border-ink/10"
                     >
                       <ProductImage
-                        images={p.images}
-                        productName={p.name}
-                        color={p.isCustomizable ? "blue" : "yellow"}
-                        className="w-full h-full"
+                              images={p.images}
+                              alt={p.name}
+                              className="w-full h-full"
                       />
                     </Link>
 

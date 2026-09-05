@@ -37,19 +37,40 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_CO",
+    url: siteConfig.siteUrl,
     siteName: siteConfig.siteName,
     title: `${siteConfig.siteName} — ${siteConfig.tagline}`,
     description: siteConfig.siteDescription,
+    images: [
+      {
+        url: siteConfig.ogImage || `${siteConfig.siteUrl}/images/logo.png`,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.siteName,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteConfig.siteName} — ${siteConfig.tagline}`,
     description: siteConfig.siteDescription,
+    images: [siteConfig.ogImage || `${siteConfig.siteUrl}/images/logo.png`],
   },
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
     apple: "/favicon.svg",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -59,10 +80,32 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${fredoka.variable} ${manrope.variable}`}>
-      <body>
+    <html lang="es" data-theme="system" className={`${fredoka.variable} ${manrope.variable}`}>
+      <body
+        className="bg-background text-foreground transition-colors duration-300"
+      >
         <CartProvider>
           <CreativeBackground />
+          {/* SEO JSON-LD Organization */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: "Papelillo",
+                url: "https://papelillo-web-lilac.vercel.app",
+                logo: "https://papelillo-web-lilac.vercel.app/images/logo.png",
+                sameAs: ["https://instagram.com/papelillo", "https://facebook.com/papelillo"],
+                contactPoint: {
+                  "@type": "ContactPoint",
+                  telephone: "+57 318 517 11 63",
+                  email: "hola@papelillo.com.co",
+                  contactType: "customer service",
+                },
+              }),
+            }}
+          />
           {/* Skip-to-content for accessibility */}
           <a
             href="#main"

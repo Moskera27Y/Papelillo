@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useSiteSettings } from "@/hooks/useDataService";
+import { useTheme } from "@/hooks/useTheme";
 import { siteConfig, buildWhatsAppLink } from "@/lib/config";
 import { cn } from "@/lib/utils";
 
@@ -14,6 +15,7 @@ export function Header() {
   const pathname = usePathname();
   const { count, toggle } = useCart();
   const { settings, isLoading } = useSiteSettings();
+  const { resolved: theme, toggle: toggleTheme } = useTheme();
   const branding = (settings?.branding ?? { logoSrc: siteConfig.logoSrc, logoDataUrl: null }) as { logoSrc: string; logoDataUrl: string | null };
   const logoSrc = branding.logoDataUrl || branding.logoSrc || siteConfig.logoSrc;
 
@@ -107,6 +109,18 @@ export function Header() {
             </div>
 
             <div className="flex lg:hidden items-center gap-3">
+              <button
+                onClick={toggleTheme}
+                className="text-ink hover:text-brand-red transition-colors relative w-10 h-10 flex items-center justify-center"
+                aria-label="Cambiar tema"
+                title={theme === "dark" ? "Cambiar a claro" : "Cambiar a oscuro"}
+              >
+                {theme === "dark" ? (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v2m0 14v2m8.66-10.66h-1.32M5.64 12H4.32m1.62-7.02l.94.94M6.2 17.8l-.94.94m12.78 0l-.94-.94M6.2 6.2l-.94.94" /></svg>
+                ) : (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3c.132 0 .264.011.393.034a1 1 0 0 1 .806 1.722c-.336-.254-.695-.439-1.077-.53.845-.227 1.762-.326 2.677-.326.915 0 1.832.099 2.677.326-.382.091-.74.276-1.077.53a1 1 0 0 1-.806-1.722A9.03 9.03 0 0 1 12 3z" /></svg>
+                )}
+              </button>
               <button
                 onClick={toggle}
                 className="relative text-ink hover:text-brand-red transition-colors"

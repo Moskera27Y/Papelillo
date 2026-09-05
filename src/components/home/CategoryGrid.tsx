@@ -167,11 +167,11 @@ export function CategoryGrid() {
                 style={{ animationDelay: `${0.3 + i * 0.08}s` }}
               >
                 <div
-                  className={`
+                  className={`\
                     relative overflow-hidden rounded-3xl border-4 border-ink
-                    shadow-sticker hover:shadow-sticker-lg
-                    hover:-translate-y-2 hover:rotate-1
-                    transition-all duration-300
+                    shadow-sticker hover:shadow-sticker-lg hover:shadow-2xl
+                    hover:-translate-y-1 hover:rotate-1
+                    transition-all duration-300 hover:scale-[1.03]
                     ${getBrandColorClass(category.color)}
                     bg-paper
                   `}

@@ -86,7 +86,7 @@ export default function CheckoutPage() {
 
 
   const { settings: siteSettings } = useSiteSettings();
-  const settings = siteSettings ?? {};
+  const settings = (siteSettings ?? {}) as any;
   const wompiCheck = isWompiReady();
 
   const total = useMemo(() => subtotal + shippingCost, [subtotal, shippingCost]);
@@ -140,8 +140,7 @@ export default function CheckoutPage() {
     setProcessing(true);
 
     try {
-      // 1. Crear el pedido (Prisma/Neón via server action)
-      const paymentMethod = form.paymentMethod || "whatsapp";
+      // 1. Crear el pedido (Prisma/Neón via server action) — usa paymentMethod STATE
       const customer: OrderCustomer = {
         name: form.name,
         lastName: form.lastName,
@@ -171,27 +170,27 @@ export default function CheckoutPage() {
         customization: l.customizations,
       }));
 
-      const subtotal = lines.reduce((sum, l) => sum + (l.product?.price ?? 0) * l.quantity, 0);
-      const shippingTotal = shippingCost;
-      const computedTotal = subtotal + shippingTotal;
+      const lineSubtotal = lines.reduce((sum, l) => sum + (l.product?.price ?? 0) * l.quantity, 0);
+      const computedTotal = lineSubtotal + shippingCost;
       if (Math.abs(computedTotal - total) > 0.01) {
         console.warn("[security] cliente total mismatch", total, computedTotal);
       }
+
       const order = await createOrderAction({
         customer,
         shipping,
         items,
         payment: {
-          method: paymentMethod as "wompi" | "whatsapp" | "cash" | "other",
+          method: paymentMethod,
           reference: `ord_${Date.now().toString(36)}_${cryptoRandomHex(6)}`,
           amount: computedTotal,
           currency: "COP",
         },
-        subtotal,
+        subtotal: lineSubtotal,
         total: computedTotal,
       });
 
-      // 2. Si el método es WhatsApp, simplemente notificar y redirigir
+      // 2. Si el método es WhatsApp, redirigir
       if (paymentMethod === "whatsapp") {
         const msg = encodeURIComponent(
           `Hola, acabo de crear un pedido (${order.number}) con los siguientes productos:\n\n` +
@@ -200,81 +199,74 @@ export default function CheckoutPage() {
         );
         const wa = settings?.contact?.whatsapp
           ? `https://wa.me/${settings.contact.whatsapp}?text=${msg}`
-          : "/checkout/success?order=" + order.id;
+          : `/checkout/success?order=${order.id}`;
         clear();
         window.location.href = wa;
         return;
       }
 
-      // 3. Si el método es Wompi, abrir el widget
+      // 3. WOMPI — generar firma e abrir widget
       if (paymentMethod === "wompi") {
         if (!wompiCheck.ready) {
-          throw new Error(
-            "Wompi no está configurado. Por favor, intenta con WhatsApp o contacta al administrador."
-          );
+          throw new Error("Wompi no está configurado.");
         }
 
-        try {
-          // Solicitar la firma al servidor (server-side)
-          const signResp = await fetch("/api/wompi/signature", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              reference: order.payment.reference,
-              amountInCents: toCents(total),
-              currency: "COP",
-            }),
-          });
+        const nonce = cryptoRandomHex(16);
+        const ref = order.id + "_" + Date.now().toString(36);
 
-          if (!signResp.ok) {
-            throw new Error("No se pudo generar la firma de Wompi");
-          }
-
-          const { signature } = await signResp.json();
-
-          const event = await openWompiWidget({
-            reference: order.payment.reference,
+        // Solicitar firma al API (rate-limit server-side + nonce anti-replay)
+        const signResp = await fetch("/api/wompi/signature", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "x-nonce": nonce },
+          body: JSON.stringify({
+            reference: ref,
             amountInCents: toCents(total),
-            customerEmail: form.email,
-            customerData: {
-              fullName: `${form.name} ${form.lastName}`,
-              phoneNumber: form.phone.replace(/\D/g, ""),
-              phoneNumberCountryCode: "57",
-            },
-            signature: {
-              integrityKey: signature,
-            },
-            redirectUrl: `${window.location.origin}/checkout/success?order=${order.id}`,
-          });
+            currency: "COP",
+          }),
+        });
 
-          // 4. Actualizar el pedido según el resultado
-          const tx = event.data.transaction;
-          if (tx.status === "APPROVED") {
-            await updateOrderPaymentStatusAction(order.id, "approved", {
-              wompiTransactionId: tx.id,
-              paidAt: new Date().toISOString(),
-            });
-            clear();
-            router.push(`/checkout/success?order=${order.id}`);
-          } else {
-            updatePayment(order.id, "declined", {
-              failureReason: tx.status_message || tx.status,
-            });
-            setError(
-              `El pago fue ${tx.status === "DECLINED" ? "rechazado" : tx.status.toLowerCase()}. ${
-                tx.status_message || ""
-              }`
-            );
-            setStep("payment");
-          }
-        } catch (err) {
-          if (err instanceof Error && err.message.includes("cerró")) {
-            // El usuario cerró el widget: el pedido queda "pending"
-            setStep("payment");
-          } else {
-            throw err;
-          }
+        if (!signResp.ok) {
+          const errText = await signResp.text();
+          throw new Error(`No se pudo generar la firma Wompi: ${errText.slice(0, 120)}`);
         }
+
+        const signData = await signResp.json();
+        const signature = signData.signature || signData.signatures?.integrity;
+
+        // Abrir widget Wompi — ESTE ES EL PASO QUE EJECUTA LA PASAREJA REAL
+        const event = await openWompiWidget({
+          reference: ref,
+          amountInCents: toCents(total),
+          customerEmail: form.email,
+          customerData: {
+            fullName: `${form.name} ${form.lastName}`,
+            phoneNumber: form.phone.replace(/\D/g, ""),
+            phoneNumberCountryCode: "57",
+          },
+          signature: {
+            integrityKey: signature as string,
+          },
+          redirectUrl: `${window.location.origin}/checkout/success?order=${order.id}`,
+        } as any);
+
+        // 4. Resultado de la transacción
+        const tx = event?.data?.transaction;
+        if (tx && tx.status === "APPROVED") {
+          await updateOrderPaymentStatusAction(order.id, "approved", {
+            wompiTransactionId: tx.id,
+            paidAt: new Date().toISOString(),
+          });
+          clear();
+          router.push(`/checkout/success?order=${order.id}`);
+        } else if (tx && tx.status === "DECLINED") {
+          updatePayment(order.id, "declined", {
+            failureReason: tx.status_message || tx.status,
+          });
+          setError(`Pago rechazado: ${tx.status_message || "inténtalo con otro método"}`);
+          setStep("payment");
+        }
+        // else: user closed widget → order stays pending, back to payment step
+        if (!tx) setStep("payment");
       }
     } catch (err) {
       setError(
@@ -742,12 +734,7 @@ function OrderSummary({
           return (
             <div key={line.productId} className="flex gap-3">
               <div className="relative w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden border-2 border-ink/10">
-                <ProductImage
-                  images={p.images}
-                  productName={p.name}
-                  color="yellow"
-                  className="w-full h-full"
-                />
+                <ProductImage images={p.images} alt={p.name} className="w-full h-full" />
                 <span className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-ink text-paper text-xs font-bold rounded-full flex items-center justify-center">
                   {line.quantity}
                 </span>

@@ -1,0 +1,26 @@
+name: Lighthouse CI
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  lighthouse:
+    name: "Lighthouse audit"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm ci
+      - run: npm run build
+      - name: Run Lighthouse
+        uses: treosh/lighthouse-ci-action@v20
+        with:
+          urls: |
+            https://papelillo-web-lilac.vercel.app/
+            https://papelillo-web-lilac.vercel.app/shop
+          budgetPath: ./.github/lighthouse/budget.json
+          uploadArtifacts: true
