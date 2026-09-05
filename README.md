@@ -65,3 +65,4 @@ src/
 - Sticker-shadow (sombra dura offset) en lugar de blur-soft shadows.
 - Composición editorial, asimétrica, con espacio negativo.
 - Mobile-first: cada sección rediseñada para móvil, no solo escalada.
+\n\n<!-- vercel rebuild trigger 1788648072 -->
