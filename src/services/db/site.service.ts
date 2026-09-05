@@ -1,8 +1,5 @@
-// src/services/db/site.service.ts
-import { db } from '@/lib/db'
-import type { SiteSettings, SocialLink } from '@prisma/client'
-
-// 🔐 Tipo Wompi config (cliente-safe)
+// src/services/db/site.service.ts — cliente-safe
+// 🔐 Wompi config type (browser-safe, no Prisma dependency)
 export interface WompiConfig {
   enabled: boolean
   publicKey: string
@@ -12,10 +9,17 @@ export interface WompiConfig {
   webhookUrl?: string
 }
 
-export interface SiteSettingsWithSocial extends SiteSettings {
-  socialLinks: SocialLink[]
+export interface SiteSettingsClient {
+  id: string
+  brandName: string
+  tagline: string
+  socialLinks?: SocialLink[]
   wompi?: WompiConfig
 }
+
+// Tipos Prisma importados SOLO para server functions:
+import { db } from '@/lib/db'
+import type { SiteSettings, SocialLink } from '@prisma/client'
 
 export async function getSiteSettings(): Promise<SiteSettingsWithSocial> {
   const settings = await db.siteSettings.findFirst({
@@ -45,7 +49,7 @@ export async function getSiteSettings(): Promise<SiteSettingsWithSocial> {
  * Sync fallback para cliente — usa localStorage o env vars (Vercel).
  * Evita promises en el render del widget Wompi.
  */
-export function getSiteSettingsSync(): SiteSettingsWithSocial {
+export function getSiteSettingsSync(): SiteSettingsClient {
   // 1. Cache de sessionStorage (SSR-safe)
   if (typeof window !== 'undefined') {
     const cached = window.sessionStorage.getItem('papelillo_wompi_config');
