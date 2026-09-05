@@ -72,9 +72,10 @@ export function ProductCard({ product }: ProductCardProps) {
           ) : (
             <>
               <button
-                onClick={handleAddToCart}
-                className="flex-1 bg-ink text-paper text-sm font-bold rounded-full px-4 py-2 hover:bg-opacity-90 transition-colors"
-              >
+                  onClick={handleAddToCart}
+                  aria-label={`Agregar ${product.name} al carrito`}
+                  className="flex-1 bg-ink text-paper text-sm font-bold rounded-full px-4 py-2 hover:brightness-90 active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow"
+                >
                 Agregar
               </button>
               <a
