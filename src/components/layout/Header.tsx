@@ -1,22 +1,35 @@
 "use client";
-
+// =============================================================
+// Header — Isomorphic (SSR-safe) + client interactivity
+// Pattern: React hydration safety (useSafeLocalStorage for theme)
+// =============================================================
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
-import { useSiteSettings } from "@/hooks/useDataService";
 import { useTheme } from "@/hooks/useTheme";
 import { siteConfig, buildWhatsAppLink } from "@/lib/config";
 import { cn } from "@/lib/utils";
+
+// SSR-safe initial settings — avoids hydration mismatch between
+// server render (isLoading=true, fallback logo) and client (loaded logo)
+import { getSiteSettingsSync } from "@/services/db/site.service";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const { count, toggle } = useCart();
-  const { settings, isLoading } = useSiteSettings();
   const { resolved: theme, toggle: toggleTheme } = useTheme();
-  const branding = (settings?.branding ?? { logoSrc: siteConfig.logoSrc, logoDataUrl: null }) as { logoSrc: string; logoDataUrl: string | null };
+
+  // Initial settings from sync fallback — isomorphic render safety
+  const initialSettings = getSiteSettingsSync();
+  const branding =
+    (initialSettings?.branding ?? { logoSrc: siteConfig.logoSrc, logoDataUrl: null }) as {
+      logoSrc: string;
+      logoDataUrl: string | null;
+    };
+  // logoDataUrl from DB takes precedence; falls back to logoSrc → config
   const logoSrc = branding.logoDataUrl || branding.logoSrc || siteConfig.logoSrc;
 
   const navItems = [
@@ -62,7 +75,6 @@ export function Header() {
                 />
               </div>
             </Link>
-
             <nav className="hidden lg:flex items-center gap-8">
               {navItems.map((item) => (
                 <Link
@@ -79,7 +91,6 @@ export function Header() {
                 </Link>
               ))}
             </nav>
-
             <div className="hidden lg:flex items-center gap-4">
               <a
                 href={buildWhatsAppLink()}

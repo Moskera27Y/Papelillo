@@ -15,6 +15,7 @@ export interface SiteSettingsClient {
   tagline: string
   socialLinks?: SocialLink[]
   wompi?: WompiConfig
+  branding?: { logoSrc?: string; logoDataUrl?: string | null; faviconSrc?: string }
 }
 
 // Tipos Prisma importados SOLO para server functions:
@@ -66,9 +67,9 @@ export function getSiteSettingsSync(): SiteSettingsClient {
     socialLinks: [],
     wompi: {
       enabled: true,
-      publicKey: process.env.NEXT_PUBLIC_WOMPI_PUBLIC_KEY || '',
-      environment: (process.env.NEXT_PUBLIC_WOMPI_ENV || 'production') as 'sandbox' | 'production',
-      integrityKey: process.env.NEXT_PUBLIC_WOMPI_INTEGRITY_KEY || '',
+      publicKey: '',
+      environment: 'production' as 'sandbox' | 'production',
+      integrityKey: '',
     },
   };
 }
