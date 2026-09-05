@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect } from "react";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
@@ -46,14 +44,14 @@ export function CartDrawer() {
       />
 
       <aside
-        className={`fixed top-0 right-0 bottom-0 z-[101] w-full max-w-md bg-paper shadow-[-8px_0_24px_rgba(10,10,10,0.15)] flex flex-col transition-transform duration-300 ${
+        className={`fixed top-0 right-0 bottom-0 z-[101] w-full max-w-md max-h-screen bg-paper shadow-[-8px_0_24px_rgba(10,10,10,0.15)] flex flex-col transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
         aria-label="Carrito de compras"
         role="dialog"
         aria-modal="true"
       >
-        <div className="flex items-center justify-between px-6 py-5 border-b border-ink/10">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-ink/10 shrink-0">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-brand-yellow border-2 border-ink rounded-full flex items-center justify-center shadow-sticker-sm">
               <svg className="w-5 h-5 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -78,7 +76,8 @@ export function CartDrawer() {
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto px-6 py-4">
+        {/* Contenedor scrollable: grow + min-h-0 garantiza scroll de items */}
+        <div className="flex-1 min-h-0 overflow-y-auto px-6 py-4">
           {!productsLoaded ? (
             <LoadingCartItems count={count} />
           ) : isEmpty ? (
@@ -95,8 +94,9 @@ export function CartDrawer() {
           )}
         </div>
 
-        {!isEmpty && (
-          <div className="border-t border-ink/10 px-6 py-5 space-y-4 bg-paper-soft">
+        {/* Footer fijo: siempre visible + accesible */}
+        {!isEmpty && productsLoaded && (
+          <div className="border-t border-ink/10 px-6 py-5 shrink-0 space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-sm text-ink-muted">Subtotal</span>
               {hasQuoteOnly ? (
@@ -114,7 +114,7 @@ export function CartDrawer() {
                 <Link
                   href="/checkout"
                   onClick={() => setOpen(false)}
-                  className="block w-full bg-ink text-paper text-center font-bold rounded-full px-6 py-3.5 hover:bg-opacity-90 transition-colors shadow-sticker-sm"
+                  className="block w-full bg-ink text-paper text-center font-bold rounded-full px-6 py-4 hover:brightness-90 active:scale-[0.98] transition-all duration-200 shadow-sticker-sm focus-visible:ring-2 focus-visible:ring-brand-yellow"
                 >
                   Finalizar compra
                 </Link>
@@ -124,7 +124,7 @@ export function CartDrawer() {
                 <Link
                   href="/checkout"
                   onClick={() => setOpen(false)}
-                  className="block w-full bg-brand-yellow text-ink text-center font-bold rounded-full px-6 py-3.5 hover:brightness-90 transition-colors shadow-sticker-sm"
+                  className="block w-full bg-brand-yellow text-ink text-center font-bold rounded-full px-6 py-4 hover:brightness-90 active:scale-[0.98] transition-all duration-200 shadow-sticker-sm"
                 >
                   Ir a pagar (cotizar productos)
                 </Link>
@@ -141,7 +141,7 @@ export function CartDrawer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setOpen(false)}
-                  className="block w-full bg-brand-green text-ink text-center font-bold rounded-full px-6 py-3.5 hover:bg-opacity-90 transition-colors shadow-sticker-sm"
+                  className="block w-full bg-brand-green text-ink text-center font-bold rounded-full px-6 py-4 hover:brightness-90 active:scale-[0.98] transition-all duration-200 shadow-sticker-sm"
                 >
                   Solicitar cotización por WhatsApp
                 </a>
@@ -158,6 +158,23 @@ export function CartDrawer() {
         )}
       </aside>
     </>
+  );
+}
+
+// Shimmer loading rows mientras products API carga
+function LoadingCartItems({ count }: { count: number }) {
+  return (
+    <div className="space-y-4">
+      {Array.from({ length: count || 1 }).map((_, i) => (
+        <div key={i} className="flex gap-4 bg-paper rounded-2xl border-2 border-ink/10 p-3">
+          <div className="w-20 h-20 flex-shrink-0 rounded-xl skeleton skeleton-circle" />
+          <div className="flex-1 space-y-2 py-1">
+            <div className="h-4 skeleton skeleton-text w-3/4 rounded" />
+            <div className="h-3 skeleton skeleton-text w-1/2 rounded" />
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -197,15 +214,15 @@ function CartItemRow({ line }: { line: ReturnType<typeof useCart>["lines"][numbe
       <div className="flex-1 min-w-0">
         <div className="flex items-start justify-between gap-2">
           <Link
-            href={`/product/${p.slug}`}
+            href={p.slug ? `/product/${p.slug}` : "#"}
             className="font-display text-base font-bold text-ink hover:text-brand-red transition-colors line-clamp-2"
           >
-            {p.name}
+            {p.name || line.snapshot?.name || "Producto"}
           </Link>
           <button
             onClick={() => removeItem(p.id, line.variantId)}
             className="flex-shrink-0 w-7 h-7 rounded-full border border-ink/20 hover:bg-brand-red hover:text-paper hover:border-brand-red transition-colors flex items-center justify-center"
-            aria-label={`Quitar ${p.name}`}
+            aria-label={`Quitar ${p.name || "producto"}`}
           >
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
@@ -214,7 +231,6 @@ function CartItemRow({ line }: { line: ReturnType<typeof useCart>["lines"][numbe
         </div>
 
         <p className="text-xs text-ink-muted mb-2">{displayPrice}</p>
-
         {line.customizations && Object.keys(line.customizations).length > 0 && (
           <div className="mb-2 space-y-0.5">
             {Object.entries(line.customizations).map(([k, v]) => (
@@ -254,23 +270,6 @@ function CartItemRow({ line }: { line: ReturnType<typeof useCart>["lines"][numbe
         </div>
       </div>
     </article>
-  );
-}
-
-// Shimmer loading rows mientras products API carga
-function LoadingCartItems({ count }: { count: number }) {
-  return (
-    <div className="space-y-4">
-      {Array.from({ length: count || 1 }).map((_, i) => (
-        <div key={i} className="flex gap-4 bg-paper rounded-2xl border-2 border-ink/10 p-3">
-          <div className="w-20 h-20 flex-shrink-0 rounded-xl skeleton skeleton-circle" />
-          <div className="flex-1 space-y-2 py-1">
-            <div className="h-4 skeleton skeleton-text w-3/4 rounded" />
-            <div className="h-3 skeleton skeleton-text w-1/2 rounded" />
-          </div>
-        </div>
-      ))}
-    </div>
   );
 }
 
