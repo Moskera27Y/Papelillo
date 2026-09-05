@@ -9,6 +9,7 @@ import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CreativeBackground } from "@/components/layout/CreativeBackground";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { siteConfig } from "@/lib/config";
+import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 
 const fredoka = Fredoka({
   subsets: ["latin"],

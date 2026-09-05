@@ -5,6 +5,7 @@ import { useActiveProducts, useActiveCategories } from "@/hooks/useDataService";
 import { useShopFilters, ShopSearch, ShopSorting, ShopCategoryTabs, ShopFilterToggles, MobileFiltersDrawer } from "@/components/shop/ShopControls";
 import { ProductCard } from "@/components/products/ProductCard";
 import { ProductGridSkeleton } from "@/components/shop/ProductSkeleton";
+import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import type { AdminProduct } from "@/types/admin";
 import type { Product } from "@/types";
 
@@ -458,51 +459,16 @@ function ShopContent() {
 }
 
 // ============================================================
-// PÁGINA PRINCIPAL (envuelta en Suspense para searchParams)
+// PÁGINA PRINCIPAL — envuelta en ErrorBoundary REAL (clase) que
+// muestra el error TÉCNICO EXACTO en lugar de "Ups, algo salió mal"
 // ============================================================
 
 export default function ShopPage() {
-  return <ShopContent />;
-}
-
-// Error Boundary que EXPOSE el error real en lugar de "Ups, algo salió mal"
-function ErrorBoundary({ children }: { children: React.ReactNode }) {
-  const [error, setError] = React.useState<Error | null>(null);
-  if (error) {
-    return (
-      <div className="min-h-screen bg-paper flex items-center justify-center p-6">
-        <div className="max-w-3xl w-full bg-brand-red/10 border-2 border-brand-red rounded-3xl p-6 text-ink">
-          <h1 className="font-display text-2xl font-bold mb-3">⚠️ Error de renderizado detectado</h1>
-          <p className="mb-3">Error técnico EXACTO:</p>
-          <pre className="bg-ink text-paper p-4 rounded-xl overflow-x-auto text-xs whitespace-pre wrap-break-word mb-4">
-            {error.stack || error.message}
-          </pre>
-          <button
-            onClick={() => { setError(null); window.location.reload(); }}
-            className="bg-ink text-paper font-bold rounded-full px-5 py-2 hover:bg-opacity-90"
-          >
-            Recargar y reintentar
-          </button>
-        </div>
-      </div>
-    );
-  }
   return (
-    <ErrorBoundaryInner onCatch={setError}>{children}</ErrorBoundaryInner>
+    <ErrorBoundary>
+      <ShopContent />
+    </ErrorBoundary>
   );
-}
-
-function ErrorBoundaryInner({ children, onCatch }: { children: React.ReactNode; onCatch: (e: Error) => void }) {
-  const [errored, setErrored] = React.useState(false);
-  React.useEffect(() => {
-    const h = (e: ErrorEvent) => { setErrored(true); onCatch(e.error || new Error(e.message)); };
-    const r = (e: PromiseRejectionEvent) => { setErrored(true); onCatch(e.reason || new Error('Unhandled promise rejection')); };
-    window.addEventListener('error', h);
-    window.addEventListener('unhandledrejection', r);
-    return () => { window.removeEventListener('error', h); window.removeEventListener('unhandledrejection', r); };
-  }, [onCatch]);
-  if (errored) return null;
-  return <>{children}</>;
 }
 
 

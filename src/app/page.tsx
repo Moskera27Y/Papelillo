@@ -5,10 +5,11 @@ import { CustomHighlight } from "@/components/home/CustomHighlight";
 import { Gallery } from "@/components/home/Gallery";
 import { InstagramSection } from "@/components/home/InstagramSection";
 import { CTASection } from "@/components/home/CTASection";
+import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 
 export default function Home() {
   return (
-    <>
+    <ErrorBoundary>
       <Hero />
       <CategoryGrid />
       <FeaturedProducts />
@@ -16,6 +17,6 @@ export default function Home() {
       <Gallery />
       <InstagramSection />
       <CTASection />
-    </>
+    </ErrorBoundary>
   );
 }

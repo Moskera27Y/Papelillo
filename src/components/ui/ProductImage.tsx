@@ -16,7 +16,8 @@ interface ProductImageProps {
 
 const PLACEHOLDER_IMG = "/images/placeholder.png";
 // Valid base64 1x1 gray blur seed (prevents next/image crash on invalid blurDataURL)
-const BLUR_FALLBACK = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHRwOi53d3cub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSIjY2NjY2NjIi8+PC9zdmc+";
+// ✅ NOT an <svg> — raw PNG bytes avoid Edge optimization parser corruption (<path> Expected number)
+const BLUR_FALLBACK = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
 
 export function ProductImage({ images, alt = "Producto", className = "", priority = false }: ProductImageProps) {
   const safeImages = React.useMemo(() => {
