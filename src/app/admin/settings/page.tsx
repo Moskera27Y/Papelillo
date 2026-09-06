@@ -7,12 +7,13 @@ import { AdminCard, Input, Textarea, Toast } from "@/components/admin/AdminUI";
 import { useSiteSettings, useAuth } from "@/hooks/useDataService";
 import { updateSiteSettingsAction } from "@/app/actions";
 import { loginAction, logoutAction } from "@/app/actions";
+import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import type { SiteSettings, WompiConfig } from "@/types/admin";
 
 function SettingsContent() {
   const { settings, isLoading: ssLoading } = useSiteSettings();
   const { changePassword, changeUsername, session, isLoading: authLoading } = useAuth();
-  const [draft, setDraft] = useState<any>(settings);
+  const [draft, setDraft] = useState<any>(null);
   const [toast, setToast] = useState<string | null>(null);
 
   const [currentPw, setCurrentPw] = useState("");
@@ -20,8 +21,9 @@ function SettingsContent() {
   const [confirmPw, setConfirmPw] = useState("");
   const [newUsername, setNewUsername] = useState(session?.username ?? "");
 
+  // Normaliza settings → draft con defaults completos para TODOS los campos anidados
   useEffect(() => {
-    setDraft(settings);
+    setDraft((prev: any) => normalizeSettings(settings, prev));
   }, [settings]);
 
   useEffect(() => {
@@ -462,10 +464,44 @@ function WompiSettings({
   );
 }
 
+// Normaliza settings → draft con defaults completos para TODOS los campos anidados
+function normalizeSettings(settings: any, prevDraft: any) {
+  if (!settings) return prevDraft ?? null;
+  return {
+    ...settings,
+    brandName: settings.brandName ?? "Papelillo",
+    tagline: settings.tagline ?? "Papelería creativa",
+    branding: {
+      logoSrc: settings.branding?.logoSrc ?? "/images/logo.svg",
+      logoDataUrl: settings.branding?.logoDataUrl ?? null,
+      faviconSrc: settings.branding?.faviconSrc ?? "/favicon.ico",
+    },
+    contact: {
+      email: settings.contact?.email ?? settings.contactEmail ?? null,
+      whatsapp: settings.contact?.whatsapp ?? settings.contactWhatsapp ?? null,
+      phone: settings.contact?.phone ?? settings.contactPhone ?? null,
+      address: settings.contact?.address ?? settings.contactAddress ?? null,
+      city: settings.contact?.city ?? settings.contactCity ?? null,
+      hours: settings.contact?.hours ?? settings.contactHours ?? null,
+      text: settings.contact?.text ?? settings.contactText ?? null,
+    },
+    wompi: settings.wompi ?? { enabled: false, publicKey: "", environment: "production", integrityKey: "", merchantName: undefined, webhookUrl: undefined },
+    seo: {
+      siteName: settings.seo?.siteName ?? settings.brandName ?? "Papelillo",
+      siteDescription: settings.seo?.siteDescription ?? null,
+      siteUrl: settings.seo?.siteUrl ?? null,
+      ogImage: settings.seo?.ogImage ?? null,
+      keywords: settings.seo?.keywords ?? [],
+    },
+  };
+}
+
 export default function AdminSettingsPage() {
   return (
     <AuthGuard>
-      <SettingsContent />
+      <ErrorBoundary pageTitle="Configuración">
+        <SettingsContent />
+      </ErrorBoundary>
     </AuthGuard>
   );
 }

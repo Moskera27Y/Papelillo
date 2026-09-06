@@ -13,9 +13,18 @@ export interface SiteSettingsClient {
   id: string
   brandName: string
   tagline: string
+  footerDescription?: string | null
   socialLinks?: Array<{ name: string; url: string; icon: string; isActive: boolean; order: number }>
   wompi?: WompiConfig
-  branding?: { logoSrc?: string; logoDataUrl?: string | null; faviconSrc?: string }
+  branding?: { logoSrc?: string | null; logoDataUrl?: string | null; faviconSrc?: string }
+  contact?: { email?: string | null; whatsapp?: string | null; phone?: string | null; address?: string | null; city?: string | null; hours?: string | null; text?: string | null }
+  seo?: {
+    siteName: string
+    siteDescription: string | null
+    siteUrl: string | null
+    ogImage: string | null
+    keywords: string[]
+  }
 }
 
 // ============================================================
@@ -30,17 +39,28 @@ export function getSiteSettingsSync(): SiteSettingsClient {
       try { return JSON.parse(cached) as SiteSettingsClient; } catch {}
     }
   }
+  const fallbackBrand = 'Papelillo';
   // 2. Fallback cliente-safe (NO process.env — Vercel Edge no polyfill cliente)
   return {
     id: 'main',
-    brandName: 'Papelillo',
+    brandName: fallbackBrand,
     tagline: 'Papelería creativa',
+    footerDescription: 'Creaciones únicas hechas a mano.',
     socialLinks: [],
     wompi: {
       enabled: true,
       publicKey: '',
       environment: 'production' as 'sandbox' | 'production',
       integrityKey: '',
+    },
+    branding: { logoSrc: '/images/logo.svg', logoDataUrl: null, faviconSrc: '/favicon.ico' },
+    contact: {},
+    seo: {
+      siteName: fallbackBrand,
+      siteDescription: 'Papelería creativa — productos únicos hechos a mano.',
+      siteUrl: '',
+      ogImage: '',
+      keywords: [],
     },
   };
 }
@@ -59,8 +79,12 @@ export async function getSiteSettingsServer(): Promise<SiteSettingsClient> {
       id: 'main',
       brandName: 'Papelillo',
       tagline: 'Papelería creativa',
+      footerDescription: 'Creaciones únicas hechas a mano.',
       socialLinks: [],
       wompi: { enabled: false, publicKey: '', environment: 'production', integrityKey: '' },
+      branding: { logoSrc: '/images/logo.svg', logoDataUrl: null, faviconSrc: '/favicon.ico' },
+      contact: {},
+      seo: { siteName: 'Papelillo', siteDescription: 'Papelería creativa — productos únicos hechos a mano.', siteUrl: '', ogImage: '', keywords: [] },
     };
   }
   // Safely map Prisma fields (some may be null/undefined in DB)
@@ -69,6 +93,7 @@ export async function getSiteSettingsServer(): Promise<SiteSettingsClient> {
     id: safeSettings.id,
     brandName: safeSettings.brandName ?? 'Papelillo',
     tagline: safeSettings.tagline ?? 'Papelería creativa',
+    footerDescription: safeSettings.footerDescription,
     socialLinks: safeSettings.socialLinks ?? [],
     wompi: {
       enabled: safeSettings.wompiEnabled ?? false,
@@ -79,9 +104,25 @@ export async function getSiteSettingsServer(): Promise<SiteSettingsClient> {
       webhookUrl: safeSettings.wompiWebhookUrl ?? undefined,
     },
     branding: {
-      logoSrc: safeSettings.logoSrc ?? undefined,
+      logoSrc: safeSettings.logoSrc ?? '/images/logo.svg',
       logoDataUrl: safeSettings.logoDataUrl ?? null,
-      faviconSrc: safeSettings.faviconSrc ?? undefined,
+      faviconSrc: safeSettings.faviconSrc ?? '/favicon.ico',
+    },
+    contact: {
+      email: safeSettings.contactEmail,
+      whatsapp: safeSettings.contactWhatsapp,
+      phone: safeSettings.contactPhone,
+      address: safeSettings.contactAddress,
+      city: safeSettings.contactCity,
+      hours: safeSettings.contactHours,
+      text: safeSettings.contactText,
+    },
+    seo: {
+      siteName: safeSettings.seoSiteName ?? safeSettings.brandName ?? 'Papelillo',
+      siteDescription: safeSettings.seoSiteDescription,
+      siteUrl: safeSettings.seoSiteUrl,
+      ogImage: safeSettings.seoOgImage,
+      keywords: safeSettings.seoKeywords ?? [],
     },
   } as SiteSettingsClient;
 }

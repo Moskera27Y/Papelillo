@@ -5,6 +5,8 @@ import React from "react";
 interface ErrorBoundaryProps {
   children: React.ReactNode;
   fallback?: (error: Error, reset: () => void) => React.ReactNode;
+  label?: string;
+  pageTitle?: string;
 }
 
 interface ErrorBoundaryState {
