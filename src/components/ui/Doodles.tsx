@@ -2,7 +2,7 @@ import React from "react";
 
 // Doodles SVG — pequeños elementos decorativos inspirados en papel y stickers.
 
-export function Star({ className = "", size = 24 }: { className?: string; size?: number }) {
+export function Star({ className = "", size = 24, style }: { className?: string; size?: number; style?: React.CSSProperties }) {
   return (
     <svg
       width={size}
@@ -11,23 +11,32 @@ export function Star({ className = "", size = 24 }: { className?: string; size?:
       fill="currentColor"
       className={className}
       aria-hidden="true"
+      style={style}
     >
       <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
     </svg>
   );
 }
 
-export function Heart({ className = "", size = 24 }: { className?: string; size?: number }) {
+export function Heart({ className = "", size = 24, filled = true }: { className?: string; size?: number; filled?: boolean }) {
   return (
     <svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      fill="currentColor"
+      fill={filled ? "currentColor" : "none"}
+      stroke="currentColor"
+      strokeWidth={filled ? 0 : 2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className={className}
       aria-hidden="true"
     >
-      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d={filled ? "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" : "M19 14l-1.41-1.41C17.42 11.71 18 10.83 18 9.86c0-2.34-1.96-4.3-4.3-4.3-1.92 0-3.58 1.35-3.93 3.22A2.71 2.71 0 0 0 11.27 11.5 2.5 2.5 0 0 0 14 14h.86l5 5z"}
+      />
     </svg>
   );
 }

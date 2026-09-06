@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useActiveCategories } from "@/hooks/useDataService";
 import { getBrandColorClass } from "@/lib/utils";
 import { Star } from "@/components/ui/Doodles";
+import { ArrowRight } from "lucide-react";
 
 export function CategoryGrid() {
   const { categories: activeCategories, isLoading, error } = useActiveCategories();
@@ -93,16 +94,15 @@ export function CategoryGrid() {
   // Función para obtener el icono por slug de categoría, fallback por color
   const getIcon = (category: { slug: string; color: string }): React.ReactNode => {
     if (iconMap[category.slug]) return iconMap[category.slug];
-    // Fallback por color (para compatibilidad)
     const colorFill: Record<string, string> = {
       red: "#FF2B32",
       yellow: "#FFD000",
-      green: "#78D64B",
+      green: "#78D64b",
       blue: "#5274E8",
       ink: "#0A0A0A",
     };
     const fill = colorFill[category.color] || "#FF2B32";
-    return <Star size={24} className="text-current" style={{ color: fill }} />;
+    return <Star className="text-current" style={{ color: fill }} />;
   };
 
   return (
@@ -267,20 +267,7 @@ export function CategoryGrid() {
                        transition-all duration-300 border-3 border-ink"
           >
             Ver todas las categorías
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2.5}
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg>
+            <ArrowRight className="w-5 h-5" strokeWidth={2.5} />
           </Link>
         </div>
       </div>
