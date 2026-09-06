@@ -65,3 +65,8 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
     </div>
   );
 }
+
+// ✅ Export default REQUERIDO para next/dynamic — sin esto, mod.default es undefined
+// y Next.js usa el objeto módulo entero como component → React error #306 "[object Module]"
+export default QuickViewModal;
+// build marker 1788653554-7337
