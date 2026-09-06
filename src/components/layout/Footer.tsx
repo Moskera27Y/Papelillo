@@ -8,7 +8,7 @@ import { SocialIcon } from "@/components/ui/SocialIcon";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
-  const { data: settings, isLoading } = useSiteSettings();
+  const { settings, isLoading } = useSiteSettings();
 
   return (
     <footer className="bg-ink text-paper">

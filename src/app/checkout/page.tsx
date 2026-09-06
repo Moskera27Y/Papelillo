@@ -85,9 +85,11 @@ export default function CheckoutPage() {
   }, [form]);
 
 
-  const { settings: siteSettings } = useSiteSettings();
+  const { settings: siteSettings, isLoading } = useSiteSettings();
   const settings = (siteSettings ?? {}) as any;
-  const wompiCheck = isWompiReady();
+  // ✅ Root fix: useSiteSettings trae la config REAL desde Prisma, no sessionStorage cache
+  const wompiConfig = settings.wompi ?? { enabled: false, publicKey: "", environment: "sandbox" as const, integrityKey: "" };
+  const wompiCheck = useMemo(() => isWompiReady(wompiConfig), [wompiConfig]);
 
   const total = useMemo(() => subtotal + shippingCost, [subtotal, shippingCost]);
 
@@ -247,6 +249,13 @@ export default function CheckoutPage() {
             integrityKey: signature as string,
           },
           redirectUrl: `${window.location.origin}/checkout/success?order=${order.id}`,
+          // ✅ Pass config explicitly (no module cache)
+          config: {
+            enabled: wompiConfig.enabled,
+            publicKey: wompiConfig.publicKey,
+            environment: wompiConfig.environment || "sandbox",
+            integrityKey: wompiConfig.integrityKey,
+          },
         } as any);
 
         // 4. Resultado de la transacción
@@ -336,6 +345,7 @@ export default function CheckoutPage() {
                 wompiReady={wompiCheck.ready}
                 wompiReasons={wompiCheck.reasons}
                 hasQuoteOnly={hasQuoteOnly}
+                isLoading={isLoading}
               />
             )}
           </div>
@@ -548,6 +558,7 @@ function PaymentForm({
   onPay,
   onBack,
   processing,
+  isLoading,
   wompiReady,
   wompiReasons,
   hasQuoteOnly,
@@ -557,6 +568,7 @@ function PaymentForm({
   onPay: () => void;
   onBack: () => void;
   processing: boolean;
+  isLoading: boolean;
   wompiReady: boolean;
   wompiReasons: string[];
   hasQuoteOnly: boolean;
@@ -581,10 +593,10 @@ function PaymentForm({
           </button>
           <button
             onClick={onPay}
-            disabled={processing}
+            disabled={processing || isLoading}
             className="flex-1 bg-brand-green text-ink font-bold rounded-full px-6 py-3 hover:bg-opacity-90 transition-colors shadow-sticker disabled:opacity-50"
           >
-            {processing ? "Enviando..." : "Enviar solicitud por WhatsApp"}
+            {processing ? "Procesando..." : isLoading ? "Cargando..." : paymentMethod === "wompi" ? "Pagar con Wompi" : "Enviar solicitud por WhatsApp"}
           </button>
         </div>
       </div>

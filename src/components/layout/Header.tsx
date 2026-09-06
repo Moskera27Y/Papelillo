@@ -10,10 +10,8 @@ import { useCart } from "@/context/CartContext";
 import { useTheme } from "@/hooks/useTheme";
 import { siteConfig, buildWhatsAppLink } from "@/lib/config";
 import { cn } from "@/lib/utils";
-
-// SSR-safe initial settings — avoids hydration mismatch between
-// server render (isLoading=true, fallback logo) and client (loaded logo)
-import { getSiteSettingsSync } from "@/services/db/site.service";
+import { useSiteSettings } from "@/hooks/useDataService";
+import { SocialIcon } from "@/components/ui/SocialIcon";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -21,15 +19,13 @@ export function Header() {
   const pathname = usePathname();
   const { count, toggle } = useCart();
   const { resolved: theme, toggle: toggleTheme } = useTheme();
-
-  // Initial settings from sync fallback — isomorphic render safety
-  const initialSettings = getSiteSettingsSync();
+  // ✅ useSiteSettings (SSR-safe, fallback a siteConfig) — elimina getSiteSettingsSync/sessionStorage (root cause #306)
+  const { settings, isLoading } = useSiteSettings();
   const branding =
-    (initialSettings?.branding ?? { logoSrc: siteConfig.logoSrc, logoDataUrl: null }) as {
+    (settings?.branding ?? { logoSrc: siteConfig.logoSrc, logoDataUrl: null }) as {
       logoSrc: string;
       logoDataUrl: string | null;
     };
-  // logoDataUrl from DB takes precedence; falls back to logoSrc → config
   const logoSrc = branding.logoDataUrl || branding.logoSrc || siteConfig.logoSrc;
 
   const navItems = [
@@ -99,9 +95,7 @@ export function Header() {
                 className="text-ink hover:text-brand-green transition-all duration-200 hover:scale-110"
                 aria-label="WhatsApp"
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M12 3C6.7 3 2.4 6.8 1.2 11.6c0 .3.1.6.1 1H3.5c.1 0 .1-.1 0-.1-.2-.1-.3-.3-.4-.5C1 11.9 1 11.3 1 11 1 6.6 4.6 3 9 3h2.5c.3 0 .6.1.8.3.2.2.2.5.2.8v1.3c0 .3-.1.6-.3.7-.2.1-.4.2-.7.2h-2c-.3 0-.5-.2-.5-.5v-2c0-.3.2-.6.5-.7.2-.1.5-.1.7-.1h4c.8 0 1.5.7 1.5 1.5v6.9c0 .3-.1.6-.3.8-.2.1-.5.2-.7.2h-1c-.4 0-.7.3-.7.7 0 .8.7 1.5 1.5 1.5h2c.6 0 1 .5 1 1.1 0 .3-.1.6-.3.8-.2.2-.4.3-.7.4C21.7 18.4 24 15 24 11 24 6.6 21.3 3 18.5 3H17c-.3 0-.6-.1-.8-.3-.2-.2-.2-.5-.2-.8z" />
-                </svg>
+                <SocialIcon icon="whatsapp" />
               </a>
               <button
                 onClick={toggle}
@@ -186,9 +180,7 @@ export function Header() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-lg font-semibold text-brand-green"
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M12 3C6.7 3 2.4 6.8 1.2 11.6c0 .3.1.6.1 1H3.5c.1 0 .1-.1 0-.1-.2-.1-.3-.3-.4-.5C1 11.9 1 11.3 1 11 1 6.6 4.6 3 9 3h2.5c.3 0 .6.1.8.3.2.2.2.5.2.8v1.3c0 .3-.1.6-.3.7-.2.1-.4.2-.7.2h-2c-.3 0-.5-.2-.5-.5v-2c0-.3.2-.6.5-.7.2-.1.5-.1.7-.1h4c.8 0 1.5.7 1.5 1.5v6.9c0 .3-.1.6-.3.8-.2.1-.5.2-.7.2h-1c-.4 0-.7.3-.7.7 0 .8.7 1.5 1.5 1.5h2c.6 0 1 .5 1 1.1 0 .3-.1.6-.3.8-.2.2-.4.3-.7.4C21.7 18.4 24 15 24 11 24 6.6 21.3 3 18.5 3H17c-.3 0-.6-.1-.8-.3-.2-.2-.2-.5-.2-.8z" />
-                </svg>
+                <SocialIcon icon="whatsapp" />
                 WhatsApp
               </a>
             </nav>

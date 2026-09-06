@@ -6,8 +6,8 @@ import { useSiteSettings } from "@/hooks/useDataService";
 import { SocialIcon } from "@/components/ui/SocialIcon";
 
 export function InstagramSection() {
-  const { data: settings, isLoading } = useSiteSettings();
-  const instagramLink = settings?.socialLinks?.find((l: any) => l.icon === "instagram" && (l.isActive ?? true)) ?? null;
+  const { settings, isLoading } = useSiteSettings();
+  const instagramLink = (settings as any)?.socialLinks?.find((l: any) => l.icon === "instagram" && (l.isActive ?? true)) ?? null;
   const hasInstagram = !isLoading && instagramLink?.url;
   const instagramUrl = instagramLink?.url ?? siteConfig.instagramUrl;
   const [visible, setVisible] = useState(false);

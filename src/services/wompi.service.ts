@@ -4,7 +4,6 @@
 // NO expone secretos en el frontend.
 // ============================================================
 
-import { getSiteSettingsSync } from "@/services/db/site.service";
 import type { WompiConfig } from "@/services/db/site.service";
 
 // ============================================================
@@ -71,45 +70,14 @@ declare global {
 // IMPLEMENTATION
 // ============================================================
 
+// ============================================================
+// IMPLEMENTATION
+// ============================================================
+
 const WOMPI_SCRIPT_ID = "wompi-widget-script";
-
-// 🔐 Cache de configuración Wompi (evita promesas en widget de checkout)
-let _wompiConfig: WompiConfig | null = null;
-
-/**
- * Obtiene la configuración pública de Wompi desde los settings.
- * Versión SYNC: usa getSiteSettingsSync() con fallback a env vars.
- */
-export function getWompiConfig(): WompiConfig {
-  if (_wompiConfig) return _wompiConfig;
-  const settings = getSiteSettingsSync();
-  // Cliente-safe env access (Vercel Edge: process.env puede no estar en runtime)
-  if (typeof window !== "undefined") {
-    const injected = (window as any).__PAPELILLO_WOMPI_CONFIG__;
-    if (injected && injected.publicKey) {
-      _wompiConfig = { enabled: true, publicKey: injected.publicKey, environment: injected.environment || "production", integrityKey: injected.integrityKey || "" };
-      return _wompiConfig;
-    }
-  }
-  _wompiConfig = settings.wompi ?? {
-    enabled: true,
-    publicKey: "",
-    environment: "production",
-    integrityKey: "",
-  };
-  return _wompiConfig;
-}
-
-/**
- * 🔁 Invalidate cache en servidor (después de mutations)
- */
-export function clearWompiConfigCache(): void {
-  _wompiConfig = null;
-}
 
 /**
  * Carga el script del Widget de Wompi de forma dinámica e idempotente.
- * Se elige el script de Sandbox o Producción según la configuración actual.
  */
 export function loadWompiScript(environment: "sandbox" | "production"): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -123,7 +91,6 @@ export function loadWompiScript(environment: "sandbox" | "production"): Promise<
       return;
     }
     if (existing) {
-      // Reemplazar si el entorno cambió
       existing.remove();
     }
     const script = document.createElement("script");
@@ -141,12 +108,12 @@ export function loadWompiScript(environment: "sandbox" | "production"): Promise<
 }
 
 /**
- * Indica si Wompi está listo para usarse:
- * - Habilitado
- * - Llave pública configurada
+ * Indica si Wompi está listo recibiendo la config como parámetro (no cache global).
  */
-export function isWompiReady(): { ready: boolean; reasons: string[] } {
-  const cfg = getWompiConfig();
+export function isWompiReady(cfg?: WompiConfig): { ready: boolean; reasons: string[] } {
+  if (!cfg) {
+    return { ready: false, reasons: ["No se recibió configuración de Wompi"] };
+  }
   const reasons: string[] = [];
   if (!cfg.enabled) reasons.push("Wompi está deshabilitado");
   if (!cfg.publicKey) reasons.push("Falta la llave pública");
@@ -155,18 +122,22 @@ export function isWompiReady(): { ready: boolean; reasons: string[] } {
 
 /**
  * Abre el widget de Wompi con los parámetros dados.
- * Devuelve una promesa que resuelve al evento de transacción.
+ * Recibe publicKey/environment/integrityKey como parte de opts (no desde cache global).
  */
 export function openWompiWidget(
-  opts: Omit<WompiWidgetOptions, "publicKey">
+  opts: Omit<WompiWidgetOptions, "publicKey"> & {
+    config: Pick<WompiConfig, "enabled" | "publicKey" | "environment" | "integrityKey">;
+  }
 ): Promise<WompiTransactionEvent> {
-  return new Promise(async (resolve, reject) => {
-    const cfg = getWompiConfig();
-    if (!cfg.enabled || !cfg.publicKey) {
-      reject(new Error("Wompi no está configurado correctamente"));
-      return;
-    }
+  const cfg = opts.config;
+  if (!cfg.enabled || !cfg.publicKey) {
+    return Promise.reject(new Error("Wompi no está configurado correctamente"));
+  }
 
+  const { config: _cfg, ...rest } = opts;
+  void _cfg; // publicKey se pasa explícitamente desde checkout, no expuesto en logs
+
+  return new Promise(async (resolve, reject) => {
     try {
       await loadWompiScript(cfg.environment);
     } catch (err) {
@@ -180,7 +151,7 @@ export function openWompiWidget(
     }
 
     const widget = new window.WidgetCheckout({
-      ...opts,
+      ...rest,
       publicKey: cfg.publicKey,
       currency: "COP",
     });
@@ -201,20 +172,13 @@ export function openWompiWidget(
   });
 }
 
-/**
- * Formatea un valor COP a string sin decimales (Wompi requiere cents).
- */
+/** Formatea COP */
 export function toCents(amountInCOP: number): number {
   return Math.round(amountInCOP * 100);
 }
-
 export function fromCents(cents: number): number {
   return cents / 100;
 }
-
-/**
- * Formatea COP para mostrar (sin decimales, con punto como separador de miles).
- */
 export function formatCOP(amount: number): string {
   return new Intl.NumberFormat("es-CO", {
     style: "currency",

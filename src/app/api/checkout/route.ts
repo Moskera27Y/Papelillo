@@ -5,7 +5,7 @@
 // Rate limited por IP + nonce anti-replay (devops security pattern)
 // ===========================================================
 import { db } from "@/lib/db";
-import { getWompiConfig } from "@/services/wompi.service";
+import { getSiteSettingsAction } from "@/app/actions";
 import crypto from "crypto";
 
 export const runtime = "nodejs";
@@ -121,10 +121,12 @@ export async function POST(req: Request) {
       } as any,
     });
 
-    // 4. Generar firma Wompi (integrity)
-    const cfg = getWompiConfig();
-    const integrityKey = cfg.integrityKey || process.env.WOMPI_INTEGRITY_KEY || "";
-    if (!cfg.publicKey || !integrityKey) {
+    // 4. Generar firma Wompi (integrity) — lee DIRECTAMENTE desde Prisma (no cache roto)
+    const settings = await getSiteSettingsAction();
+    const wompi = (settings as any)?.wompi ?? {};
+    const publicKey = wompi.publicKey || "";
+    const integrityKey = wompi.integrityKey || process.env.WOMPI_INTEGRITY_KEY || "";
+    if (!publicKey || !integrityKey) {
       return Response.json({ error: "Wompi no configurado" }, { status: 500 });
     }
 
@@ -139,13 +141,13 @@ export async function POST(req: Request) {
     return Response.json({
       success: true,
       orderId: order.id,
-      publicKey: cfg.publicKey,
+      publicKey: publicKey,
       amountInCents,
       currency: "COP",
       reference,
       signature,
       redirectUrl: `${process.env.NEXT_PUBLIC_SITE_URL || "https://papelillo-web-lilac.vercel.app"}/checkout/success?orderId=${order.id}`,
-      environment: cfg.environment,
+      environment: wompi.environment,
     });
   } catch (err: any) {
     console.error("[checkout]", err);

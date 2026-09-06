@@ -6,8 +6,8 @@ import { useSiteSettings } from "@/hooks/useDataService";
 import { SocialIcon } from "@/components/ui/SocialIcon";
 
 export function WhatsAppButton() {
-  const { data: settings, isLoading } = useSiteSettings();
-  const whatsappLink = settings?.socialLinks?.find((l: any) => l.icon === "whatsapp" && (l.isActive ?? true)) ?? null;
+  const { settings, isLoading } = useSiteSettings();
+  const whatsappLink = (settings as any)?.socialLinks?.find((l: any) => l.icon === "whatsapp" && (l.isActive ?? true)) ?? null;
   const href = whatsappLink?.url ?? `https://wa.me/${siteConfig.whatsappNumber}`;
   const isConfigured = !isLoading && !!whatsappLink?.url;
   // Fallback: si admin no configuró WhatsApp, usa number estático de config
