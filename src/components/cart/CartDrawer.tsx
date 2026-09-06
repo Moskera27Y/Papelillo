@@ -6,6 +6,7 @@ import { useCart } from "@/context/CartContext";
 import { formatCOP } from "@/services/wompi.service";
 import { buildWhatsAppLink } from "@/lib/config";
 import { ProductImage } from "@/components/ui/ProductImage";
+import { ShoppingCart, X } from "lucide-react";
 
 // ============================================================
 // CART DRAWER — Drawer lateral con todo el carrito.
@@ -56,9 +57,7 @@ export function CartDrawer() {
         <div className="flex items-center justify-between px-6 py-5 border-b border-ink/10 shrink-0">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-brand-yellow border-2 border-ink rounded-full flex items-center justify-center shadow-sticker-sm">
-              <svg className="w-5 h-5 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
+              <ShoppingCart className="w-5 h-5 text-ink" />
             </div>
             <div>
               <h2 className="font-display text-xl font-bold text-ink">Tu carrito</h2>
@@ -72,9 +71,7 @@ export function CartDrawer() {
             className="w-10 h-10 rounded-full border-2 border-ink bg-paper hover:bg-brand-red hover:text-paper transition-colors flex items-center justify-center"
             aria-label="Cerrar carrito"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <X className="w-5 h-5" strokeWidth={2.5} />
           </button>
         </div>
 
@@ -226,9 +223,7 @@ function CartItemRow({ line }: { line: ReturnType<typeof useCart>["lines"][numbe
             className="flex-shrink-0 w-7 h-7 rounded-full border border-ink/20 hover:bg-brand-red hover:text-paper hover:border-brand-red transition-colors flex items-center justify-center"
             aria-label={`Quitar ${p.name || "producto"}`}
           >
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <X className="w-3.5 h-3.5" strokeWidth={2.5} />
           </button>
         </div>
 
