@@ -133,11 +133,20 @@ export async function getSiteSettings() {
 }
 
 // SERVER-ONLY update functions (lazy-import Prisma inside body)
+// Strip campos anidados/relations (socialLinks[]) que no son columnas del schema
+const SETTINGS_COLUMNS = new Set([
+  'id','brandName','tagline','footerDescription','logoSrc','logoDataUrl','faviconSrc',
+  'contactEmail','contactWhatsapp','contactWhatsappMsg','contactPhone','contactAddress','contactCity','contactHours','contactText',
+  'seoSiteName','seoSiteDescription','seoSiteUrl','seoOgImage','seoKeywords',
+  'wompiEnabled','wompiEnvironment','wompiPublicKey','wompiIntegrityKey','wompiMerchantName','wompiWebhookUrl',
+]);
 export async function updateSiteSettings(data: Record<string, any>) {
   const { db } = await import('@/lib/db');
+  const clean: Record<string, any> = {};
+  for (const k of SETTINGS_COLUMNS) if (k in data) clean[k] = data[k];
   const settings = await db.siteSettings.findFirst();
-  if (!settings) return db.siteSettings.create({ data: { id: 'main', ...data } });
-  return db.siteSettings.update({ where: { id: settings.id }, data });
+  if (!settings) return db.siteSettings.create({ data: { id: 'main', ...clean } });
+  return db.siteSettings.update({ where: { id: settings.id }, data: clean });
 }
 
 export async function updateSiteContent(data: Record<string, any>) {

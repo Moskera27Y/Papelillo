@@ -383,12 +383,58 @@ export async function updateSiteContentAction(data: Record<string, any>) {
 }
 
 export async function updateSiteSettingsAction(data: any) {
-  const settings = await siteService.updateSiteSettings(data)
-  revalidatePath('/admin/settings')
-  revalidatePath('/')
-  revalidatePath('/nosotros')
-  revalidatePath('/contacto')
-  return settings
+  // ✅ Des-normaliza el draft UI → columnas Prisma planas
+  // El draft tiene nesting: seo.{siteName,siteDescription,siteUrl,ogImage,keywords}
+  // branding.{logoSrc,logoDataUrl,faviconSrc}, contact.{email,whatsapp,...}, socialLinks:[], wompi{}
+  const flat: any = {
+  id: data?.id ?? 'main',
+    brandName: data?.brandName ?? 'Papelillo',
+    tagline: data?.tagline ?? 'Papelería creativa',
+    footerDescription: data?.footerDescription ?? null,
+    // Contact (flat columns)
+    contactEmail: data?.contact?.email ?? data?.contactEmail ?? null,
+    contactWhatsapp: data?.contact?.whatsapp ?? data?.contactWhatsapp ?? null,
+    contactWhatsappMsg: data?.contact?.text ?? data?.contactWhatsappMsg ?? null,
+    contactPhone: data?.contact?.phone ?? data?.contactPhone ?? null,
+    contactAddress: data?.contact?.address ?? data?.contactAddress ?? null,
+    contactCity: data?.contact?.city ?? data?.contactCity ?? null,
+    contactHours: data?.contact?.hours ?? data?.contactHours ?? null,
+    contactText: data?.contact?.text ?? data?.contactText ?? null,
+    // SEO (flat columns)
+    seoSiteName: data?.seo?.siteName ?? data?.seoSiteName ?? data?.brandName ?? 'Papelillo',
+    seoSiteDescription: data?.seo?.siteDescription ?? data?.seoSiteDescription ?? null,
+    seoSiteUrl: data?.seo?.siteUrl ?? data?.seoSiteUrl ?? null,
+    seoOgImage: data?.seo?.ogImage ?? data?.seoOgImage ?? null,
+    seoKeywords: data?.seo?.keywords ?? data?.seoKeywords ?? [],
+    // Branding (flat columns)
+    logoSrc: data?.branding?.logoSrc ?? data?.logoSrc ?? '/images/logo.svg',
+    logoDataUrl: data?.branding?.logoDataUrl ?? data?.logoDataUrl ?? null,
+    faviconSrc: data?.branding?.faviconSrc ?? data?.faviconSrc ?? '/favicon.ico',
+    // Wompi (flat columns)
+    wompiEnabled: data?.wompi?.enabled ?? data?.wompiEnabled ?? false,
+    wompiEnvironment: data?.wompi?.environment ?? data?.wompiEnvironment ?? 'production',
+    wompiPublicKey: data?.wompi?.publicKey ?? data?.wompiPublicKey ?? null,
+    wompiMerchantName: data?.wompi?.merchantName ?? data?.wompiMerchantName ?? null,
+    wompiWebhookUrl: data?.wompi?.webhookUrl ?? data?.wompiWebhookUrl ?? null,
+  };
+
+  // Separar socialLinks (relación) del resto
+  const links = data?.socialLinks;
+  const result = await siteService.updateSiteSettings(flat);
+  if (Array.isArray(links) && links.length > 0) {
+    await siteService.updateSocialLinks(links.map((l: any) => ({
+      name: l.name,
+      url: l.url ?? '',
+      icon: l.icon ?? '',
+      isActive: l.isActive ?? true,
+      order: l.order ?? 0,
+    })));
+  }
+  revalidatePath('/admin/settings');
+  revalidatePath('/');
+  revalidatePath('/nosotros');
+  revalidatePath('/contacto');
+  return result;
 }
 
 export async function updateSocialLinksAction(links: any[]) {
