@@ -30,7 +30,7 @@ function SettingsContent() {
     setNewUsername(session?.username ?? "");
   }, [session]);
 
-  if (ssLoading || authLoading) {
+  if (!draft || ssLoading || authLoading) {
     return (
       <div className="min-h-screen bg-paper-soft flex items-center justify-center">
         <div className="text-ink-muted">Cargando configuración...</div>
